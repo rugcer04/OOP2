@@ -1,9 +1,4 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
-using std::string;
-using std::vector;
+#include "Lib.h";
 
 //struktura studento duomenims saugoti
 struct Studentas {
