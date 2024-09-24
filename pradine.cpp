@@ -43,16 +43,37 @@ void ivedimas(Studentas &Lok, char pasirinkimas) {
    cin >> Lok.vardas;
    cout << "Įveskite studento pavardę: " << endl;
    cin >> Lok.pavarde;
+   cin.ignore();
 
-   int ndSk;
-   cout << "Įveskite namų darbų skaičių: " << endl;
-   cin >> ndSk;
+   cout << "Įveskite namų darbų pažymius (Kai baigsite įvedimą, spauskite dukart Enter klavišą):" << endl;
 
-   Lok.namuDarbai.resize(ndSk);
-   for (int j = 0; j < ndSk; ++j) {
-      cout << "Įveskite " << j+1 << "-ojo namų darbo pažymį: " << endl;
-      cin >> Lok.namuDarbai[j];
+   Lok.namuDarbai.clear();
+   string input;
+   int pazymys;
+
+   while (true) {
+      getline(cin, input);
+      if (input.empty()) {
+         break;
+      }
+      stringstream ss(input);
+      if (ss >> pazymys) {
+         Lok.namuDarbai.push_back(pazymys);
+      } else {
+         cout << "Netinkama įvestis, bandykite dar kartą." << endl;
+      }
+
    }
+
+   //int ndSk;
+   //cout << "Įveskite namų darbų skaičių: " << endl;
+   //cin >> ndSk;
+
+   //Lok.namuDarbai.resize(ndSk);
+   //for (int j = 0; j < ndSk; ++j) {
+   //   cout << "Įveskite " << j+1 << "-ojo namų darbo pažymį: " << endl;
+   //   cin >> Lok.namuDarbai[j];
+   //}
 
    cout << "Įveskite egzamino rezultatą: " << endl;
    cin >> Lok.egzaminas;
