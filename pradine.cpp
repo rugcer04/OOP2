@@ -21,8 +21,24 @@ double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
    return vidurkis * 0.4 + egzaminas * 0.6;
 }
 
+//funkcija galutiniam balui apskaiciuoti naudojant mediana
+double skaiciuotiGalutiniMediana(vector<int> namuDarbai, int egzaminas) {
+    sort(namuDarbai.begin(), namuDarbai.end()) ;
+    double mediana;
+    int size = namuDarbai.size();
+
+    if (size % 2 == 0) {
+        mediana = (namuDarbai[size / 2 - 1] + namuDarbai[size / 2]) / 2.0; 
+    } else {
+        mediana = namuDarbai[size / 2];
+    }
+
+    return mediana * 0.4 + egzaminas * 0.6;
+
+}
+
 //funkcija ivesti duomenims
-void ivedimas(Studentas &Lok) {
+void ivedimas(Studentas &Lok, char pasirinkimas) {
    cout << "Įveskite studento vardą: " << endl;
    cin >> Lok.vardas;
    cout << "Įveskite studento pavardę: " << endl;
@@ -41,13 +57,23 @@ void ivedimas(Studentas &Lok) {
    cout << "Įveskite egzamino rezultatą: " << endl;
    cin >> Lok.egzaminas;
 
-   Lok.galutinis = skaiciuotiGalutiniVidurkiu(Lok.namuDarbai, Lok.egzaminas);
+   if (pasirinkimas == 'V') {
+      Lok.galutinis = skaiciuotiGalutiniVidurkiu(Lok.namuDarbai, Lok.egzaminas);
+   } else if (pasirinkimas == 'M') {
+      Lok.galutinis = skaiciuotiGalutiniMediana(Lok.namuDarbai, Lok.egzaminas);
+   }
+
 }
 
 //funkcija isvesti duomenis
-void isvedimas(const vector<Studentas>& studentai) {
-   cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
-   cout << "---------------------------------------------" << endl;
+void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
+   if (pasirinkimas == 'V') {
+      cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+   } else if (pasirinkimas == 'M') {
+      cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
+   }
+
+   cout << "-----------------------------------------------" << endl;
    for (const auto& Lok: studentai) {
       cout << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << Lok.galutinis  << endl;
    }
@@ -60,11 +86,18 @@ int main() {
 
     vector<Studentas> studentai(studentuSk);
 
+    char pasirinkimas;
+    do {
+      cout << "Pasirinkite galutinio balo skaičiavimo metodą (V- vidurkiu, M- mediana): ";
+      cin >> pasirinkimas;
+      pasirinkimas = toupper(pasirinkimas);
+    } while (pasirinkimas != 'V' && pasirinkimas != 'M');
+
     for (int i = 0; i < studentuSk; i++) {
-        ivedimas(studentai[i]);
+        ivedimas(studentai[i], pasirinkimas);
     }
 
-    isvedimas(studentai);
+    isvedimas(studentai, pasirinkimas);
 
     return 0;
 
