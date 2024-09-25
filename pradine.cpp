@@ -49,7 +49,7 @@ void generuotiDuomenis(Studentas& Lok, int ndSkaicius) {
    for (int i = 0; i < ndSkaicius; i++) {
       int pazymys = generuotiSkaiciu();
       Lok.namuDarbai.push_back(pazymys);
-      cout << pazymys << ", ";
+      cout << pazymys << " ";
    }
    Lok.egzaminas = generuotiSkaiciu();
    cout << "\nSugeneruotas egzamino rezultatas: " << Lok.egzaminas << endl;
