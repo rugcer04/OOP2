@@ -4,7 +4,6 @@
 #include "Stud.cpp"
 
 
-
 int main() {
    srand(time(0));
 
@@ -44,6 +43,16 @@ int main() {
     for (Studentas& studentas : studentai) {
         skaiciuotiGalutini(studentas, pasirinkimas);
     }
+
+    //Surūšiuojame studentus pagal pavardę
+    sort(studentai.begin(), studentai.end(),
+        [](const Studentas& a, const Studentas& b) {
+            if (a.pavarde == b.pavarde) {
+                return a.vardas < b.vardas; //jei pavardes vienodos, rusiuojame pagal vardus
+            }
+            return a.pavarde < b.pavarde;
+        }
+    );
 
     //Pasirinkimas rezultatų išvedimui
     char isvedimoBudas;
