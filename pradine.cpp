@@ -64,7 +64,7 @@ void ivestiVardaPavarde(Studentas& Lok) {
    cin.ignore();
 }
 
-//funkcija ivesti duomenims ranka
+//funkcija ivesti pazymius ranka
 void ivedimas(Studentas &Lok) {
    ivestiVardaPavarde(Lok);
 
@@ -91,12 +91,12 @@ void ivedimas(Studentas &Lok) {
    cout << "Įveskite egzamino rezultatą: " << endl;
    cin >> Lok.egzaminas;
 
-}
+};
 
 //funkcija pasirinkti duomenu ivedimo buda
 void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
    char pasirinkimas;
-   cout << "Ar norite įvesti duomenis rankiniu būdu (R) ar generuoti automatiškai (A)? ";
+   cout << "Ar norite įvesti pažymius rankiniu būdu (R) ar generuoti automatiškai (A)? ";
    cin >> pasirinkimas;
    pasirinkimas = toupper(pasirinkimas);
 
@@ -111,6 +111,7 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
    }
 
 }
+
 
 //funkcija apskaiciuoti galutini bala
 void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas) {
@@ -135,13 +136,69 @@ void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
    }
 }
 
+//funkcija skaityti duomenis is failo
+void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadinimas) {
+   ifstream failas(failoPavadinimas);
+   if (!failas) {
+      cerr << "Nepavyko atidaryti failo: " << failoPavadinimas << endl;
+      return;
+   }
+
+   string eilute;
+   getline(failas, eilute); //perskaito headeri ir ignoruoja
+
+   while (getline(failas, eilute)) {
+      stringstream ss(eilute); //sukuriame stringsteam objekta ss, kuris leidzi iiskidyt eilute i atskirus zodzius arba skaicius
+      Studentas tempStudentas;
+      ss >> tempStudentas.pavarde >> tempStudentas.vardas; //pirmi du elementai eiluteje yra pavarde ir vardas, todel jie yra priskiriami
+
+      int pazymys;
+      vector<int> namuDarbai;
+
+      //skaitys visus skaicius, kol dar yra skaiciu
+      while (ss >> pazymys) {
+         namuDarbai.push_back(pazymys);
+      }
+
+      //paskutinis ivestas pazymys yra egzamino, todel ji pasalinsime is namu darbu saraso
+      tempStudentas.egzaminas = namuDarbai.back();
+      namuDarbai.pop_back(); // pasalina paskutini elementa, nes tai egzaminas
+
+      tempStudentas.namuDarbai = namuDarbai;
+      studentai.push_back(tempStudentas);
+
+   }
+   failas.close();
+
+}
+
+
 int main() {
    srand(time(0));
-   cout << "Įveskite studentų skaičių: " << endl;
-    int studentuSk;
-    cin >> studentuSk;
 
-    vector<Studentas> studentai(studentuSk);
+   vector<Studentas> studentai;
+    char duomenuIvedimoBudas;
+    
+    cout << "Ar norite duomenis įvesti (I) ar nuskaityti iš failo (F)? ";
+    cin >> duomenuIvedimoBudas;
+    duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
+    
+    if (duomenuIvedimoBudas == 'I') {
+        cout << "Įveskite studentų skaičių: ";
+        int studentuSk;
+        cin >> studentuSk;
+        studentai.resize(studentuSk);  //resizinam kad zinotume kiek studentu gali tilpt i vektoriu
+
+        for (int i = 0; i < studentuSk; i++) {
+            pasirinktiDuomenuIvedimoBuda(studentai[i]);
+        }
+
+    } else if (duomenuIvedimoBudas == 'F') {
+        string failoPavadinimas;
+        cout << "Įveskite failo pavadinimą: ";
+        cin >> failoPavadinimas;
+        nuskaitytiIsFailo(studentai, failoPavadinimas);
+    }
 
     char pasirinkimas;
     do {
@@ -150,9 +207,8 @@ int main() {
       pasirinkimas = toupper(pasirinkimas);
     } while (pasirinkimas != 'V' && pasirinkimas != 'M');
 
-    for (int i = 0; i < studentuSk; i++) {
-      pasirinktiDuomenuIvedimoBuda(studentai[i]);
-      skaiciuotiGalutini(studentai[i], pasirinkimas);
+    for (Studentas& studentas : studentai) {
+        skaiciuotiGalutini(studentas, pasirinkimas);
     }
 
     isvedimas(studentai, pasirinkimas);

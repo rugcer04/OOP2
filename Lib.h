@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <sstream>
+#include <fstream>
 
 using std::string;
 using std::vector;
@@ -15,3 +16,5 @@ using std::setprecision;
 using std::fixed;
 using std::setw;
 using std::stringstream;
+using std::ifstream;
+using std::cerr;
