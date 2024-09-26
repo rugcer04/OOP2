@@ -1,7 +1,4 @@
-
-//#include "Lib.h"
 #include "Stud.h"
-
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
@@ -131,17 +128,41 @@ void ivedimas(Studentas &Lok) {
 //funkcija pasirinkti duomenu ivedimo buda
 void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
    char pasirinkimas;
-   cout << "Ar norite įvesti pažymius rankiniu būdu (R) ar generuoti automatiškai (A)? ";
-   cin >> pasirinkimas;
-   pasirinkimas = toupper(pasirinkimas);
+   while (true) {
+      cout << "Ar norite įvesti pažymius rankiniu būdu (R) ar generuoti automatiškai (A)? ";
+      cin >> pasirinkimas;
+      pasirinkimas = toupper(pasirinkimas);
+      if (pasirinkimas == 'R' || pasirinkimas == 'A') {
+            break;
+        } else {
+            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+        }
+   }
 
    if (pasirinkimas == 'R') {
       ivedimas(Lok);
    } else if (pasirinkimas == 'A') {
       ivestiVardaPavarde(Lok);
-      int ndSkaicius;
       cout << "Įveskite, kiek namų darbų pažymių sugeneruoti: ";
-      cin >> ndSkaicius;
+      cin.ignore();
+      
+      int ndSkaicius;
+      string input;
+
+        while(true) {
+            getline(cin, input);
+
+            try{
+                stringstream ss(input);
+                if (!(ss >> ndSkaicius)) {
+                    throw invalid_argument("įvestis nėra skaičius. ");
+                }
+                break;
+            } catch (const invalid_argument &e){
+                cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
+            }
+        }
+
       generuotiDuomenis(Lok, ndSkaicius);
    }
 

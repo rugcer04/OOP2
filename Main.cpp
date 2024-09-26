@@ -1,24 +1,46 @@
-
 #include "Lib.h"
 #include "Stud.h"
 #include "Stud.cpp"
 
-
 int main() {
-   srand(time(0));
+    srand(time(0));
 
     vector<Studentas> studentai;
 
     //Pasirinkimas duomenims įvesti
     char duomenuIvedimoBudas;
-    cout << "Ar norite duomenis įvesti (I) ar nuskaityti iš failo (F)? ";
-    cin >> duomenuIvedimoBudas;
-    duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
+    while (true) {
+        cout << "Ar norite duomenis įvesti (I) ar nuskaityti iš failo (F)? ";
+        cin >> duomenuIvedimoBudas;
+        duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
+
+        if (duomenuIvedimoBudas == 'I' || duomenuIvedimoBudas == 'F') {
+            break;
+        } else {
+            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+        }
+    }
     
     if (duomenuIvedimoBudas == 'I') {
         cout << "Įveskite studentų skaičių: ";
+        cin.ignore();
+        string input;
         int studentuSk;
-        cin >> studentuSk;
+
+        while(true) {
+            getline(cin, input);
+
+            try{
+                stringstream ss(input);
+                if (!(ss >> studentuSk)) {
+                    throw invalid_argument("įvestis nėra skaičius. ");
+                }
+                break;
+            } catch (const invalid_argument &e){
+                cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
+            }
+        }
+
         studentai.resize(studentuSk);
 
         for (int i = 0; i < studentuSk; i++) {
@@ -32,7 +54,7 @@ int main() {
         nuskaitytiIsFailo(studentai, failoPavadinimas);
     }
 
-    //Pasirinkimas galutio balo skaičiavimo metodui
+    //Pasirinkimas galutinio balo skaičiavimo metodui
     char pasirinkimas;
     do {
       cout << "Pasirinkite galutinio balo skaičiavimo metodą (V- vidurkiu, M- mediana): ";
@@ -56,9 +78,17 @@ int main() {
 
     //Pasirinkimas rezultatų išvedimui
     char isvedimoBudas;
-    cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
-    cin >> isvedimoBudas;
-    isvedimoBudas = toupper(isvedimoBudas);
+    while (true) {
+        cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
+        cin >> isvedimoBudas;
+        isvedimoBudas = toupper(isvedimoBudas);
+
+        if (isvedimoBudas == 'E' || isvedimoBudas == 'F') {
+            break;
+        } else {
+            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+        }
+    }
 
     if (isvedimoBudas == 'E') {
       isvedimas(studentai, pasirinkimas);
@@ -70,5 +100,4 @@ int main() {
     }
 
     return 0;
-
 }
