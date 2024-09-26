@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <sstream>
 #include <fstream>
+#include <stdexcept>
 
 using std::string;
 using std::vector;
@@ -22,5 +23,7 @@ using std::stringstream;
 using std::ifstream;
 using std::cerr;
 using std::ofstream;
+using std::invalid_argument;
+using std::out_of_range;
 
 #endif

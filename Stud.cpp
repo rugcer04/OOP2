@@ -2,8 +2,13 @@
 //#include "Lib.h"
 #include "Stud.h"
 
+
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
+   if (namuDarbai.empty()) {
+      return egzaminas * 0.6;
+   }
+
    double vidurkis = 0.0;
    for (int nd: namuDarbai) {
       vidurkis += nd;
@@ -16,6 +21,10 @@ double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
 double skaiciuotiGalutiniMediana(vector<int> namuDarbai, int egzaminas) {
+   if (namuDarbai.empty()) {
+      return egzaminas * 0.6;
+   }
+
     sort(namuDarbai.begin(), namuDarbai.end()) ;
     double mediana;
     int size = namuDarbai.size();
@@ -72,17 +81,50 @@ void ivedimas(Studentas &Lok) {
       if (input.empty()) {
          break;
       }
-      stringstream ss(input);
-      if (ss >> pazymys) {
+
+      try {
+         stringstream ss(input);
+         if (!(ss >> pazymys)) {
+            throw invalid_argument("Netinkama įvestis");
+         }
+
+         if (pazymys < 1 || pazymys > 10) {
+            throw out_of_range("Pažymys turi būti tarp 1 ir 10");
+         }
+
          Lok.namuDarbai.push_back(pazymys);
-      } else {
-         cout << "Netinkama įvestis, bandykite dar kartą." << endl;
+
+      } catch (const invalid_argument& e) {
+         cout << "Klaida: įvesta ne skaičius. Bandykite dar kartą." << endl;
+      } catch (const out_of_range& e) {
+         cout << "Klaida: pažymys turi būti tarp 1 ir 10. Bandykite dar kartą." << endl;
       }
 
    }
 
    cout << "Įveskite egzamino rezultatą: " << endl;
-   cin >> Lok.egzaminas;
+   while (true) {
+      cin >> input;
+
+      try {
+         stringstream ss(input);
+         if (!(ss >> pazymys)) {
+            throw invalid_argument("Netinkama įvestis");
+         }
+
+         if (pazymys < 1 || pazymys > 10) {
+            throw out_of_range("Egzamino pažymys turi būti tarp 1 ir 10");
+         }
+
+         Lok.egzaminas = pazymys;
+         break;
+
+      } catch (const invalid_argument& e) {
+         cout << "Klaida: įvesta ne skaičius. Bandykite dar kartą." << endl;
+      } catch (const out_of_range& e) {
+         cout << "Klaida: pažymys turi būti tarp 1 ir 10. Bandykite dar kartą." << endl;
+      }
+   }
 
 };
 
@@ -145,19 +187,33 @@ void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadini
       Studentas tempStudentas;
       ss >> tempStudentas.pavarde >> tempStudentas.vardas; //pirmi du elementai eiluteje yra pavarde ir vardas, todel jie yra priskiriami pavardei ir vardui
 
-      int pazymys;
+      string reiksme;
       vector<int> namuDarbai;
 
-      while (ss >> pazymys) {
-         namuDarbai.push_back(pazymys);
+      while (ss >> reiksme) {
+         try {
+            int pazymys = stoi(reiksme);
+
+            if (pazymys >= 1 && pazymys <= 10) {
+               namuDarbai.push_back(pazymys);
+            } else {
+               cerr << "Netinkamas pažymys (" << pazymys << "), praleidžiama reikšmė" << endl;
+            }
+         } catch (invalid_argument&) {
+            cerr << "Netinkamas simbolis (" << reiksme << "), praleidžiama reikšmė." << endl;
+         } catch (out_of_range&) {
+            cerr << "Pažymys už intervalo ribų, praleidžiama reikšmė." << endl;
+         }
       }
 
-      //paskutinis ivestas pazymys yra egzamino, todel ji pasalinsime is namu darbu saraso
-      tempStudentas.egzaminas = namuDarbai.back();
-      namuDarbai.pop_back();
+      if (!namuDarbai.empty()) {
+            //Paskutinis skaičius yra egzamino pažymys
+            tempStudentas.egzaminas = namuDarbai.back();
+            namuDarbai.pop_back();
+            tempStudentas.namuDarbai = namuDarbai;
 
-      tempStudentas.namuDarbai = namuDarbai;
-      studentai.push_back(tempStudentas);
+            studentai.push_back(tempStudentas);
+        }
 
    }
    failas.close();
