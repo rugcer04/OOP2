@@ -9,6 +9,7 @@ struct Studentas {
    double galutinis;
 };
 
+
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
    double vidurkis = 0.0;
@@ -145,24 +146,23 @@ void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadini
    }
 
    string eilute;
-   getline(failas, eilute); //perskaito headeri ir ignoruoja
+   getline(failas, eilute);
 
    while (getline(failas, eilute)) {
-      stringstream ss(eilute); //sukuriame stringsteam objekta ss, kuris leidzi iiskidyt eilute i atskirus zodzius arba skaicius
+      stringstream ss(eilute);
       Studentas tempStudentas;
-      ss >> tempStudentas.pavarde >> tempStudentas.vardas; //pirmi du elementai eiluteje yra pavarde ir vardas, todel jie yra priskiriami
+      ss >> tempStudentas.pavarde >> tempStudentas.vardas; //pirmi du elementai eiluteje yra pavarde ir vardas, todel jie yra priskiriami pavardei ir vardui
 
       int pazymys;
       vector<int> namuDarbai;
 
-      //skaitys visus skaicius, kol dar yra skaiciu
       while (ss >> pazymys) {
          namuDarbai.push_back(pazymys);
       }
 
       //paskutinis ivestas pazymys yra egzamino, todel ji pasalinsime is namu darbu saraso
       tempStudentas.egzaminas = namuDarbai.back();
-      namuDarbai.pop_back(); // pasalina paskutini elementa, nes tai egzaminas
+      namuDarbai.pop_back();
 
       tempStudentas.namuDarbai = namuDarbai;
       studentai.push_back(tempStudentas);
@@ -170,6 +170,28 @@ void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadini
    }
    failas.close();
 
+}
+
+void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, const string& failoPavadinimas) {
+   ofstream failas(failoPavadinimas);
+   if (!failas) {
+      cerr << "Nepavyko sukurti failo: " << failoPavadinimas << endl;
+      return;
+   }
+
+   if (pasirinkimas == 'V') {
+      failas << left << setw(15) << "Pavardė" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+   } else if (pasirinkimas == 'M') {
+      failas << left << setw(15) << "Pavardė" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
+   }
+
+   failas << "----------------------------------------------" << endl;
+   for (const auto& Lok : studentai)  {
+      failas << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << Lok.galutinis << endl;
+   }
+
+   failas.close();
+   cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
 }
 
 
@@ -187,7 +209,7 @@ int main() {
         cout << "Įveskite studentų skaičių: ";
         int studentuSk;
         cin >> studentuSk;
-        studentai.resize(studentuSk);  //resizinam kad zinotume kiek studentu gali tilpt i vektoriu
+        studentai.resize(studentuSk);
 
         for (int i = 0; i < studentuSk; i++) {
             pasirinktiDuomenuIvedimoBuda(studentai[i]);
@@ -211,7 +233,19 @@ int main() {
         skaiciuotiGalutini(studentas, pasirinkimas);
     }
 
-    isvedimas(studentai, pasirinkimas);
+    char isvedimoBudas;
+    cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
+    cin >> isvedimoBudas;
+    isvedimoBudas = toupper(isvedimoBudas);
+
+    if (isvedimoBudas == 'E') {
+      isvedimas(studentai, pasirinkimas);
+    } else if (isvedimoBudas = 'F') {
+      string failoPavadinimas;
+      cout << "Įveskite failo pavadinimą rezultatams išsaugoti: ";
+      cin >> failoPavadinimas;
+      isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+    }
 
     return 0;
 

@@ -1,3 +1,6 @@
+#ifndef LIB_H
+#define LIB_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,3 +21,6 @@ using std::setw;
 using std::stringstream;
 using std::ifstream;
 using std::cerr;
+using std::ofstream;
+
+#endif
