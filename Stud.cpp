@@ -36,21 +36,19 @@ double skaiciuotiGalutiniMediana(vector<int> namuDarbai, int egzaminas) {
 
 }
 
-//funkcija generuoti atsitiktinius skaicius
-int generuotiSkaiciu() {
-    return rand() % 10 + 1;
-}
+random_device rd_generator;
+uniform_int_distribution<int> Results_interval(1, 10);
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
 void generuotiDuomenis(Studentas& Lok, int ndSkaicius) {
    Lok.namuDarbai.clear();
    cout << "Sugeneruoti namų darbų pažymiai: ";
    for (int i = 0; i < ndSkaicius; i++) {
-      int pazymys = generuotiSkaiciu();
+      int pazymys = Results_interval(rd_generator);
       Lok.namuDarbai.push_back(pazymys);
       cout << pazymys << " ";
    }
-   Lok.egzaminas = generuotiSkaiciu();
+   Lok.egzaminas = Results_interval(rd_generator);
    cout << "\nSugeneruotas egzamino rezultatas: " << Lok.egzaminas << endl;
 }
 
@@ -74,14 +72,14 @@ void ivedimas(Studentas &Lok) {
    int pazymys;
 
    while (true) {
-      getline(cin, input);
+      getline(cin, input);   //naudojama perskaityti visa eilute input, iskaiciuojant tarpus
       if (input.empty()) {
          break;
       }
 
       try {
          stringstream ss(input);
-         if (!(ss >> pazymys)) {
+         if (!(ss >> pazymys)) {  //bandoma extractint skaiciu
             throw invalid_argument("Netinkama įvestis");
          }
 
@@ -144,7 +142,7 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
    } else if (pasirinkimas == 'A') {
       ivestiVardaPavarde(Lok);
       cout << "Įveskite, kiek namų darbų pažymių sugeneruoti: ";
-      cin.ignore();
+      //cin.ignore();
       
       int ndSkaicius;
       string input;
@@ -194,12 +192,13 @@ void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
 
 //funkcija skaityti duomenis is failo
 void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadinimas) {
-   ifstream failas(failoPavadinimas);
+   ifstream failas(failoPavadinimas);  //bandoma atidaryti faila
    if (!failas) {
       cerr << "Nepavyko atidaryti failo: " << failoPavadinimas << endl;
       return;
    }
 
+   //perskaitoma pirma eilute(header) ir praleidziama
    string eilute;
    getline(failas, eilute);
 

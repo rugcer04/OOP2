@@ -9,6 +9,7 @@
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
+#include <random> // For random_device and uniform_int_distribution
 
 using std::string;
 using std::vector;
@@ -25,5 +26,7 @@ using std::cerr;
 using std::ofstream;
 using std::invalid_argument;
 using std::out_of_range;
+using std::random_device;
+using std::uniform_int_distribution;
 
 #endif

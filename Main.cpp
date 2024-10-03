@@ -3,8 +3,6 @@
 #include "Stud.cpp"
 
 int main() {
-    srand(time(0));
-
     vector<Studentas> studentai;
 
     //Pasirinkimas duomenims įvesti
