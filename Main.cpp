@@ -8,17 +8,18 @@ int main() {
     //Pasirinkimas duomenims įvesti
     char duomenuIvedimoBudas;
     while (true) {
-        cout << "Ar norite duomenis įvesti (I) ar nuskaityti iš failo (F)? ";
+        cout << "Ar norite duomenis įvesti (I), nuskaityti iš failo (F), ar sugeneruoti failą ir jį nuskaityti (G)? ";
         cin >> duomenuIvedimoBudas;
         duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
 
-        if (duomenuIvedimoBudas == 'I' || duomenuIvedimoBudas == 'F') {
+        if (duomenuIvedimoBudas == 'I' || duomenuIvedimoBudas == 'F' || duomenuIvedimoBudas == 'G') {
             break;
         } else {
             cout << "Neteisinga įvestis, bandykite dar kartą.\n";
         }
     }
     
+    //Ivesti rankiniu budu
     if (duomenuIvedimoBudas == 'I') {
         cout << "Įveskite studentų skaičių: ";
         cin.ignore();
@@ -45,10 +46,27 @@ int main() {
             pasirinktiDuomenuIvedimoBuda(studentai[i]);
         }
 
-    } else if (duomenuIvedimoBudas == 'F') {
+    }
+    //Nuskaitymas is failo
+     else if (duomenuIvedimoBudas == 'F') {
         string failoPavadinimas;
         cout << "Įveskite failo pavadinimą: ";
         cin >> failoPavadinimas;
+        nuskaitytiIsFailo(studentai, failoPavadinimas);
+    }
+
+    //failo generavimas ir nuskaitymas
+    else if (duomenuIvedimoBudas == 'G') {
+        string failoPavadinimas;
+        int studentuSkaicius;
+
+        cout << "Įveskite, kiek studentų norite sugeneruoti: ";
+        cin >> studentuSkaicius;
+
+        cout << "Įveskite failo pavadinimą: ";
+        cin >> failoPavadinimas;
+
+        generuotiFaila(studentuSkaicius, failoPavadinimas);
         nuskaitytiIsFailo(studentai, failoPavadinimas);
     }
 

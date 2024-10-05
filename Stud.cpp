@@ -1,4 +1,5 @@
 #include "Stud.h"
+using std::to_string;
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
@@ -261,4 +262,46 @@ void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, cons
 
    failas.close();
    cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
+}
+
+//Funckija generuoti failus
+void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
+   ofstream failas(failoPavadinimas);
+   if (!failas) {
+      cerr << "Nepavyksta sukurti failo: " << failoPavadinimas << endl;
+      return;
+   }
+
+   failas << left << setw(15) << "Pavarde" 
+           << left << setw(15) << "Vardas" 
+           << left << setw(10) << "ND1"
+           << left << setw(10) << "ND2"
+           << left << setw(10) << "ND3"
+           << left << setw(10) << "ND4"
+           << left << setw(10) << "ND5"
+           << left << setw(10) << "ND6"
+           << left << setw(10) << "ND7"
+           << left << setw(10) << "ND8"
+           << left << setw(10) << "ND9"
+           << left << setw(10) << "ND10"
+           << left << setw(10) << "Egzaminas" 
+           << endl;
+
+   for (int i = 1; i <= studentuSkaicius; i++) {
+      string pavarde = "Pavarde" + to_string(i);
+      string vardas = "Vardas" + to_string(i);
+      failas << left << setw(15) << pavarde
+             << left << setw(15) << vardas;
+
+      for (int j = 0; j < 10; ++j) {
+         int pazymys = Results_interval(rd_generator);
+         failas << left << setw(10) << pazymys;
+      }
+
+      int egzaminas = Results_interval(rd_generator);
+      failas << left << setw(10) << egzaminas << "\n";
+   }
+
+   failas.close();
+   cout << "Failas " << failoPavadinimas << " sėkmingai sukurtas" << endl;
 }
