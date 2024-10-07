@@ -310,6 +310,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
    cout << "Failas " << failoPavadinimas << " sėkmingai sukurtas" << endl;
 }
 
+//funkcija suskirstyti studentus i kategorijas
 void KategorijosPriskirimas(vector<Studentas> &stud, int n) {
    for (int i = 0; i < n; i++) {
       if (stud[i].galutinis < 5.0) {
@@ -319,32 +320,35 @@ void KategorijosPriskirimas(vector<Studentas> &stud, int n) {
       }
    }
 }
-/*
-void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai) {
+
+//funkcija isvesti skirtingas kategorijas i failus
+void IsvedimasIKategorijosFailus(const vector<Studentas>& studentai, const string& vargsiukuFailas, const string& kietiakuFailas) {
+   ofstream vargsiukai(vargsiukuFailas);
+   ofstream kietiakai(kietiakuFailas);
+
+   if (!vargsiukai || !kietiakai) {
+      cerr << "Nepavyko sukurti vieno iš failų!" << endl;
+      return;
+   }
+
+   //antrastes
+   vargsiukai << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+   vargsiukai << "---------------------------------------------" << endl;
+
+   kietiakai << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+   kietiakai << "---------------------------------------------" << endl;
+
    for (const auto& studentas : studentai) {
-      if (studentas.galutinis < 5.0) {
-         vargsiukai.push_back(studentas);
-      } else {
-         kietiakai.push_back(studentas);
+      if (studentas.kategorija == Studentas::Kategorija::Vargsiukai) {
+         vargsiukai << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
+      } else if (studentas.kategorija == Studentas::Kategorija::Kietiakai) {
+         kietiakai << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
       }
    }
+
+   vargsiukai.close();
+   kietiakai.close();
+
+   cout << "Vargsiukai sėkmingai išsaugoti faile: " << vargsiukuFailas << endl;
+   cout << "Kietiakai sėkmingai išsaugoti faile: " << kietiakuFailas << endl;
 }
-
-void isvestiVargsiukusIFaila(const vector<Studentas>& vargsiukai, const string& failoPavadinimas) {
-    ofstream failas(failoPavadinimas);
-    if (!failas) {
-        cerr << "Nepavyko sukurti failo: " << failoPavadinimas << endl;
-        return;
-    }
-
-    failas << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
-    failas << "----------------------------------------------" << endl;
-
-    for (const auto& studentas : vargsiukai) {
-        failas << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
-    }
-
-    failas.close();
-    cout << "Vargšiukų rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
-}
-*/

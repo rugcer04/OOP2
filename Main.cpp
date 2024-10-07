@@ -83,6 +83,7 @@ int main() {
     }
 
     KategorijosPriskirimas(studentai, studentai.size());
+    IsvedimasIKategorijosFailus(studentai, "vargsiukai.txt", "kietiakai.txt");
 
     //Surūšiuojame studentus pagal pavardę
     sort(studentai.begin(), studentai.end(),
