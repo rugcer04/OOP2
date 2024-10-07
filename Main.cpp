@@ -82,6 +82,8 @@ int main() {
         skaiciuotiGalutini(studentas, pasirinkimas);
     }
 
+    KategorijosPriskirimas(studentai, studentai.size());
+
     //Surūšiuojame studentus pagal pavardę
     sort(studentai.begin(), studentai.end(),
         [](const Studentas& a, const Studentas& b) {

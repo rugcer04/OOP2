@@ -11,6 +11,8 @@ struct Studentas {
    vector<int> namuDarbai;
    int egzaminas;
    double galutinis;
+   enum class Kategorija {Vargsiukai, Kietiakai};
+   Kategorija kategorija;
 };
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki

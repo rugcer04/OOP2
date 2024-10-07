@@ -1,5 +1,4 @@
 #include "Stud.h"
-using std::to_string;
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
@@ -284,6 +283,11 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
            << left << setw(10) << "ND8"
            << left << setw(10) << "ND9"
            << left << setw(10) << "ND10"
+           << left << setw(10) << "ND11"
+           << left << setw(10) << "ND12"
+           << left << setw(10) << "ND13"
+           << left << setw(10) << "ND14"
+           << left << setw(10) << "ND15"
            << left << setw(10) << "Egzaminas" 
            << endl;
 
@@ -293,7 +297,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
       failas << left << setw(15) << pavarde
              << left << setw(15) << vardas;
 
-      for (int j = 0; j < 10; ++j) {
+      for (int j = 0; j < 15; ++j) {
          int pazymys = Results_interval(rd_generator);
          failas << left << setw(10) << pazymys;
       }
@@ -305,3 +309,42 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
    failas.close();
    cout << "Failas " << failoPavadinimas << " sėkmingai sukurtas" << endl;
 }
+
+void KategorijosPriskirimas(vector<Studentas> &stud, int n) {
+   for (int i = 0; i < n; i++) {
+      if (stud[i].galutinis < 5.0) {
+         stud[i].kategorija = Studentas::Kategorija::Vargsiukai;
+      } else {
+         stud[i].kategorija = Studentas::Kategorija::Kietiakai;
+      }
+   }
+}
+/*
+void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai) {
+   for (const auto& studentas : studentai) {
+      if (studentas.galutinis < 5.0) {
+         vargsiukai.push_back(studentas);
+      } else {
+         kietiakai.push_back(studentas);
+      }
+   }
+}
+
+void isvestiVargsiukusIFaila(const vector<Studentas>& vargsiukai, const string& failoPavadinimas) {
+    ofstream failas(failoPavadinimas);
+    if (!failas) {
+        cerr << "Nepavyko sukurti failo: " << failoPavadinimas << endl;
+        return;
+    }
+
+    failas << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+    failas << "----------------------------------------------" << endl;
+
+    for (const auto& studentas : vargsiukai) {
+        failas << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
+    }
+
+    failas.close();
+    cout << "Vargšiukų rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
+}
+*/

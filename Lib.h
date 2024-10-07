@@ -28,5 +28,6 @@ using std::invalid_argument;
 using std::out_of_range;
 using std::random_device;
 using std::uniform_int_distribution;
+using std::to_string;
 
 #endif
