@@ -67,6 +67,7 @@ int main() {
         cin >> failoPavadinimas;
 
         generuotiFaila(studentuSkaicius, failoPavadinimas);
+        //generuotiFaila(10, failoPavadinimas);
         nuskaitytiIsFailo(studentai, failoPavadinimas);
     }
 
@@ -82,8 +83,8 @@ int main() {
         skaiciuotiGalutini(studentas, pasirinkimas);
     }
 
-    KategorijosPriskirimas(studentai, studentai.size());
-    IsvedimasIKategorijosFailus(studentai, "vargsiukai.txt", "kietiakai.txt");
+    //KategorijosPriskirimas(studentai, studentai.size());
+    //IsvedimasIKategorijosFailus(studentai, "vargsiukai.txt", "kietiakai.txt");
 
     //Surūšiuojame studentus pagal pavardę
     sort(studentai.begin(), studentai.end(),
@@ -94,6 +95,16 @@ int main() {
             return a.pavarde < b.pavarde;
         }
     );
+
+    //Skirstyti studentus i vargsiukus ir kietiakus
+    vector<Studentas> vargsiukai, kietiakai;
+    skirstytiStudentus(studentai, vargsiukai, kietiakai);
+
+    //Isvesti vargsiukus i faila
+    isvestiGrupesIFaila(vargsiukai, "vargsiukai.txt", pasirinkimas);
+
+    //Isvesti kietiakus i faila
+    isvestiGrupesIFaila(kietiakai, "kietiakai.txt", pasirinkimas);
 
     //Pasirinkimas rezultatų išvedimui
     char isvedimoBudas;

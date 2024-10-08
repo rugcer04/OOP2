@@ -175,6 +175,30 @@ void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas) {
       Lok.galutinis = skaiciuotiGalutiniMediana(Lok.namuDarbai, Lok.egzaminas);
    }
 }
+/*
+void isvestiAntraste(char pasirinkimas) {
+    if (pasirinkimas == 'V') {
+        cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+    } else if (pasirinkimas == 'M') {
+        cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
+    }
+    cout << "-----------------------------------------------" << endl;
+}
+
+void isvestiDuomenis(const vector<Studentas>& studentai) {
+    for (const auto& studentas : studentai) {
+        cout << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
+    }
+}
+
+void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
+    // Išvesti antraštę pagal pasirinkimą (Vidurkis ar Mediana)
+    isvestiAntraste(pasirinkimas);
+
+    // Išvesti studentų duomenis
+    isvestiDuomenis(studentai);
+}
+*/
 
 //funkcija isvesti duomenis
 void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
@@ -310,6 +334,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
    cout << "Failas " << failoPavadinimas << " sėkmingai sukurtas" << endl;
 }
 
+/*
 //funkcija suskirstyti studentus i kategorijas
 void KategorijosPriskirimas(vector<Studentas> &stud, int n) {
    for (int i = 0; i < n; i++) {
@@ -351,4 +376,40 @@ void IsvedimasIKategorijosFailus(const vector<Studentas>& studentai, const strin
 
    cout << "Vargsiukai sėkmingai išsaugoti faile: " << vargsiukuFailas << endl;
    cout << "Kietiakai sėkmingai išsaugoti faile: " << kietiakuFailas << endl;
+}
+*/
+
+
+void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai) {
+   for (const auto& studentas : studentai) {
+      if (studentas.galutinis < 5.0) {
+         vargsiukai.push_back(studentas);
+      } else {
+         kietiakai.push_back(studentas);
+      }
+   }
+}
+
+void isvestiGrupesIFaila(const vector<Studentas>& studentai, const string& failoPavadinimas, char pasirinkimas) {
+   ofstream failas(failoPavadinimas);
+   if (!failas) {
+      cerr << "Nepavyko sukurti failo: " << failoPavadinimas << endl;
+      return;
+   }
+
+   if (pasirinkimas == 'V') {
+      failas << left << setw(15) << "Pavardė" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+   } else if (pasirinkimas == 'M') {
+      failas << left << setw(15) << "Pavardė" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
+   }
+
+   //failas << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis" << endl;
+   //failas << "----------------------------------------------" << endl;
+
+   for (const auto& studentas : studentai) {
+      failas << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
+   }
+
+   failas.close();
+   cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
 }
