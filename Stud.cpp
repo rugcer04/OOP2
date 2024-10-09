@@ -175,30 +175,6 @@ void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas) {
       Lok.galutinis = skaiciuotiGalutiniMediana(Lok.namuDarbai, Lok.egzaminas);
    }
 }
-/*
-void isvestiAntraste(char pasirinkimas) {
-    if (pasirinkimas == 'V') {
-        cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
-    } else if (pasirinkimas == 'M') {
-        cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
-    }
-    cout << "-----------------------------------------------" << endl;
-}
-
-void isvestiDuomenis(const vector<Studentas>& studentai) {
-    for (const auto& studentas : studentai) {
-        cout << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
-    }
-}
-
-void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
-    // Išvesti antraštę pagal pasirinkimą (Vidurkis ar Mediana)
-    isvestiAntraste(pasirinkimas);
-
-    // Išvesti studentų duomenis
-    isvestiDuomenis(studentai);
-}
-*/
 
 //funkcija isvesti duomenis
 void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
@@ -403,13 +379,49 @@ void isvestiGrupesIFaila(const vector<Studentas>& studentai, const string& failo
       failas << left << setw(15) << "Pavardė" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
    }
 
-   //failas << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis" << endl;
-   //failas << "----------------------------------------------" << endl;
-
    for (const auto& studentas : studentai) {
       failas << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
    }
 
    failas.close();
    cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
+}
+
+//funkcija rusiuoti studentus
+void rusiuotiStudentus(vector<Studentas>& studentai, char parametras) {
+   if(parametras == 'V') {
+      //Rusiavimas pagal varda
+      sort(studentai.begin(), studentai.end(),
+        [](const Studentas& a, const Studentas& b) {
+            if (a.vardas == b.vardas) {
+                return a.pavarde < b.pavarde;
+            }
+            return a.vardas < b.vardas;
+        }
+    );
+   } else if (parametras == 'P') {
+      //Rusiavimas pagal pavarde
+      sort(studentai.begin(), studentai.end(),
+        [](const Studentas& a, const Studentas& b) {
+            if (a.pavarde == b.pavarde) {
+                return a.vardas < b.vardas;
+            }
+            return a.pavarde < b.pavarde;
+        }
+    );
+   } else if (parametras == 'M') {
+      //Rusiavimas pagal galutini pazymi mazejimo tvarka
+      sort(studentai.begin(), studentai.end(),
+        [](const Studentas& a, const Studentas& b) {
+            return a.galutinis < b.galutinis;
+        }
+    );
+   } else if (parametras == 'D') {
+      //Rusiavimas pagal galutini pazymi didejimo tvarka
+      sort(studentai.begin(), studentai.end(),
+        [](const Studentas& a, const Studentas& b) {
+            return a.galutinis < b.galutinis;
+        }
+    );
+   }
 }

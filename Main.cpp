@@ -86,15 +86,12 @@ int main() {
     //KategorijosPriskirimas(studentai, studentai.size());
     //IsvedimasIKategorijosFailus(studentai, "vargsiukai.txt", "kietiakai.txt");
 
-    //Surūšiuojame studentus pagal pavardę
-    sort(studentai.begin(), studentai.end(),
-        [](const Studentas& a, const Studentas& b) {
-            if (a.pavarde == b.pavarde) {
-                return a.vardas < b.vardas; //jei pavardes vienodos, rusiuojame pagal vardus
-            }
-            return a.pavarde < b.pavarde;
-        }
-    );
+    //Surusiuojame studentus
+    char parametras;
+    cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjamo tvarka (M) ar didėjimo tvarka (D): ";
+    cin >> parametras;
+    parametras = toupper(parametras);
+    rusiuotiStudentus(studentai, parametras);
 
     //Skirstyti studentus i vargsiukus ir kietiakus
     vector<Studentas> vargsiukai, kietiakai;
