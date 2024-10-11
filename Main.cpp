@@ -2,8 +2,6 @@
 #include "Stud.h"
 #include "Stud.cpp"
 
-#include <chrono>
-using namespace std::chrono;
 
 int main() {
     high_resolution_clock::time_point start, end;
@@ -55,6 +53,8 @@ int main() {
     }
     //Nuskaitymas is failo
      else if (duomenuIvedimoBudas == 'F') {
+        //cin.ignore();
+        //system("dir *.txt");
         string failoPavadinimas;
         cout << "Įveskite failo pavadinimą: ";
         cin >> failoPavadinimas;
@@ -63,93 +63,106 @@ int main() {
 
     //failo generavimas ir nuskaitymas
     else if (duomenuIvedimoBudas == 'G') {
+        vector<int> studentuDydziai = {10000000};
+        char pasirinkimas;
+
+        for (int n : studentuDydziai) {
+            studentai.clear();
+            string failoPavadinimas = "studentai" + to_string(n) + ".txt";
+
+            //Generuojamas failas
+            start = high_resolution_clock::now();
+            generuotiFaila(n, failoPavadinimas);
+            end = high_resolution_clock::now();
+            failoKuriamoLaikas = duration_cast<duration<double>>(end - start);
+
+            //Failas nuskaitomas
+            start = high_resolution_clock::now();
+            nuskaitytiIsFailo(studentai, failoPavadinimas);
+            end = high_resolution_clock::now();
+            duomenuNuskaitymoLaikas = duration_cast<duration<double>>(end - start);
+
+            //vartotojas viena karta pasirenka galutinio balo skaiciavimo metoda ir rusiavimo parametra
+            if (n == 1000) {
+                pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+                for (Studentas& studentas : studentai) {
+                    skaiciuotiGalutini(studentas, pasirinkimas);
+                }
+                pasirinktiRusiavimoParametra(studentai);
+            } else {
+                for (Studentas& studentas : studentai) {
+                    skaiciuotiGalutini(studentas, pasirinkimas);
+                }
+            }
+
+            //Skirstyti studentus i vargsiukus ir kietiakus
+            start = high_resolution_clock::now();
+            vector<Studentas> vargsiukai, kietiakai;
+            skirstytiStudentus(studentai, vargsiukai, kietiakai);
+            end = high_resolution_clock::now();
+            studentuRusiavimoLaikas = duration_cast<duration<double>>(end - start);
+
+            start = high_resolution_clock::now();
+            //Isvesti vargsiukus i faila
+            isvestiGrupesIFaila(vargsiukai, "vargsiukai.txt", pasirinkimas);
+            //Isvesti kietiakus i faila
+            isvestiGrupesIFaila(kietiakai, "kietiakai.txt", pasirinkimas);
+            end = high_resolution_clock::now();
+            studentuIsvedimoLaikas = duration_cast<duration<double>>(end - start);
+
+            spausdintiOperacijuLaikus(n, failoKuriamoLaikas, duomenuNuskaitymoLaikas, studentuRusiavimoLaikas, studentuIsvedimoLaikas);
+
+        }
+             
+        //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+        pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+
+        /*
+        //Generuojamas ir nuskaitomas vienas failas
         string failoPavadinimas;
         int studentuSkaicius;
 
         cout << "Įveskite, kiek studentų norite sugeneruoti: ";
         cin >> studentuSkaicius;
 
-        cout << "Įveskite failo pavadinimą: ";
-        cin >> failoPavadinimas;
+        //cout << "Įveskite failo pavadinimą: ";
+        //cin >> failoPavadinimas;
+        failoPavadinimas = "studentai" + to_string(studentuSkaicius) + ".txt";
 
         start = high_resolution_clock::now();
         generuotiFaila(studentuSkaicius, failoPavadinimas);
         end = high_resolution_clock::now();
         failoKuriamoLaikas = duration_cast<duration<double>>(end - start);
 
-        //generuotiFaila(10, failoPavadinimas);
         start = high_resolution_clock::now();
         nuskaitytiIsFailo(studentai, failoPavadinimas);
         end = high_resolution_clock::now();
         duomenuNuskaitymoLaikas = duration_cast<duration<double>>(end - start);
+        */
     }
 
-    //Pasirinkimas galutinio balo skaičiavimo metodui
-    char pasirinkimas;
-    do {
-      cout << "Pasirinkite galutinio balo skaičiavimo metodą (V- vidurkiu, M- mediana): ";
-      cin >> pasirinkimas;
-      pasirinkimas = toupper(pasirinkimas);
-    } while (pasirinkimas != 'V' && pasirinkimas != 'M');
-
-    for (Studentas& studentas : studentai) {
+    if (duomenuIvedimoBudas != 'G') {
+        //Pasirinkimas galutinio balo skaičiavimo metodui
+        char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+        for (Studentas& studentas : studentai) {
         skaiciuotiGalutini(studentas, pasirinkimas);
-    }
-
-    //Surusiuojame studentus
-    char parametras;
-    cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjamo tvarka (M) ar didėjimo tvarka (D): ";
-    cin >> parametras;
-    parametras = toupper(parametras);
-
-    start = high_resolution_clock::now();
-    rusiuotiStudentus(studentai, parametras);
-    end = high_resolution_clock::now();
-    studentuRusiavimoLaikas = duration_cast<duration<double>>(end - start);
-
-    //Skirstyti studentus i vargsiukus ir kietiakus
-    vector<Studentas> vargsiukai, kietiakai;
-    skirstytiStudentus(studentai, vargsiukai, kietiakai);
-
-    start = high_resolution_clock::now();
-
-    //Isvesti vargsiukus i faila
-    isvestiGrupesIFaila(vargsiukai, "vargsiukai.txt", pasirinkimas);
-
-    //Isvesti kietiakus i faila
-    isvestiGrupesIFaila(kietiakai, "kietiakai.txt", pasirinkimas);
-
-    end = high_resolution_clock::now();
-    studentuIsvedimoLaikas = duration_cast<duration<double>>(end - start);
-
-    //Pasirinkimas rezultatų išvedimui
-    char isvedimoBudas;
-    while (true) {
-        cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
-        cin >> isvedimoBudas;
-        isvedimoBudas = toupper(isvedimoBudas);
-
-        if (isvedimoBudas == 'E' || isvedimoBudas == 'F') {
-            break;
-        } else {
-            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
         }
-    }
 
-    if (isvedimoBudas == 'E') {
-      isvedimas(studentai, pasirinkimas);
-    } else if (isvedimoBudas = 'F') {
-      string failoPavadinimas;
-      cout << "Įveskite failo pavadinimą rezultatams išsaugoti: ";
-      cin >> failoPavadinimas;
-      isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-    }
+        //Surusiuojame studentus pagal pasirinkta parametra
+        pasirinktiRusiavimoParametra(studentai);
 
-    if (duomenuIvedimoBudas == 'G') {
-        cout << "Failo generavimas užtruko: " << failoKuriamoLaikas.count() << " sekundžių\n";
-        cout << "Duomenų nuskaitymas iš failo užtruko: " << duomenuNuskaitymoLaikas.count() << " sekundžių\n";
-        cout << "Studentų rūšiavimas užtruko: " << studentuRusiavimoLaikas.count() << " sekundžių\n";
-        cout << "Rezultatų įrašymas į failus užtruko: " << studentuIsvedimoLaikas.count() << " sekundžių\n";
+        //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+        pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+
+        //Skirstyti studentus i vargsiukus ir kietiakus
+        vector<Studentas> vargsiukai, kietiakai;
+        skirstytiStudentus(studentai, vargsiukai, kietiakai);
+
+        //Isvesti vargsiukus i faila
+        isvestiGrupesIFaila(vargsiukai, "vargsiukai.txt", pasirinkimas);
+
+        //Isvesti kietiakus i faila
+        isvestiGrupesIFaila(kietiakai, "kietiakai.txt", pasirinkimas);
     }
 
     return 0;

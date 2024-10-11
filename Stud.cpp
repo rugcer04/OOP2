@@ -425,3 +425,58 @@ void rusiuotiStudentus(vector<Studentas>& studentai, char parametras) {
     );
    }
 }
+
+//funckija vartotojui pasirinkti galutinio balo matavimo buda
+char pasirinktiGalutinioskaiciavimoMetoda() {
+    char pasirinkimas;
+    do {
+        cout << "Pasirinkite galutinio balo skaičiavimo metodą (V- vidurkiu, M- mediana): ";
+        cin >> pasirinkimas;
+        pasirinkimas = toupper(pasirinkimas);
+    } while (pasirinkimas != 'V' && pasirinkimas != 'M');
+
+    return pasirinkimas;
+}
+
+//funkcija pasirinkti rusiavimo parametra
+void pasirinktiRusiavimoParametra(vector<Studentas>& studentai) {
+    char parametras;
+    cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjamo tvarka (M) ar didėjimo tvarka (D): ";
+    cin >> parametras;
+    parametras = toupper(parametras);
+    rusiuotiStudentus(studentai, parametras);
+}
+
+//funckija pasirinkti rezultato isvedimo buda
+void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pasirinkimas) {
+    char isvedimoBudas;
+    while (true) {
+        cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
+        cin >> isvedimoBudas;
+        isvedimoBudas = toupper(isvedimoBudas);
+
+        if (isvedimoBudas == 'E' || isvedimoBudas == 'F') {
+            break;
+        } else {
+            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+        }
+    }
+
+    if (isvedimoBudas == 'E') {
+        isvedimas(studentai, pasirinkimas);
+    } else if (isvedimoBudas == 'F') {
+        string failoPavadinimas;
+        cout << "Įveskite failo pavadinimą rezultatams išsaugoti: ";
+        cin >> failoPavadinimas;
+        isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+    }
+}
+
+void spausdintiOperacijuLaikus(int n, duration<double> failoKuriamoLaikas, duration<double> duomenuNuskaitymoLaikas, duration<double> studentuRusiavimoLaikas, duration<double> studentuIsvedimoLaikas) {
+    cout << "Duomenų kiekis: " << n << endl;
+    cout << "Failo generavimo laikas: " << failoKuriamoLaikas.count() << " s" << endl;
+    cout << "Duomenų nuskaitymo laikas: " << duomenuNuskaitymoLaikas.count() << " s" << endl;
+    cout << "Studentų rūšiavimo į dvi grupes laikas : " << studentuRusiavimoLaikas.count() << " s" << endl;
+    cout << "Studentų išvedimo laikas: " << studentuIsvedimoLaikas.count() << " s" << endl;
+    cout << "--------------------------" << endl;
+}

@@ -10,6 +10,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <random> // For random_device and uniform_int_distribution
+#include <chrono>
 
 using std::string;
 using std::vector;
@@ -29,5 +30,6 @@ using std::out_of_range;
 using std::random_device;
 using std::uniform_int_distribution;
 using std::to_string;
+using namespace std::chrono;
 
 #endif
