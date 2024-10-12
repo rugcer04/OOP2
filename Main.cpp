@@ -12,7 +12,7 @@ int main() {
     //Pasirinkimas duomenims įvesti
     char duomenuIvedimoBudas;
     while (true) {
-        cout << "Ar norite duomenis įvesti (I), nuskaityti iš failo (F), ar sugeneruoti failą ir jį nuskaityti (G)? ";
+        cout << "Ar norite duomenis įvesti (I), nuskaityti iš failo (F), ar sugeneruoti failą (G)? ";
         cin >> duomenuIvedimoBudas;
         duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
 
@@ -58,12 +58,17 @@ int main() {
         string failoPavadinimas;
         cout << "Įveskite failo pavadinimą: ";
         cin >> failoPavadinimas;
+
+        start = high_resolution_clock::now();
         nuskaitytiIsFailo(studentai, failoPavadinimas);
+        end = high_resolution_clock::now();
+        duomenuNuskaitymoLaikas = duration_cast<duration<double>>(end - start);
+        //cout << "Duomenų nuskaitymo laikas: " << duomenuNuskaitymoLaikas.count() << " s" << endl;
     }
 
-    //failo generavimas ir nuskaitymas
+    //failo generavimas
     else if (duomenuIvedimoBudas == 'G') {
-        vector<int> studentuDydziai = {10000000};
+        vector<int> studentuDydziai = {1000, 10000, 100000, 1000000, 10000000};
         char pasirinkimas;
 
         for (int n : studentuDydziai) {
@@ -75,7 +80,11 @@ int main() {
             generuotiFaila(n, failoPavadinimas);
             end = high_resolution_clock::now();
             failoKuriamoLaikas = duration_cast<duration<double>>(end - start);
+            cout << "Duomenų kiekis: " << n << endl;
+            cout << "Failo generavimo laikas: " << failoKuriamoLaikas.count() << " s" << endl;
+            cout << "-----------------------------" << endl;
 
+            /*
             //Failas nuskaitomas
             start = high_resolution_clock::now();
             nuskaitytiIsFailo(studentai, failoPavadinimas);
@@ -111,11 +120,12 @@ int main() {
             studentuIsvedimoLaikas = duration_cast<duration<double>>(end - start);
 
             spausdintiOperacijuLaikus(n, failoKuriamoLaikas, duomenuNuskaitymoLaikas, studentuRusiavimoLaikas, studentuIsvedimoLaikas);
+            */
 
         }
              
         //pasirenkame kaip pateikti rezultatus (faile ar terminale)
-        pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+        //pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
 
         /*
         //Generuojamas ir nuskaitomas vienas failas
@@ -141,6 +151,39 @@ int main() {
         */
     }
 
+    char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+    for (Studentas& studentas : studentai) {
+        skaiciuotiGalutini(studentas, pasirinkimas);
+    }
+
+    pasirinktiRusiavimoParametra(studentai);
+
+    //Skirstyti studentus i vargsiukus ir kietiakus
+    start = high_resolution_clock::now();
+    vector<Studentas> vargsiukai, kietiakai;
+    skirstytiStudentus(studentai, vargsiukai, kietiakai);
+    end = high_resolution_clock::now();
+    studentuRusiavimoLaikas = duration_cast<duration<double>>(end - start);
+
+    start = high_resolution_clock::now();
+    //Isvesti vargsiukus i faila
+    isvestiGrupesIFaila(vargsiukai, "vargsiukai.txt", pasirinkimas);
+    //Isvesti kietiakus i faila
+    isvestiGrupesIFaila(kietiakai, "kietiakai.txt", pasirinkimas);
+    end = high_resolution_clock::now();
+    studentuIsvedimoLaikas = duration_cast<duration<double>>(end - start);
+
+    //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+    pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+
+    cout << "--------------------------------" << endl;
+    if (duomenuIvedimoBudas == 'F') {
+        cout << "Duomenų nuskaitymo laikas: " << duomenuNuskaitymoLaikas.count() << " s" << endl;
+    }
+    cout << "Studentų rūšiavimo į dvi grupes laikas : " << studentuRusiavimoLaikas.count() << " s" << endl;
+    cout << "Studentų išvedimo laikas: " << studentuIsvedimoLaikas.count() << " s" << endl;
+
+    /*
     if (duomenuIvedimoBudas != 'G') {
         //Pasirinkimas galutinio balo skaičiavimo metodui
         char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
@@ -164,6 +207,7 @@ int main() {
         //Isvesti kietiakus i faila
         isvestiGrupesIFaila(kietiakai, "kietiakai.txt", pasirinkimas);
     }
+    */
 
     return 0;
 }

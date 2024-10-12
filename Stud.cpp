@@ -441,7 +441,7 @@ char pasirinktiGalutinioskaiciavimoMetoda() {
 //funkcija pasirinkti rusiavimo parametra
 void pasirinktiRusiavimoParametra(vector<Studentas>& studentai) {
     char parametras;
-    cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjamo tvarka (M) ar didėjimo tvarka (D): ";
+    cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjimo tvarka (M) ar didėjimo tvarka (D): ";
     cin >> parametras;
     parametras = toupper(parametras);
     rusiuotiStudentus(studentai, parametras);
@@ -472,6 +472,7 @@ void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pa
     }
 }
 
+/*
 void spausdintiOperacijuLaikus(int n, duration<double> failoKuriamoLaikas, duration<double> duomenuNuskaitymoLaikas, duration<double> studentuRusiavimoLaikas, duration<double> studentuIsvedimoLaikas) {
     cout << "Duomenų kiekis: " << n << endl;
     cout << "Failo generavimo laikas: " << failoKuriamoLaikas.count() << " s" << endl;
@@ -480,3 +481,4 @@ void spausdintiOperacijuLaikus(int n, duration<double> failoKuriamoLaikas, durat
     cout << "Studentų išvedimo laikas: " << studentuIsvedimoLaikas.count() << " s" << endl;
     cout << "--------------------------" << endl;
 }
+*/
