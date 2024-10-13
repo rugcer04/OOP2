@@ -11,15 +11,13 @@ struct Studentas {
    vector<int> namuDarbai;
    int egzaminas;
    double galutinis;
-//   enum class Kategorija {Vargsiukai, Kietiakai};
-//   Kategorija kategorija;
 };
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
-double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas);
+double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas);
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
-double skaiciuotiGalutiniMediana(vector<int> namuDarbai, int egzaminas);
+double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas);
 
 //funkcija generuoti atsitiktinius skaicius
 int generuotiSkaiciu();
@@ -47,5 +45,23 @@ void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadini
 
 //funckija irasyti rezultatus i faila
 void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, const string& failoPavadinimas);
+
+//Funckija generuoti failus
+void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas);
+
+//funkcija suskirstyti studentus i dvi grupes
+void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai);
+
+//funkcija rusiuoti studentus
+void rusiuotiStudentus(vector<Studentas>& studentai, char parametras);
+
+//funckija vartotojui pasirinkti galutinio balo matavimo buda
+char pasirinktiGalutinioskaiciavimoMetoda();
+
+//funkcija pasirinkti rusiavimo parametra
+void pasirinktiRusiavimoParametra(vector<Studentas>& studentai);
+
+//funckija pasirinkti rezultato isvedimo buda
+void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pasirinkimas);
 
 #endif

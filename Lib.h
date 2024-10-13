@@ -9,8 +9,9 @@
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
-#include <random> // For random_device and uniform_int_distribution
+#include <random> //random_device and uniform_int_distribution
 #include <chrono>
+#include <utility>
 
 using std::string;
 using std::vector;
@@ -31,5 +32,6 @@ using std::random_device;
 using std::uniform_int_distribution;
 using std::to_string;
 using namespace std::chrono;
+using std::move;
 
 #endif

@@ -1,7 +1,7 @@
 #include "Stud.h"
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
-double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
+double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
    if (namuDarbai.empty()) {
       return egzaminas * 0.6;
    }
@@ -17,7 +17,7 @@ double skaiciuotiGalutiniVidurkiu(const vector<int> namuDarbai, int egzaminas) {
 }
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
-double skaiciuotiGalutiniMediana(vector<int> namuDarbai, int egzaminas) {
+double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas) {
    if (namuDarbai.empty()) {
       return egzaminas * 0.6;
    }
@@ -42,6 +42,8 @@ uniform_int_distribution<int> Results_interval(1, 10);
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
 void generuotiDuomenis(Studentas& Lok, int ndSkaicius) {
    Lok.namuDarbai.clear();
+   Lok.namuDarbai.reserve(ndSkaicius);
+
    cout << "Sugeneruoti namų darbų pažymiai: ";
    for (int i = 0; i < ndSkaicius; i++) {
       int pazymys = Results_interval(rd_generator);
@@ -230,9 +232,9 @@ void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadini
             //Paskutinis skaičius yra egzamino pažymys
             tempStudentas.egzaminas = namuDarbai.back();
             namuDarbai.pop_back();
-            tempStudentas.namuDarbai = namuDarbai;
+            tempStudentas.namuDarbai = move(namuDarbai);
 
-            studentai.push_back(tempStudentas);
+            studentai.push_back(move(tempStudentas));
         }
 
    }
@@ -294,8 +296,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
    for (int i = 1; i <= studentuSkaicius; i++) {
       string pavarde = "Pavarde" + to_string(i);
       string vardas = "Vardas" + to_string(i);
-      failas << left << setw(15) << pavarde
-             << left << setw(15) << vardas;
+      failas << left << setw(15) << pavarde << left << setw(15) << vardas;
 
       for (int j = 0; j < 15; ++j) {
          int pazymys = Results_interval(rd_generator);
@@ -310,52 +311,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
    cout << "Failas " << failoPavadinimas << " sėkmingai sukurtas" << endl;
 }
 
-/*
-//funkcija suskirstyti studentus i kategorijas
-void KategorijosPriskirimas(vector<Studentas> &stud, int n) {
-   for (int i = 0; i < n; i++) {
-      if (stud[i].galutinis < 5.0) {
-         stud[i].kategorija = Studentas::Kategorija::Vargsiukai;
-      } else {
-         stud[i].kategorija = Studentas::Kategorija::Kietiakai;
-      }
-   }
-}
-
-//funkcija isvesti skirtingas kategorijas i failus
-void IsvedimasIKategorijosFailus(const vector<Studentas>& studentai, const string& vargsiukuFailas, const string& kietiakuFailas) {
-   ofstream vargsiukai(vargsiukuFailas);
-   ofstream kietiakai(kietiakuFailas);
-
-   if (!vargsiukai || !kietiakai) {
-      cerr << "Nepavyko sukurti vieno iš failų!" << endl;
-      return;
-   }
-
-   //antrastes
-   vargsiukai << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
-   vargsiukai << "---------------------------------------------" << endl;
-
-   kietiakai << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
-   kietiakai << "---------------------------------------------" << endl;
-
-   for (const auto& studentas : studentai) {
-      if (studentas.kategorija == Studentas::Kategorija::Vargsiukai) {
-         vargsiukai << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
-      } else if (studentas.kategorija == Studentas::Kategorija::Kietiakai) {
-         kietiakai << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
-      }
-   }
-
-   vargsiukai.close();
-   kietiakai.close();
-
-   cout << "Vargsiukai sėkmingai išsaugoti faile: " << vargsiukuFailas << endl;
-   cout << "Kietiakai sėkmingai išsaugoti faile: " << kietiakuFailas << endl;
-}
-*/
-
-
+//funkcija suskirstyti studentus i dvi grupes
 void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai) {
    for (const auto& studentas : studentai) {
       if (studentas.galutinis < 5.0) {
@@ -364,27 +320,6 @@ void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& v
          kietiakai.push_back(studentas);
       }
    }
-}
-
-void isvestiGrupesIFaila(const vector<Studentas>& studentai, const string& failoPavadinimas, char pasirinkimas) {
-   ofstream failas(failoPavadinimas);
-   if (!failas) {
-      cerr << "Nepavyko sukurti failo: " << failoPavadinimas << endl;
-      return;
-   }
-
-   if (pasirinkimas == 'V') {
-      failas << left << setw(15) << "Pavardė" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
-   } else if (pasirinkimas == 'M') {
-      failas << left << setw(15) << "Pavardė" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
-   }
-
-   for (const auto& studentas : studentai) {
-      failas << left << setw(15) << studentas.pavarde << setw(15) << studentas.vardas << fixed << setprecision(2) << studentas.galutinis << endl;
-   }
-
-   failas.close();
-   cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
 }
 
 //funkcija rusiuoti studentus
@@ -440,11 +375,19 @@ char pasirinktiGalutinioskaiciavimoMetoda() {
 
 //funkcija pasirinkti rusiavimo parametra
 void pasirinktiRusiavimoParametra(vector<Studentas>& studentai) {
-    char parametras;
-    cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjimo tvarka (M) ar didėjimo tvarka (D): ";
-    cin >> parametras;
-    parametras = toupper(parametras);
-    rusiuotiStudentus(studentai, parametras);
+   char parametras;
+   while (true) {
+      cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjimo tvarka (M) ar didėjimo tvarka (D): ";
+      cin >> parametras;
+      parametras = toupper(parametras);
+
+      if (parametras == 'V' || parametras == 'P' || parametras == 'M'|| parametras == 'D') {
+         break;
+      } else {
+         cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+      }
+   }
+   rusiuotiStudentus(studentai, parametras);
 }
 
 //funckija pasirinkti rezultato isvedimo buda
@@ -471,14 +414,3 @@ void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pa
         isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
     }
 }
-
-/*
-void spausdintiOperacijuLaikus(int n, duration<double> failoKuriamoLaikas, duration<double> duomenuNuskaitymoLaikas, duration<double> studentuRusiavimoLaikas, duration<double> studentuIsvedimoLaikas) {
-    cout << "Duomenų kiekis: " << n << endl;
-    cout << "Failo generavimo laikas: " << failoKuriamoLaikas.count() << " s" << endl;
-    cout << "Duomenų nuskaitymo laikas: " << duomenuNuskaitymoLaikas.count() << " s" << endl;
-    cout << "Studentų rūšiavimo į dvi grupes laikas : " << studentuRusiavimoLaikas.count() << " s" << endl;
-    cout << "Studentų išvedimo laikas: " << studentuIsvedimoLaikas.count() << " s" << endl;
-    cout << "--------------------------" << endl;
-}
-*/
