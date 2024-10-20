@@ -20,7 +20,7 @@ double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas);
 double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas);
 
 //funkcija generuoti atsitiktinius skaicius
-int generuotiSkaiciu();
+//int generuotiSkaiciu();
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
 void generuotiDuomenis(Studentas& Lok, int ndSkaicius);
@@ -41,7 +41,8 @@ void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas);
 void isvedimas(const vector<Studentas>& studentai, char pasirinkimas);
 
 //funkcija skaityti duomenis is failo
-void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadinimas);
+template <typename Container>
+void nuskaitytiIsFailo(Container& studentai, const string& failoPavadinimas);
 
 //funckija irasyti rezultatus i faila
 void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, const string& failoPavadinimas);

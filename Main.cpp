@@ -3,8 +3,24 @@
 #include "Timer.h"
 
 int main() {
-    vector<Studentas> studentai;
+    /*
+    char konteinerioPasirinkimas;
+    cout << "Norite naudoti vector (V) ar list (L)? ";
+    cin >> konteinerioPasirinkimas;
+    konteinerioPasirinkimas = toupper(konteinerioPasirinkimas);
 
+    if (konteinerioPasirinkimas == 'L') {
+        list<Studentas> studentai;
+        string failoPavadinimas;
+        cout << "Įveskite failo pavadinimą: ";
+        cin >> failoPavadinimas;
+        nuskaitytiIsFailo(studentai, failoPavadinimas);
+
+    } else if (konteinerioPasirinkimas == 'V') {
+    */
+
+    vector<Studentas> studentai;
+  
     //Pasirinkimas duomenims įvesti
     char duomenuIvedimoBudas;
     while (true) {
@@ -50,7 +66,7 @@ int main() {
     //Nuskaitymas is failo
      else if (duomenuIvedimoBudas == 'F') {
         //cin.ignore();
-        //system("dir /b *.txt");
+        //system("dir *.txt");
         string failoPavadinimas;
         cout << "Įveskite failo pavadinimą: ";
         cin >> failoPavadinimas;
@@ -73,6 +89,7 @@ int main() {
             generuotiFaila(n, failoPavadinimas);
             cout << "Failo su " << n << " įrašų generavimo laikas: " << t2.elapsed() << " s\n" << endl;        
         }
+
     return 0;
     }
 
@@ -105,6 +122,7 @@ int main() {
         string failoPavadinimas = "studrez.txt";
         isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
     }
+
 
     return 0;
 }

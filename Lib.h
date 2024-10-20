@@ -12,6 +12,7 @@
 #include <random> //random_device and uniform_int_distribution
 #include <chrono>
 #include <utility>
+#include <list>
 
 using std::string;
 using std::vector;
@@ -33,5 +34,6 @@ using std::uniform_int_distribution;
 using std::to_string;
 using namespace std::chrono;
 using std::move;
+using std::list;
 
 #endif

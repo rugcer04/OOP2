@@ -1,7 +1,6 @@
 #include "Stud.h"
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
-//template <typename Container>
 double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
    if (namuDarbai.empty()) {
       return egzaminas * 0.6;
@@ -194,7 +193,8 @@ void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
 }
 
 //funkcija skaityti duomenis is failo
-void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadinimas) {
+template <typename Container>
+void nuskaitytiIsFailo(Container& studentai, const string& failoPavadinimas) {
    ifstream failas(failoPavadinimas);  //bandoma atidaryti faila
    if (!failas) {
       cerr << "Nepavyko atidaryti failo: " << failoPavadinimas << endl;
@@ -242,6 +242,8 @@ void nuskaitytiIsFailo(vector<Studentas>& studentai, const string& failoPavadini
    failas.close();
 
 }
+template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&, const string& failoPavadinimas);
+template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&, const string& failoPavadinimas);
 
 //funckija irasyti rezultatus i faila
 void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, const string& failoPavadinimas) {
