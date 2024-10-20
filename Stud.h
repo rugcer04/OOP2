@@ -45,7 +45,8 @@ template <typename Container>
 void nuskaitytiIsFailo(Container& studentai, const string& failoPavadinimas);
 
 //funckija irasyti rezultatus i faila
-void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, const string& failoPavadinimas);
+template <typename Container>
+void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string& failoPavadinimas);
 
 //Funckija generuoti failus
 void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas);
@@ -64,5 +65,10 @@ void pasirinktiRusiavimoParametra(vector<Studentas>& studentai);
 
 //funckija pasirinkti rezultato isvedimo buda
 void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pasirinkimas);
+
+char pasirinktiDuomenuIvedima();
+
+template <typename Container>
+void ivedimasRanka(Container& studentas);
 
 #endif

@@ -4,6 +4,7 @@
 
 int main() {
     /*
+    //TEST
     char konteinerioPasirinkimas;
     cout << "Norite naudoti vector (V) ar list (L)? ";
     cin >> konteinerioPasirinkimas;
@@ -16,27 +17,22 @@ int main() {
         cin >> failoPavadinimas;
         nuskaitytiIsFailo(studentai, failoPavadinimas);
 
+        string failoPavadinimasRez = "studrez.txt";
+        char pasirinkimas = 'V';
+
+        isvedimasIFaila(studentai, pasirinkimas, failoPavadinimasRez);
+
     } else if (konteinerioPasirinkimas == 'V') {
     */
 
-    vector<Studentas> studentai;
-  
-    //Pasirinkimas duomenims įvesti
-    char duomenuIvedimoBudas;
-    while (true) {
-        cout << "Ar norite duomenis įvesti (I), nuskaityti iš failo (F), ar sugeneruoti failą (G)? ";
-        cin >> duomenuIvedimoBudas;
-        duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
 
-        if (duomenuIvedimoBudas == 'I' || duomenuIvedimoBudas == 'F' || duomenuIvedimoBudas == 'G') {
-            break;
-        } else {
-            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
-        }
-    }
+    vector<Studentas> studentai;
+    char duomenuIvedimoBudas = pasirinktiDuomenuIvedima();
     
     //Ivesti rankiniu budu
     if (duomenuIvedimoBudas == 'I') {
+        ivedimasRanka(studentai);
+        /*
         cout << "Įveskite studentų skaičių: ";
         cin.ignore();
         string input;
@@ -61,6 +57,7 @@ int main() {
         for (int i = 0; i < studentuSk; i++) {
             pasirinktiDuomenuIvedimoBuda(studentai[i]);
         }
+        */
 
     }
     //Nuskaitymas is failo
@@ -122,6 +119,7 @@ int main() {
         string failoPavadinimas = "studrez.txt";
         isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
     }
+    
 
 
     return 0;

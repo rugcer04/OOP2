@@ -246,7 +246,8 @@ template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&, const str
 template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&, const string& failoPavadinimas);
 
 //funckija irasyti rezultatus i faila
-void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, const string& failoPavadinimas) {
+template <typename Container>
+void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string& failoPavadinimas) {
    ofstream failas(failoPavadinimas);
    if (!failas) {
       cerr << "Nepavyko sukurti failo: " << failoPavadinimas << endl;
@@ -267,6 +268,8 @@ void isvedimasIFaila(const vector<Studentas>& studentai, char pasirinkimas, cons
    failas.close();
    cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
 }
+template void isvedimasIFaila<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
+template void isvedimasIFaila<list<Studentas>>(const list<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
 
 //Funckija generuoti failus
 void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
@@ -405,3 +408,50 @@ void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pa
         isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
     }
 }
+
+
+char pasirinktiDuomenuIvedima() {
+   char duomenuIvedimoBudas;
+   while (true) {
+      cout << "Ar norite duomenis įvesti (I), nuskaityti iš failo (F), ar sugeneruoti failą (G)? ";
+      cin >> duomenuIvedimoBudas;
+      duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
+
+      if (duomenuIvedimoBudas == 'I' || duomenuIvedimoBudas == 'F' || duomenuIvedimoBudas == 'G') {
+          break;
+      } else {
+         cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+      }
+   }
+   return duomenuIvedimoBudas;
+}
+
+template <typename Container>
+void ivedimasRanka(Container& studentai) {
+   cout << "Įveskite studentų skaičių: ";
+        cin.ignore();
+        string input;
+        int studentuSk;
+
+        while(true) {
+            getline(cin, input);
+
+            try{
+                stringstream ss(input);
+                if (!(ss >> studentuSk)) {
+                    throw invalid_argument("įvestis nėra skaičius. ");
+                }
+                break;
+            } catch (const invalid_argument &e){
+                cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
+            }
+        }
+
+        for (int i = 0; i < studentuSk; i++) {
+            typename Container::value_type studentas;
+            pasirinktiDuomenuIvedimoBuda(studentas);
+            studentai.push_back(studentas);
+        }
+}
+template void ivedimasRanka<vector<Studentas>>(vector<Studentas>&);
+template void ivedimasRanka<list<Studentas>>(list<Studentas>&);
