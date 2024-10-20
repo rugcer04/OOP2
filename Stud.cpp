@@ -1,6 +1,7 @@
 #include "Stud.h"
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
+//template <typename Container>
 double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
    if (namuDarbai.empty()) {
       return egzaminas * 0.6;
@@ -273,26 +274,14 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
       return;
    }
 
-   failas << left << setw(15) << "Pavarde" 
-           << left << setw(15) << "Vardas" 
-           << left << setw(10) << "ND1"
-           << left << setw(10) << "ND2"
-           << left << setw(10) << "ND3"
-           << left << setw(10) << "ND4"
-           << left << setw(10) << "ND5"
-           << left << setw(10) << "ND6"
-           << left << setw(10) << "ND7"
-           << left << setw(10) << "ND8"
-           << left << setw(10) << "ND9"
-           << left << setw(10) << "ND10"
-           << left << setw(10) << "ND11"
-           << left << setw(10) << "ND12"
-           << left << setw(10) << "ND13"
-           << left << setw(10) << "ND14"
-           << left << setw(10) << "ND15"
-           << left << setw(10) << "Egzaminas" 
-           << endl;
+   //antraste
+   failas << left << setw(15) << "Pavarde" << left << setw(15) << "Vardas";
+   for (int i = 1; i <= 15; i++) {
+      failas << left << setw(10) << "ND" + to_string(i);
+   }
+   failas << left << setw(10) << "Egzaminas" << endl;
 
+   //duomenu generavimas
    for (int i = 1; i <= studentuSkaicius; i++) {
       string pavarde = "Pavarde" + to_string(i);
       string vardas = "Vardas" + to_string(i);
@@ -348,7 +337,7 @@ void rusiuotiStudentus(vector<Studentas>& studentai, char parametras) {
       //Rusiavimas pagal galutini pazymi mazejimo tvarka
       sort(studentai.begin(), studentai.end(),
         [](const Studentas& a, const Studentas& b) {
-            return a.galutinis < b.galutinis;
+            return a.galutinis > b.galutinis;
         }
     );
    } else if (parametras == 'D') {
