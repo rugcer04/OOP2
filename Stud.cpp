@@ -1,5 +1,4 @@
 #include "Stud.h"
-using std::is_same_v;
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
@@ -180,7 +179,8 @@ void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas) {
 }
 
 //funkcija isvesti duomenis
-void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
+template <typename Container>
+void isvedimas(const Container& studentai, char pasirinkimas) {
    if (pasirinkimas == 'V') {
       cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
    } else if (pasirinkimas == 'M') {
@@ -192,6 +192,8 @@ void isvedimas(const vector<Studentas>& studentai, char pasirinkimas) {
       cout << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << Lok.galutinis  << endl;
    }
 }
+template void isvedimas<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas);
+template void isvedimas<list<Studentas>>(const list<Studentas>&, char pasirinkimas);
 
 //funkcija skaityti duomenis is failo
 template <typename Container>
@@ -321,7 +323,7 @@ void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& v
 template <typename Container>
 void rusiuotiStudentus(Container& studentai, char parametras) {
    //vektoriaus rusiavimas
-   if constexpr (is_same_v<Container, vector<Studentas>>) {
+   if constexpr (is_same_v<Container, vector<Studentas>>) { //patikrinama ar konteineris yra vektorius
       if(parametras == 'V') {
          //Rusiavimas pagal varda
          sort(studentai.begin(), studentai.end(),
@@ -408,7 +410,8 @@ char pasirinktiGalutinioskaiciavimoMetoda() {
 }
 
 //funkcija pasirinkti rusiavimo parametra
-void pasirinktiRusiavimoParametra(vector<Studentas>& studentai) {
+template <typename Container>
+void pasirinktiRusiavimoParametra(Container& studentai) {
    char parametras;
    while (true) {
       cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjimo tvarka (M) ar didėjimo tvarka (D): ";
@@ -423,6 +426,8 @@ void pasirinktiRusiavimoParametra(vector<Studentas>& studentai) {
    }
    rusiuotiStudentus(studentai, parametras);
 }
+template void pasirinktiRusiavimoParametra<vector<Studentas>>(vector<Studentas>&);
+template void pasirinktiRusiavimoParametra<list<Studentas>>(list<Studentas>&);
 
 //funckija pasirinkti rezultato isvedimo buda
 void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pasirinkimas) {

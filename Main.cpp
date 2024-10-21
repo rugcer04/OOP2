@@ -123,6 +123,11 @@ int main() {
 
         //Pasirenkame studentu rusiavimo parametra
         pasirinktiRusiavimoParametra(studentai);
+
+        //TEST
+        string failoPavadinimas = "studrez.txt";
+        char pasrinkimas = 'F';
+        isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
     }
     
 

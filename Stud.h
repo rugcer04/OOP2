@@ -19,9 +19,6 @@ double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas);
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
 double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas);
 
-//funkcija generuoti atsitiktinius skaicius
-//int generuotiSkaiciu();
-
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
 void generuotiDuomenis(Studentas& Lok, int ndSkaicius);
 
@@ -38,7 +35,8 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& Lok);
 void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas);
 
 //funkcija isvesti duomenis
-void isvedimas(const vector<Studentas>& studentai, char pasirinkimas);
+template <typename Container>
+void isvedimas(const Container& studentai, char pasirinkimas);
 
 //funkcija skaityti duomenis is failo
 template <typename Container>
@@ -62,7 +60,8 @@ void rusiuotiStudentus(Container& studentai, char parametras);
 char pasirinktiGalutinioskaiciavimoMetoda();
 
 //funkcija pasirinkti rusiavimo parametra
-void pasirinktiRusiavimoParametra(vector<Studentas>& studentai);
+template <typename Container>
+void pasirinktiRusiavimoParametra(Container& studentai);
 
 //funckija pasirinkti rezultato isvedimo buda
 void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pasirinkimas);
