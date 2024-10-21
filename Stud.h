@@ -55,7 +55,8 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas);
 void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai);
 
 //funkcija rusiuoti studentus
-void rusiuotiStudentus(vector<Studentas>& studentai, char parametras);
+template <typename Container>
+void rusiuotiStudentus(Container& studentai, char parametras);
 
 //funckija vartotojui pasirinkti galutinio balo matavimo buda
 char pasirinktiGalutinioskaiciavimoMetoda();

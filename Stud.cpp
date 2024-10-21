@@ -1,4 +1,5 @@
 #include "Stud.h"
+using std::is_same_v;
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
@@ -317,43 +318,82 @@ void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& v
 }
 
 //funkcija rusiuoti studentus
-void rusiuotiStudentus(vector<Studentas>& studentai, char parametras) {
-   if(parametras == 'V') {
-      //Rusiavimas pagal varda
-      sort(studentai.begin(), studentai.end(),
-        [](const Studentas& a, const Studentas& b) {
+template <typename Container>
+void rusiuotiStudentus(Container& studentai, char parametras) {
+   //vektoriaus rusiavimas
+   if constexpr (is_same_v<Container, vector<Studentas>>) {
+      if(parametras == 'V') {
+         //Rusiavimas pagal varda
+         sort(studentai.begin(), studentai.end(),
+         [](const Studentas& a, const Studentas& b) {
+               if (a.vardas == b.vardas) {
+                  return a.pavarde < b.pavarde;
+               }
+               return a.vardas < b.vardas;
+         }
+      );
+      } else if (parametras == 'P') {
+         //Rusiavimas pagal pavarde
+         sort(studentai.begin(), studentai.end(),
+         [](const Studentas& a, const Studentas& b) {
+               if (a.pavarde == b.pavarde) {
+                  return a.vardas < b.vardas;
+               }
+               return a.pavarde < b.pavarde;
+         }
+      );
+      } else if (parametras == 'M') {
+         //Rusiavimas pagal galutini pazymi mazejimo tvarka
+         sort(studentai.begin(), studentai.end(),
+         [](const Studentas& a, const Studentas& b) {
+               return a.galutinis > b.galutinis;
+         }
+      );
+      } else if (parametras == 'D') {
+         //Rusiavimas pagal galutini pazymi didejimo tvarka
+         sort(studentai.begin(), studentai.end(),
+         [](const Studentas& a, const Studentas& b) {
+               return a.galutinis < b.galutinis;
+         }
+      );
+      }
+   } else if constexpr (is_same_v<Container, list<Studentas>>) {
+      //list rusiavimas
+      if(parametras == 'V') {
+         //Rusiavimas pagal varda
+         studentai.sort([](const Studentas& a, const Studentas& b) {
             if (a.vardas == b.vardas) {
-                return a.pavarde < b.pavarde;
+               return a.pavarde < b.pavarde;
             }
             return a.vardas < b.vardas;
-        }
-    );
-   } else if (parametras == 'P') {
-      //Rusiavimas pagal pavarde
-      sort(studentai.begin(), studentai.end(),
-        [](const Studentas& a, const Studentas& b) {
+         }
+      );
+      } else if (parametras == 'P') {
+         //Rusiavimas pagal pavarde
+         studentai.sort([](const Studentas& a, const Studentas& b) {
             if (a.pavarde == b.pavarde) {
-                return a.vardas < b.vardas;
+               return a.vardas < b.vardas;
             }
             return a.pavarde < b.pavarde;
-        }
-    );
-   } else if (parametras == 'M') {
-      //Rusiavimas pagal galutini pazymi mazejimo tvarka
-      sort(studentai.begin(), studentai.end(),
-        [](const Studentas& a, const Studentas& b) {
+         }
+      );
+      } else if (parametras == 'M') {
+         //Rusiavimas pagal galutini pazymi mazejimo tvarka
+         studentai.sort([](const Studentas& a, const Studentas& b) {
             return a.galutinis > b.galutinis;
-        }
-    );
-   } else if (parametras == 'D') {
-      //Rusiavimas pagal galutini pazymi didejimo tvarka
-      sort(studentai.begin(), studentai.end(),
-        [](const Studentas& a, const Studentas& b) {
+         }
+      );
+      } else if (parametras == 'D') {
+         //Rusiavimas pagal galutini pazymi didejimo tvarka
+         studentai.sort([](const Studentas& a, const Studentas& b) {
             return a.galutinis < b.galutinis;
-        }
-    );
+         }
+      );
+      }
    }
 }
+template void rusiuotiStudentus<vector<Studentas>>(vector<Studentas>&, char parametras);
+template void rusiuotiStudentus<list<Studentas>>(list<Studentas>&, char parametras);
 
 //funckija vartotojui pasirinkti galutinio balo matavimo buda
 char pasirinktiGalutinioskaiciavimoMetoda() {

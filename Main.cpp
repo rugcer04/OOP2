@@ -115,6 +115,14 @@ int main() {
 
         return 0;
         }
+        //Pasirenkame galutinio pazymio skaiciavimo metoda
+        char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+        for (Studentas& studentas : studentai) {
+            skaiciuotiGalutini(studentas, pasirinkimas);
+        }
+
+        //Pasirenkame studentu rusiavimo parametra
+        pasirinktiRusiavimoParametra(studentai);
     }
     
 
