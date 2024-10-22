@@ -182,14 +182,14 @@ void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas) {
 template <typename Container>
 void isvedimas(const Container& studentai, char pasirinkimas) {
    if (pasirinkimas == 'V') {
-      cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Vid.)" << endl;
+      cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis (Vid.)" << setw(50) << left << "Adresas atmintyje" << endl;
    } else if (pasirinkimas == 'M') {
-      cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(15) << "Galutinis (Med.)" << endl;
+      cout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis (Med.)" << setw(50) << left << "Adresas atmintyje" << endl;
    }
 
-   cout << "-----------------------------------------------" << endl;
+   cout << "-------------------------------------------------------------------" << endl;
    for (const auto& Lok: studentai) {
-      cout << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << Lok.galutinis  << endl;
+      cout << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << setw(20) << Lok.galutinis << setw(50) << left << &Lok << endl;
    }
 }
 template void isvedimas<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas);
