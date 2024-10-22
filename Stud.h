@@ -50,7 +50,8 @@ void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string
 void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas);
 
 //funkcija suskirstyti studentus i dvi grupes
-void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai);
+template <typename Container>
+void skirstytiStudentus(const Container& studentai, Container& vargsiukai, Container& kietiakai);
 
 //funkcija rusiuoti studentus
 template <typename Container>

@@ -76,10 +76,11 @@ int main() {
             string failoPavadinimas = "studrez.txt";
             isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
         }
+        
 
     //Darbas su sarasu
     } else if (konteinerioPasirinkimas == 'L') {
-        vector<Studentas> studentai;
+        list<Studentas> studentai;
         char duomenuIvedimoBudas = pasirinktiDuomenuIvedima();
     
         //Ivesti rankiniu budu
@@ -123,6 +124,13 @@ int main() {
 
         //Pasirenkame studentu rusiavimo parametra
         pasirinktiRusiavimoParametra(studentai);
+
+        //Skirstyti studentus i vargsiukus ir kietiakus
+        Timer t3;
+        list<Studentas> vargsiukai, kietiakai;
+        skirstytiStudentus(studentai, vargsiukai, kietiakai);
+        cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
 
         //TEST
         string failoPavadinimas = "studrez.txt";

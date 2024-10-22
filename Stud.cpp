@@ -309,7 +309,8 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
 }
 
 //funkcija suskirstyti studentus i dvi grupes
-void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakai) {
+template <typename Container>
+void skirstytiStudentus(const Container& studentai, Container& vargsiukai, Container& kietiakai) {
    for (const auto& studentas : studentai) {
       if (studentas.galutinis < 5.0) {
          vargsiukai.push_back(studentas);
@@ -318,6 +319,8 @@ void skirstytiStudentus(const vector<Studentas>& studentai, vector<Studentas>& v
       }
    }
 }
+template void skirstytiStudentus<vector<Studentas>>(const vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
+template void skirstytiStudentus<list<Studentas>>(const list<Studentas>&, list<Studentas>&, list<Studentas>&);
 
 //funkcija rusiuoti studentus
 template <typename Container>
