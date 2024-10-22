@@ -131,11 +131,20 @@ int main() {
         skirstytiStudentus(studentai, vargsiukai, kietiakai);
         cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
 
+        Timer t4;
+        //Isvesti vargsiukus i faila
+        isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
+        //Isvesti kietiakus i faila
+        isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
+        cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
-        //TEST
-        string failoPavadinimas = "studrez.txt";
-        char pasrinkimas = 'F';
-        isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+        //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+        if (duomenuIvedimoBudas == 'I') {
+            pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+        } else {
+            string failoPavadinimas = "studrez.txt";
+            isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+        }
     }
     
 

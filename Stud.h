@@ -65,7 +65,8 @@ template <typename Container>
 void pasirinktiRusiavimoParametra(Container& studentai);
 
 //funckija pasirinkti rezultato isvedimo buda
-void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pasirinkimas);
+template <typename Container>
+void pasirinktiRezultatuIsvedimoBuda(const Container& studentai, char pasirinkimas);
 
 char pasirinktiDuomenuIvedima();
 

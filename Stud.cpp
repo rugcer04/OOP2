@@ -433,7 +433,8 @@ template void pasirinktiRusiavimoParametra<vector<Studentas>>(vector<Studentas>&
 template void pasirinktiRusiavimoParametra<list<Studentas>>(list<Studentas>&);
 
 //funckija pasirinkti rezultato isvedimo buda
-void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pasirinkimas) {
+template <typename Container>
+void pasirinktiRezultatuIsvedimoBuda(const Container& studentai, char pasirinkimas) {
     char isvedimoBudas;
     while (true) {
         cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
@@ -456,6 +457,8 @@ void pasirinktiRezultatuIsvedimoBuda(const vector<Studentas>& studentai, char pa
         isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
     }
 }
+template void pasirinktiRezultatuIsvedimoBuda<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas);
+template void pasirinktiRezultatuIsvedimoBuda<list<Studentas>>(const list<Studentas>&, char pasirinkimas);
 
 
 char pasirinktiDuomenuIvedima() {
