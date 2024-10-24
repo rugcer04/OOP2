@@ -9,11 +9,13 @@ v0.2 versijoje programa papildoma failų generavimu ir nuskaitytų failų suskir
 Programos testavimas su studentų sąrašų failais, sudarytais iš `1000`, `10000`, `100000`, `1000000`, `10000000` įrašų buvo pakartotas 3 kartus. Pateikiami šių testų laikų vidurkiai.
 
 ### Failų kūrimas
-`1 000`: 0,042s;
-`10 000`: 0,052s;
-`100 000`: 0,390s;
-`1 000 000`: 3,943s;
-`10 000 000`: 36,379s.
+| Kiekis | Laikas |
+|:-------|-------:|
+| `1 000` | 0,009s |
+| `10 000` | 0,045s |
+| `100 000` | 0,390s |
+| `1 000 000` | 3,943s |
+| `10 000 000` | 34,656s |
 
 ### Duomenų nuskaitymas iš failų
 `1 000`: 0,022s;
@@ -35,3 +37,9 @@ Programos testavimas su studentų sąrašų failais, sudarytais iš `1000`, `100
 `100 000`: 1,234s;
 `1 000 000`: 11,801s;
 `10 000 000`: 122,576s.
+
+## Testavimo sistemos parametrai
+- CPU: Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz, 1800 Mhz, 4 Core(s), 8 Logical Processor(s)
+- RAM: 8.00 GB
+- HDD: WDC WD10SPZX-21Z10T0
+- SSD: NVMe KINGSTON RBUSNS8154P3128GJ1
