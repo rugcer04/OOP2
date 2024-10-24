@@ -461,6 +461,7 @@ template void pasirinktiRezultatuIsvedimoBuda<vector<Studentas>>(const vector<St
 template void pasirinktiRezultatuIsvedimoBuda<list<Studentas>>(const list<Studentas>&, char pasirinkimas);
 
 
+//funkcija pasirinkti ivesti duomenis, nuskaityti duomenis is failo ar generuoti faila
 char pasirinktiDuomenuIvedima() {
    char duomenuIvedimoBudas;
    while (true) {
@@ -477,6 +478,7 @@ char pasirinktiDuomenuIvedima() {
    return duomenuIvedimoBudas;
 }
 
+//funckija iskviesti rankini ivedimo buda 
 template <typename Container>
 void ivedimasRanka(Container& studentai) {
    cout << "Įveskite studentų skaičių: ";

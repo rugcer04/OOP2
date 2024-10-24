@@ -4,9 +4,17 @@
 
 int main() {
     char konteinerioPasirinkimas;
-    cout << "Norite naudoti vector (V) ar list (L)? ";
-    cin >> konteinerioPasirinkimas;
-    konteinerioPasirinkimas = toupper(konteinerioPasirinkimas);
+    while (true) {
+        cout << "Norite naudoti vector (V) ar list (L)? ";
+        cin >> konteinerioPasirinkimas;
+        konteinerioPasirinkimas = toupper(konteinerioPasirinkimas);
+
+        if (konteinerioPasirinkimas == 'V' || konteinerioPasirinkimas == 'L') {
+            break;
+        } else {
+            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+        }
+    }
 
     //Darbas su vektoriumi
     if (konteinerioPasirinkimas == 'V') {
@@ -81,6 +89,7 @@ int main() {
     //Darbas su sarasu
     } else if (konteinerioPasirinkimas == 'L') {
         list<Studentas> studentai;
+        list<Studentas> vargsiukai, kietiakai;
         char duomenuIvedimoBudas = pasirinktiDuomenuIvedima();
     
         //Ivesti rankiniu budu
@@ -127,7 +136,6 @@ int main() {
 
         //Skirstyti studentus i vargsiukus ir kietiakus
         Timer t3;
-        list<Studentas> vargsiukai, kietiakai;
         skirstytiStudentus(studentai, vargsiukai, kietiakai);
         cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
 

@@ -68,8 +68,10 @@ void pasirinktiRusiavimoParametra(Container& studentai);
 template <typename Container>
 void pasirinktiRezultatuIsvedimoBuda(const Container& studentai, char pasirinkimas);
 
+//funkcija pasirinkti ivesti duomenis, nuskaityti duomenis is failo ar generuoti faila
 char pasirinktiDuomenuIvedima();
 
+//funckija iskviesti rankini ivedimo buda 
 template <typename Container>
 void ivedimasRanka(Container& studentas);
 
