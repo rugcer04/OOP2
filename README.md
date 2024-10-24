@@ -18,11 +18,11 @@ Programos testavimas su studentų sąrašų failais, sudarytais iš `1000`, `100
 | `1 000 000` | 3,943s |
 | `10 000 000` | 34,656s |
 
-## Testavimas
+### Testavimas
 ![Vektorius](vektorius.png)
 ![Sąrašas](sarasas.png)
 
-## Analizė
+### Analizė
 Kai duomenų kiekis mažesnis, programos greitis naudojant vektorius ir sąrašus mažai skiriasi. Tačiau dirbant su 10 000 000 įrašų skirtumas tampa akivaizdesnis – su vektoriais programa veikia žymiai greičiau.
 
 ## Testavimo sistemos parametrai
