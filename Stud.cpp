@@ -192,8 +192,8 @@ void isvedimas(const Container& studentai, char pasirinkimas) {
       cout << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << setw(20) << Lok.galutinis << setw(50) << left << &Lok << endl;
    }
 }
-template void isvedimas<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas);
-template void isvedimas<list<Studentas>>(const list<Studentas>&, char pasirinkimas);
+//template void isvedimas<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas);
+//template void isvedimas<list<Studentas>>(const list<Studentas>&, char pasirinkimas);
 
 //funkcija skaityti duomenis is failo
 template <typename Container>
@@ -397,8 +397,8 @@ void rusiuotiStudentus(Container& studentai, char parametras) {
       }
    }
 }
-template void rusiuotiStudentus<vector<Studentas>>(vector<Studentas>&, char parametras);
-template void rusiuotiStudentus<list<Studentas>>(list<Studentas>&, char parametras);
+//template void rusiuotiStudentus<vector<Studentas>>(vector<Studentas>&, char parametras);
+//template void rusiuotiStudentus<list<Studentas>>(list<Studentas>&, char parametras);
 
 //funckija vartotojui pasirinkti galutinio balo matavimo buda
 char pasirinktiGalutinioskaiciavimoMetoda() {
