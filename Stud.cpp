@@ -310,7 +310,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
 
 //funkcija suskirstyti studentus i dvi grupes
 template <typename Container>
-void skirstytiStudentus(const Container& studentai, Container& vargsiukai, Container& kietiakai) {
+void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& vargsiukai, Container& kietiakai) {
    for (const auto& studentas : studentai) {
       if (studentas.galutinis < 5.0) {
          vargsiukai.push_back(studentas);
@@ -319,8 +319,23 @@ void skirstytiStudentus(const Container& studentai, Container& vargsiukai, Conta
       }
    }
 }
-template void skirstytiStudentus<vector<Studentas>>(const vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
-template void skirstytiStudentus<list<Studentas>>(const list<Studentas>&, list<Studentas>&, list<Studentas>&);
+template void skirstytiStudentusPirmaStrategija<vector<Studentas>>(const vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
+template void skirstytiStudentusPirmaStrategija<list<Studentas>>(const list<Studentas>&, list<Studentas>&, list<Studentas>&);
+
+template <typename Container>
+void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai) {
+    auto it = studentai.begin();
+    while (it != studentai.end()) {
+        if (it->galutinis < 5.0) {
+            vargsiukai.push_back(*it);
+            it = studentai.erase(it);
+        } else {
+            ++it;
+        }
+    }
+}
+template void skirstytiStudentusAntraStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&);
+template void skirstytiStudentusAntraStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&);
 
 //funkcija rusiuoti studentus
 template <typename Container>

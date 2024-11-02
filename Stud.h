@@ -51,7 +51,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas);
 
 //funkcija suskirstyti studentus i dvi grupes
 template <typename Container>
-void skirstytiStudentus(const Container& studentai, Container& vargsiukai, Container& kietiakai);
+void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& vargsiukai, Container& kietiakai);
 
 //funkcija rusiuoti studentus
 template <typename Container>
@@ -74,5 +74,10 @@ char pasirinktiDuomenuIvedima();
 //funckija iskviesti rankini ivedimo buda 
 template <typename Container>
 void ivedimasRanka(Container& studentas);
+
+
+
+template <typename Container>
+void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai);
 
 #endif

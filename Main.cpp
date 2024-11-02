@@ -65,17 +65,31 @@ int main() {
         pasirinktiRusiavimoParametra(studentai);
 
         //Skirstyti studentus i vargsiukus ir kietiakus
+        // Timer t3;
+        // vector<Studentas> vargsiukai, kietiakai;
+        // skirstytiStudentusPirmaStrategija(studentai, vargsiukai, kietiakai);
+        // cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
         Timer t3;
-        vector<Studentas> vargsiukai, kietiakai;
-        skirstytiStudentus(studentai, vargsiukai, kietiakai);
+        vector<Studentas> vargsiukai;
+        skirstytiStudentusAntraStrategija(studentai, vargsiukai);
         cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
+        
+        // Timer t4;
+        // //Isvesti vargsiukus i faila
+        // isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
+        // //Isvesti kietiakus i faila
+        // isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
+        // cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
         Timer t4;
         //Isvesti vargsiukus i faila
         isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
         //Isvesti kietiakus i faila
-        isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
+        isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
         cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
+
+
 
         //pasirenkame kaip pateikti rezultatus (faile ar terminale)
         if (duomenuIvedimoBudas == 'I') {
@@ -89,7 +103,6 @@ int main() {
     //Darbas su sarasu
     } else if (konteinerioPasirinkimas == 'L') {
         list<Studentas> studentai;
-        list<Studentas> vargsiukai, kietiakai;
         char duomenuIvedimoBudas = pasirinktiDuomenuIvedima();
     
         //Ivesti rankiniu budu
@@ -135,15 +148,28 @@ int main() {
         pasirinktiRusiavimoParametra(studentai);
 
         //Skirstyti studentus i vargsiukus ir kietiakus
+        // Timer t3;
+        // list<Studentas> vargsiukai, kietiakai;
+        // skirstytiStudentusPirmaStrategija(studentai, vargsiukai, kietiakai);
+        // cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
         Timer t3;
-        skirstytiStudentus(studentai, vargsiukai, kietiakai);
+        list<Studentas> vargsiukai;
+        skirstytiStudentusAntraStrategija(studentai, vargsiukai);
         cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
+        // Timer t4;
+        // //Isvesti vargsiukus i faila
+        // isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
+        // //Isvesti kietiakus i faila
+        // isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
+        // cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
         Timer t4;
         //Isvesti vargsiukus i faila
         isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
         //Isvesti kietiakus i faila
-        isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
+        isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
         cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
         //pasirenkame kaip pateikti rezultatus (faile ar terminale)
