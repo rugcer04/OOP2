@@ -24,6 +24,23 @@ int main() {
         //Ivesti rankiniu budu
         if (duomenuIvedimoBudas == 'I') {
             ivedimasRanka(studentai);
+
+            //Pasirenkame galutinio pazymio skaiciavimo metoda
+            char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+            for (Studentas& studentas : studentai) {
+            skaiciuotiGalutini(studentas, pasirinkimas);
+            }
+
+            //Pasirenkame studentu rusiavimo parametra
+            pasirinktiRusiavimoParametra(studentai);
+
+            //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+            if (duomenuIvedimoBudas == 'I') {
+                pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+            } else {
+                string failoPavadinimas = "studrez.txt";
+                isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+            }    
         }
 
         //Nuskaitymas is failo
@@ -36,6 +53,22 @@ int main() {
             Timer t1;
             nuskaitytiIsFailo(studentai, failoPavadinimas);
             cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
+
+            //Pasirenkame galutinio pazymio skaiciavimo metoda
+            char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+            for (Studentas& studentas : studentai) {
+                skaiciuotiGalutini(studentas, pasirinkimas);
+            }
+
+            //Pasirenkame studentu rusiavimo parametra
+            pasirinktiRusiavimoParametra(studentai);
+
+            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
+
+            //isvedame rezultatus i faila
+            failoPavadinimas = "studrez.txt";
+            isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
         }
 
         //Failu generavimas
@@ -53,66 +86,30 @@ int main() {
             }
 
         return 0;
-        }
-
-        //Pasirenkame galutinio pazymio skaiciavimo metoda
-        char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
-        for (Studentas& studentas : studentai) {
-            skaiciuotiGalutini(studentas, pasirinkimas);
-        }
-
-        //Pasirenkame studentu rusiavimo parametra
-        pasirinktiRusiavimoParametra(studentai);
-
-        //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-        duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
-
-        /*
-        //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-        int strategija;
-        do {
-            cout << "Pasirinkite studentų dalijimo į dvi kategorijas strategiją: (1 - pirma, 2 - antra, 3 - trečia strategijos): ";
-            cin >> strategija;
-        } while (strategija != 1 && strategija != 2 && strategija != 3);
-
-        if (strategija == 1){
-            Timer t3;
-            vector<Studentas> vargsiukai, kietiakai;
-            skirstytiStudentusPirmaStrategija(studentai, vargsiukai, kietiakai);
-            cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
-
-            Timer t4;
-            //Isvesti vargsiukus i faila
-            isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
-            //Isvesti kietiakus i faila
-            isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
-            cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
-
-        } else if (strategija == 2){
-            Timer t3;
-            vector<Studentas> vargsiukai;
-            skirstytiStudentusAntraStrategija(studentai, vargsiukai);
-            cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
-
-            Timer t4;
-            //Isvesti vargsiukus i faila
-            isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
-            //Isvesti kietiakus i faila
-            isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
-            cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
         }
-        */
+
+        // //Pasirenkame galutinio pazymio skaiciavimo metoda
+        // char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+        // for (Studentas& studentas : studentai) {
+        //     skaiciuotiGalutini(studentas, pasirinkimas);
+        // }
+
+        // //Pasirenkame studentu rusiavimo parametra
+        // pasirinktiRusiavimoParametra(studentai);
+
+        // //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+        // duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
 
 
 
-        //pasirenkame kaip pateikti rezultatus (faile ar terminale)
-        if (duomenuIvedimoBudas == 'I') {
-            pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-        } else {
-            string failoPavadinimas = "studrez.txt";
-            isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-        }
+        // //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+        // if (duomenuIvedimoBudas == 'I') {
+        //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+        // } else {
+        //     string failoPavadinimas = "studrez.txt";
+        //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+        // }
         
 
     //Darbas su sarasu
@@ -123,6 +120,23 @@ int main() {
         //Ivesti rankiniu budu
         if (duomenuIvedimoBudas == 'I') {
             ivedimasRanka(studentai);
+
+            //Pasirenkame galutinio pazymio skaiciavimo metoda
+            char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+            for (Studentas& studentas : studentai) {
+            skaiciuotiGalutini(studentas, pasirinkimas);
+            }
+
+            //Pasirenkame studentu rusiavimo parametra
+            pasirinktiRusiavimoParametra(studentai);
+
+            //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+            if (duomenuIvedimoBudas == 'I') {
+                pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+            } else {
+                string failoPavadinimas = "studrez.txt";
+                isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+            }
         }
 
         //Nuskaitymas is failo
@@ -135,6 +149,22 @@ int main() {
             Timer t1;
             nuskaitytiIsFailo(studentai, failoPavadinimas);
             cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
+
+            //Pasirenkame galutinio pazymio skaiciavimo metoda
+            char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+            for (Studentas& studentas : studentai) {
+                skaiciuotiGalutini(studentas, pasirinkimas);
+            }
+
+            //Pasirenkame studentu rusiavimo parametra
+            pasirinktiRusiavimoParametra(studentai);
+
+            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
+
+            //isvedame rezultatus i faila
+            failoPavadinimas = "studrez.txt";
+            isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
         }
 
         //Failu generavimas
@@ -152,53 +182,28 @@ int main() {
             }
 
         return 0;
-        }
-        //Pasirenkame galutinio pazymio skaiciavimo metoda
-        char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
-        for (Studentas& studentas : studentai) {
-            skaiciuotiGalutini(studentas, pasirinkimas);
+
         }
 
-        //Pasirenkame studentu rusiavimo parametra
-        pasirinktiRusiavimoParametra(studentai);
+        // //Pasirenkame galutinio pazymio skaiciavimo metoda
+        // char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
+        // for (Studentas& studentas : studentai) {
+        //     skaiciuotiGalutini(studentas, pasirinkimas);
+        // }
 
-        //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-        duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
+        // //Pasirenkame studentu rusiavimo parametra
+        // pasirinktiRusiavimoParametra(studentai);
 
-        /*
-        //Skirstyti studentus i vargsiukus ir kietiakus
-        // Timer t3;
-        // list<Studentas> vargsiukai, kietiakai;
-        // skirstytiStudentusPirmaStrategija(studentai, vargsiukai, kietiakai);
-        // cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+        // //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+        // duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
 
-        Timer t3;
-        list<Studentas> vargsiukai;
-        skirstytiStudentusAntraStrategija(studentai, vargsiukai);
-        cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
-
-        // Timer t4;
-        // //Isvesti vargsiukus i faila
-        // isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
-        // //Isvesti kietiakus i faila
-        // isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
-        // cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
-
-        Timer t4;
-        //Isvesti vargsiukus i faila
-        isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
-        //Isvesti kietiakus i faila
-        isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
-        cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
-        */
-
-        //pasirenkame kaip pateikti rezultatus (faile ar terminale)
-        if (duomenuIvedimoBudas == 'I') {
-            pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-        } else {
-            string failoPavadinimas = "studrez.txt";
-            isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-        }
+        // //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+        // if (duomenuIvedimoBudas == 'I') {
+        //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+        // } else {
+        //     string failoPavadinimas = "studrez.txt";
+        //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+        // }
     }
     
 
