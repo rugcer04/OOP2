@@ -80,4 +80,7 @@ void ivedimasRanka(Container& studentas);
 template <typename Container>
 void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai);
 
+template <typename Container>
+void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas);
+
 #endif

@@ -1,4 +1,5 @@
 #include "Stud.h"
+#include "Timer.h"
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
@@ -523,3 +524,43 @@ void ivedimasRanka(Container& studentai) {
 }
 template void ivedimasRanka<vector<Studentas>>(vector<Studentas>&);
 template void ivedimasRanka<list<Studentas>>(list<Studentas>&);
+
+template <typename Container>
+void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
+   //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+   int strategija;
+   do {
+      cout << "Pasirinkite studentų dalijimo į dvi kategorijas strategiją: (1 - pirma, 2 - antra, 3 - trečia strategijos): ";
+      cin >> strategija;
+   } while (strategija != 1 && strategija != 2 && strategija != 3);
+
+   if (strategija == 1){
+      Timer t3;
+      Container vargsiukai, kietiakai;
+      skirstytiStudentusPirmaStrategija(studentai, vargsiukai, kietiakai);
+      cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
+      Timer t4;
+      //Isvesti vargsiukus i faila
+      isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
+      //Isvesti kietiakus i faila
+      isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
+      cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
+
+   } else if (strategija == 2){
+      Timer t3;
+      Container vargsiukai;
+      skirstytiStudentusAntraStrategija(studentai, vargsiukai);
+      cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
+      Timer t4;
+      //Isvesti vargsiukus i faila
+      isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
+      //Isvesti kietiakus i faila
+      isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
+      cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
+
+   }
+}
+template void duomenuIsvedimasPagalStrategija<vector<Studentas>>(vector<Studentas>&, char pasirinkimas);
+template void duomenuIsvedimasPagalStrategija<list<Studentas>>(list<Studentas>&, char pasirinkimas);
