@@ -83,4 +83,7 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
 template <typename Container>
 void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas);
 
+template <typename Container>
+void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai);
+
 #endif

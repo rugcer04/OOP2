@@ -325,18 +325,41 @@ template void skirstytiStudentusPirmaStrategija<list<Studentas>>(const list<Stud
 
 template <typename Container>
 void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai) {
-    auto it = studentai.begin();
-    while (it != studentai.end()) {
-        if (it->galutinis < 5.0) {
-            vargsiukai.push_back(*it);
-            it = studentai.erase(it);
-        } else {
-            ++it;
-        }
-    }
+   auto it = studentai.begin();
+   while (it != studentai.end()) {
+      if (it->galutinis < 5.0) {
+         vargsiukai.push_back(*it);
+         it = studentai.erase(it);
+      } else {
+         ++it;
+      }
+   }
 }
 template void skirstytiStudentusAntraStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&);
 template void skirstytiStudentusAntraStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&);
+
+template <typename Container>
+void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai){
+   if constexpr(is_same_v<Container, vector<Studentas>>) {
+      auto it = stable_partition(studentai.begin(), studentai.end(), [](const Studentas& Lok){
+         return Lok.galutinis < 5.0;
+      });
+      vargsiukai.assign(studentai.begin(), it);
+      kietiakai.assign(it, studentai.end());   
+   } else if constexpr (is_same_v<Container, list<Studentas>>){
+      auto it = studentai.begin();
+      while (it != studentai.end()) {
+         if (it->galutinis < 5.0) {
+            vargsiukai.push_back(*it);
+            it = studentai.erase(it);
+         } else {
+            ++it;
+         }
+      }
+   }
+}
+template void skirstytiStudentusTreciaStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
+template void skirstytiStudentusTreciaStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&, list<Studentas>&);
 
 //funkcija rusiuoti studentus
 template <typename Container>
@@ -560,6 +583,22 @@ void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
       isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
       cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
+   } else if (strategija == 3){
+      Timer t3;
+      Container vargsiukai, kietiakai;
+      skirstytiStudentusTreciaStrategija(studentai, vargsiukai, kietiakai);
+      cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
+      Timer t4;
+      //Isvesti vargsiukus i faila
+      isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
+      //Isvesti kietiakus i faila
+      if constexpr (is_same_v<Container, vector<Studentas>>){
+         isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
+      } else if constexpr (is_same_v<Container, list<Studentas>>){
+         isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
+      }
+      cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
    }
 }
 template void duomenuIsvedimasPagalStrategija<vector<Studentas>>(vector<Studentas>&, char pasirinkimas);
