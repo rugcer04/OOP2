@@ -63,12 +63,12 @@ int main() {
             //Pasirenkame studentu rusiavimo parametra
             pasirinktiRusiavimoParametra(studentai);
 
-            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
-
             //isvedame rezultatus i faila
             failoPavadinimas = "studrez.txt";
             isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+
+            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
         }
 
         //Failu generavimas
@@ -88,28 +88,6 @@ int main() {
         return 0;
 
         }
-
-        // //Pasirenkame galutinio pazymio skaiciavimo metoda
-        // char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
-        // for (Studentas& studentas : studentai) {
-        //     skaiciuotiGalutini(studentas, pasirinkimas);
-        // }
-
-        // //Pasirenkame studentu rusiavimo parametra
-        // pasirinktiRusiavimoParametra(studentai);
-
-        // //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-        // duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
-
-
-
-        // //pasirenkame kaip pateikti rezultatus (faile ar terminale)
-        // if (duomenuIvedimoBudas == 'I') {
-        //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-        // } else {
-        //     string failoPavadinimas = "studrez.txt";
-        //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-        // }
         
 
     //Darbas su sarasu
@@ -159,12 +137,12 @@ int main() {
             //Pasirenkame studentu rusiavimo parametra
             pasirinktiRusiavimoParametra(studentai);
 
-            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
-
             //isvedame rezultatus i faila
             failoPavadinimas = "studrez.txt";
             isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+
+            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
         }
 
         //Failu generavimas
@@ -184,26 +162,6 @@ int main() {
         return 0;
 
         }
-
-        // //Pasirenkame galutinio pazymio skaiciavimo metoda
-        // char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
-        // for (Studentas& studentas : studentai) {
-        //     skaiciuotiGalutini(studentas, pasirinkimas);
-        // }
-
-        // //Pasirenkame studentu rusiavimo parametra
-        // pasirinktiRusiavimoParametra(studentai);
-
-        // //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-        // duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
-
-        // //pasirenkame kaip pateikti rezultatus (faile ar terminale)
-        // if (duomenuIvedimoBudas == 'I') {
-        //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-        // } else {
-        //     string failoPavadinimas = "studrez.txt";
-        //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-        // }
     }
     
 

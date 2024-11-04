@@ -557,37 +557,38 @@ void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
       cin >> strategija;
    } while (strategija != 1 && strategija != 2 && strategija != 3);
 
+   int kiekis = studentai.size();
    if (strategija == 1){
       Timer t3;
       Container vargsiukai, kietiakai;
       skirstytiStudentusPirmaStrategija(studentai, vargsiukai, kietiakai);
-      cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+      cout << "Failo su " << kiekis << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
 
       Timer t4;
       //Isvesti vargsiukus i faila
       isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
       //Isvesti kietiakus i faila
       isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
-      cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
+      cout << "Failo su " << kiekis << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
    } else if (strategija == 2){
       Timer t3;
       Container vargsiukai;
       skirstytiStudentusAntraStrategija(studentai, vargsiukai);
-      cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+      cout << "Failo su " << kiekis << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
 
       Timer t4;
       //Isvesti vargsiukus i faila
       isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
       //Isvesti kietiakus i faila
       isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
-      cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
+      cout << "Failo su " << kiekis << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
 
    } else if (strategija == 3){
       Timer t3;
       Container vargsiukai, kietiakai;
       skirstytiStudentusTreciaStrategija(studentai, vargsiukai, kietiakai);
-      cout << "Failo su " << studentai.size() << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+      cout << "Failo su " << kiekis << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
 
       Timer t4;
       //Isvesti vargsiukus i faila
@@ -598,7 +599,7 @@ void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
       } else if constexpr (is_same_v<Container, list<Studentas>>){
          isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
       }
-      cout << "Failo su " << studentai.size() << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
+      cout << "Failo su " << kiekis << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
    }
 }
 template void duomenuIsvedimasPagalStrategija<vector<Studentas>>(vector<Studentas>&, char pasirinkimas);
