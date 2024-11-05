@@ -13,6 +13,7 @@
 #include <chrono>
 #include <utility>
 #include <list>
+#include <limits>
 
 using std::string;
 using std::vector;
@@ -36,5 +37,8 @@ using namespace std::chrono;
 using std::move;
 using std::list;
 using std::is_same_v;
+using std::numeric_limits;
+using std::max;
+using std::streamsize;
 
 #endif

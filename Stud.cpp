@@ -521,29 +521,29 @@ char pasirinktiDuomenuIvedima() {
 template <typename Container>
 void ivedimasRanka(Container& studentai) {
    cout << "Įveskite studentų skaičių: ";
-        cin.ignore();
-        string input;
-        int studentuSk;
+   cin.ignore();
+   string input;
+   int studentuSk;
 
-        while(true) {
-            getline(cin, input);
+   while(true) {
+      getline(cin, input);
 
-            try{
-                stringstream ss(input);
-                if (!(ss >> studentuSk)) {
-                    throw invalid_argument("įvestis nėra skaičius. ");
-                }
-                break;
-            } catch (const invalid_argument &e){
-                cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
-            }
-        }
+      try{
+         stringstream ss(input);
+         if (!(ss >> studentuSk)) {
+            throw invalid_argument("įvestis nėra skaičius. ");
+         }
+         break;
+      } catch (const invalid_argument &e){
+         cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
+      }
+   }
 
-        for (int i = 0; i < studentuSk; i++) {
-            typename Container::value_type studentas;
-            pasirinktiDuomenuIvedimoBuda(studentas);
-            studentai.push_back(studentas);
-        }
+   for (int i = 0; i < studentuSk; i++) {
+      typename Container::value_type studentas;
+      pasirinktiDuomenuIvedimoBuda(studentas);
+      studentai.push_back(studentas);
+   }
 }
 template void ivedimasRanka<vector<Studentas>>(vector<Studentas>&);
 template void ivedimasRanka<list<Studentas>>(list<Studentas>&);
@@ -552,10 +552,28 @@ template <typename Container>
 void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
    //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
    int strategija;
-   do {
+   while (true){
       cout << "Pasirinkite studentų dalijimo į dvi kategorijas strategiją: (1 - pirma, 2 - antra, 3 - trečia strategijos): ";
-      cin >> strategija;
-   } while (strategija != 1 && strategija != 2 && strategija != 3);
+      int temp;
+      cin >> temp;
+
+      if (cin.fail()){
+         cin.clear();
+         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+         cout << "Neteisinga įvestis, bandykite dar kartą. " << endl;
+         continue;
+      }
+      if (temp >= 1 && temp <= 3) {
+         strategija = temp;
+         break;
+      } else {
+         cout << "Neteisinga įvestis, bandykite dar kartą. " << endl;
+      }
+   }
+   // do {
+   //    cout << "Pasirinkite studentų dalijimo į dvi kategorijas strategiją: (1 - pirma, 2 - antra, 3 - trečia strategijos): ";
+   //    cin >> strategija;
+   // } while (strategija != 1 && strategija != 2 && strategija != 3);
 
    int kiekis = studentai.size();
    if (strategija == 1){
