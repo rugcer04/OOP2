@@ -1,9 +1,20 @@
 # OOP
-## Aprašymas
-- v0.1 pradinėje versijoje sukuriama Studentas struktūra studento duomenims saugoti. Vartotojui leidžiama pasirinkti galutinio balo skaičiavimo būdą. Aprašomos dvi funkcijos apskaičiuoti galutinį balą naudojant vidurkį arba medianą. Sukuriamos funkcijos įvesti studento vardą, pavardę ir namų darbų ir egzamino pažymius, leidžiama vartotojui pasirinkti įvesti pažymius patiems arba juos generuoti atsitiktinai. Pasirinkimai ir įvesti duomenys yra išvedami.
-- v0.1 pradinė versija papildoma nuskaitymu iš failo. Vartotojas pasirenka ar nori įvesti duomenis ranka, ar nuskaityti iš failo ir ar nori išvedimą matyti ekrane ar sukurti ir įrašyti į naują failą. Projektas apiforminamas, surūšiuojami studentai, panaudojamas išimčių valdymas.
-- v0.2 versijoje programa papildoma failų generavimu ir nuskaitytų failų suskirstymu į dvi grupes pagal galutinį pažymį. Šios grupės įrašomos į atskirus failus, surūšiuotus pagal naudotojo parinktą parametrą. Atlikta programos veikimo greičio analizė.
-- v0.3 versijoje pridedama galimybė pasirinkti dirbti su vektoriais arba su sąrašais.
+## Versijų aprašymas
+- **v0.1 pradinėje** versijoje sukuriama `Studentas` struktūra studento duomenims saugoti. Vartotojui leidžiama pasirinkti galutinio balo skaičiavimo būdą. Aprašomos dvi funkcijos galutiniam balui apskaičiuoti- naudojant vidurkį arba medianą. Sukuriamos funkcijos įvesti studento vardą, pavardę ir namų darbų ir egzamino pažymius, leidžiama vartotojui pasirinkti įvesti pažymius patiems arba juos generuoti atsitiktinai. Pasirinkimai ir įvesti duomenys yra išvedami lentele.
+
+- **v0.1** versijoje pradinė versija papildoma nuskaitymu iš failo galimybe. Vartotojas pasirenka ar nori įvesti duomenis ranka, ar nuskaityti iš failo, taip pat - ar išvestį matyti ekrane ar sukurti ir įrašyti į naują failą. Projektas apiforminamas, surūšiuojami studentai, panaudojamas išimčių valdymas.
+
+- **v0.2** versijoje programa papildoma failų generavimu ir nuskaitytų failų suskirstymu į dvi grupes pagal galutinį pažymį. Šios grupės įrašomos į atskirus failus, surūšiuotus pagal naudotojo parinktą parametrą. Atlikta programos veikimo greičio analizė.
+
+- **v0.3** versijoje pridedama galimybė pasirinkti dirbti su vektoriais arba su sąrašais.
+
+- **v1.0** versijoje studentų rūšiavimo į dvi grupes strategija papildoma dar dvejomis strategijomis:
+    - `1 strategija`: bendras studentų konteineris skaidomas į du naujus to paties tipo konteinerius: "vargšiukai" ir "kietiakai";
+    - `2 strategija`: iš bendro studentų konteinerio "vargšiukus" perkeliame į "vargšiukų" konteinerį ir ištriname iš studentų konteinerio, jame lieka tik "kietiakai";
+    - `3 strategija`: atsižvelgiant į rušiavimo greičius, trečia strategija veikia priklausomai nuo vartotojo pasirinkto konteinerio:
+        - jei pasirenkama dirbti su *vektoriumi* - naudojama `1 strategija`, patobulinta tinkamais algoritmais; 
+        - jei pasirenkama dirbti su *sąrašu* - naudojama `2 strategija`.
+
 
 
 ## Programos veikimo greičio analizė
