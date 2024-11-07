@@ -199,11 +199,17 @@ void isvedimas(const Container& studentai, char pasirinkimas) {
 //funkcija skaityti duomenis is failo
 template <typename Container>
 void nuskaitytiIsFailo(Container& studentai, const string& failoPavadinimas) {
-   ifstream failas(failoPavadinimas);  //bandoma atidaryti faila
-   if (!failas) {
-      cerr << "Nepavyko atidaryti failo: " << failoPavadinimas << endl;
-      return;
-   }
+   string pavadinimas = failoPavadinimas;
+   ifstream failas;
+
+   do {
+        failas.open(pavadinimas);
+        if (!failas) {
+            cerr << "Nepavyko atidaryti failo: " << pavadinimas << endl;
+            cout << "Bandykite dar kartą: ";
+            cin >> pavadinimas;
+        }
+    } while (!failas);
 
    //perskaitoma pirma eilute(header) ir praleidziama
    string eilute;
