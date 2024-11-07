@@ -14,6 +14,7 @@
 #include <utility>
 #include <list>
 #include <limits>
+#include <stdexcept> //runtime_error
 
 using std::string;
 using std::vector;
@@ -40,5 +41,6 @@ using std::is_same_v;
 using std::numeric_limits;
 using std::max;
 using std::streamsize;
+using std::runtime_error;
 
 #endif

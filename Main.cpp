@@ -46,13 +46,8 @@ int main() {
         //Nuskaitymas is failo
         else if (duomenuIvedimoBudas == 'F') {
             //system("dir *.txt");
-            string failoPavadinimas;
-            cout << "Įveskite failo pavadinimą: ";
-            cin >> failoPavadinimas;
-
-            Timer t1;
-            nuskaitytiIsFailo(studentai, failoPavadinimas);
-            cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
+            //nuskaitome faila
+            nuskaitytiIsFailo(studentai);
 
             //Pasirenkame galutinio pazymio skaiciavimo metoda
             char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
@@ -64,6 +59,7 @@ int main() {
             pasirinktiRusiavimoParametra(studentai);
 
             //isvedame rezultatus i faila
+            string failoPavadinimas;
             failoPavadinimas = "studrez.txt";
             isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
 
@@ -120,13 +116,8 @@ int main() {
         //Nuskaitymas is failo
         else if (duomenuIvedimoBudas == 'F') {
             //system("dir *.txt");
-            string failoPavadinimas;
-            cout << "Įveskite failo pavadinimą: ";
-            cin >> failoPavadinimas;
-
-            Timer t1;
-            nuskaitytiIsFailo(studentai, failoPavadinimas);
-            cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
+            //nuskaitome faila
+            nuskaitytiIsFailo(studentai);
 
             //Pasirenkame galutinio pazymio skaiciavimo metoda
             char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
@@ -138,6 +129,7 @@ int main() {
             pasirinktiRusiavimoParametra(studentai);
 
             //isvedame rezultatus i faila
+            string failoPavadinimas;
             failoPavadinimas = "studrez.txt";
             isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
 

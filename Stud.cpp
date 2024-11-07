@@ -198,19 +198,28 @@ void isvedimas(const Container& studentai, char pasirinkimas) {
 
 //funkcija skaityti duomenis is failo
 template <typename Container>
-void nuskaitytiIsFailo(Container& studentai, const string& failoPavadinimas) {
-   string pavadinimas = failoPavadinimas;
+void nuskaitytiIsFailo(Container& studentai) {
+   string failoPavadinimas;
    ifstream failas;
 
-   do {
-        failas.open(pavadinimas);
-        if (!failas) {
-            cerr << "Nepavyko atidaryti failo: " << pavadinimas << endl;
-            cout << "Bandykite dar kartą: ";
-            cin >> pavadinimas;
-        }
-    } while (!failas);
+   while (true) {
+        try {
+            cout << "Įveskite failo pavadinimą: ";
+            cin >> failoPavadinimas;
+            failas.open(failoPavadinimas);
 
+            if (!failas) {
+                throw runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
+            }
+
+            break;
+
+        } catch (const runtime_error& e) {
+            cerr << e.what() << " Bandykite dar kartą." << endl;
+        }
+    }
+
+   Timer t1;
    //perskaitoma pirma eilute(header) ir praleidziama
    string eilute;
    getline(failas, eilute);
@@ -250,10 +259,11 @@ void nuskaitytiIsFailo(Container& studentai, const string& failoPavadinimas) {
 
    }
    failas.close();
+   cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
 
 }
-template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&, const string& failoPavadinimas);
-template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&, const string& failoPavadinimas);
+template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&);
+template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&);
 
 //funckija irasyti rezultatus i faila
 template <typename Container>
@@ -278,8 +288,8 @@ void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string
    failas.close();
    cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
 }
-template void isvedimasIFaila<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
-template void isvedimasIFaila<list<Studentas>>(const list<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
+//template void isvedimasIFaila<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
+//template void isvedimasIFaila<list<Studentas>>(const list<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
 
 //Funckija generuoti failus
 void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
@@ -326,8 +336,8 @@ void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& va
       }
    }
 }
-template void skirstytiStudentusPirmaStrategija<vector<Studentas>>(const vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
-template void skirstytiStudentusPirmaStrategija<list<Studentas>>(const list<Studentas>&, list<Studentas>&, list<Studentas>&);
+//template void skirstytiStudentusPirmaStrategija<vector<Studentas>>(const vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
+//template void skirstytiStudentusPirmaStrategija<list<Studentas>>(const list<Studentas>&, list<Studentas>&, list<Studentas>&);
 
 template <typename Container>
 void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai) {
@@ -341,8 +351,8 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
       }
    }
 }
-template void skirstytiStudentusAntraStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&);
-template void skirstytiStudentusAntraStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&);
+//template void skirstytiStudentusAntraStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&);
+//template void skirstytiStudentusAntraStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&);
 
 template <typename Container>
 void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai){
@@ -364,8 +374,8 @@ void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiu
       }
    }
 }
-template void skirstytiStudentusTreciaStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
-template void skirstytiStudentusTreciaStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&, list<Studentas>&);
+//template void skirstytiStudentusTreciaStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
+//template void skirstytiStudentusTreciaStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&, list<Studentas>&);
 
 //funkcija rusiuoti studentus
 template <typename Container>

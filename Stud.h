@@ -40,7 +40,7 @@ void isvedimas(const Container& studentai, char pasirinkimas);
 
 //funkcija skaityti duomenis is failo
 template <typename Container>
-void nuskaitytiIsFailo(Container& studentai, const string& failoPavadinimas);
+void nuskaitytiIsFailo(Container& studentai);
 
 //funckija irasyti rezultatus i faila
 template <typename Container>
