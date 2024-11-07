@@ -23,17 +23,17 @@ double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas) {
       return egzaminas * 0.6;
    }
 
-    sort(namuDarbai.begin(), namuDarbai.end()) ;
-    double mediana;
-    int size = namuDarbai.size();
+   sort(namuDarbai.begin(), namuDarbai.end()) ;
+   double mediana;
+   int size = namuDarbai.size();
 
-    if (size % 2 == 0) {
-        mediana = (namuDarbai[size / 2 - 1] + namuDarbai[size / 2]) / 2.0; 
-    } else {
-        mediana = namuDarbai[size / 2];
-    }
+   if (size % 2 == 0) {
+      mediana = (namuDarbai[size / 2 - 1] + namuDarbai[size / 2]) / 2.0; 
+   } else {
+      mediana = namuDarbai[size / 2];
+   }
 
-    return mediana * 0.4 + egzaminas * 0.6;
+   return mediana * 0.4 + egzaminas * 0.6;
 
 }
 
@@ -134,10 +134,10 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
       cin >> pasirinkimas;
       pasirinkimas = toupper(pasirinkimas);
       if (pasirinkimas == 'R' || pasirinkimas == 'A') {
-            break;
-        } else {
-            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
-        }
+         break;
+      } else {
+         cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+      }
    }
 
    if (pasirinkimas == 'R') {
@@ -150,19 +150,19 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
       int ndSkaicius;
       string input;
 
-        while(true) {
-            getline(cin, input);
+      while(true) {
+         getline(cin, input);
 
-            try{
-                stringstream ss(input);
-                if (!(ss >> ndSkaicius)) {
-                    throw invalid_argument("įvestis nėra skaičius. ");
-                }
-                break;
-            } catch (const invalid_argument &e){
-                cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
+         try{
+            stringstream ss(input);
+            if (!(ss >> ndSkaicius)) {
+               throw invalid_argument("įvestis nėra skaičius. ");
             }
-        }
+            break;
+         } catch (const invalid_argument &e){
+            cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
+         }
+      }
 
       generuotiDuomenis(Lok, ndSkaicius);
    }
@@ -193,8 +193,7 @@ void isvedimas(const Container& studentai, char pasirinkimas) {
       cout << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << setw(20) << Lok.galutinis << setw(50) << left << &Lok << endl;
    }
 }
-//template void isvedimas<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas);
-//template void isvedimas<list<Studentas>>(const list<Studentas>&, char pasirinkimas);
+
 
 //funkcija skaityti duomenis is failo
 template <typename Container>
@@ -203,21 +202,21 @@ void nuskaitytiIsFailo(Container& studentai) {
    ifstream failas;
 
    while (true) {
-        try {
-            cout << "Įveskite failo pavadinimą: ";
-            cin >> failoPavadinimas;
-            failas.open(failoPavadinimas);
+      try {
+         cout << "Įveskite failo pavadinimą: ";
+         cin >> failoPavadinimas;
+         failas.open(failoPavadinimas);
 
-            if (!failas) {
-                throw runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
-            }
+         if (!failas) {
+            throw runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
+         }
 
-            break;
+         break;
 
-        } catch (const runtime_error& e) {
-            cerr << e.what() << " Bandykite dar kartą." << endl;
-        }
-    }
+      } catch (const runtime_error& e) {
+         cerr << e.what() << " Bandykite dar kartą." << endl;
+      }
+   }
 
    Timer t1;
    //perskaitoma pirma eilute(header) ir praleidziama
@@ -255,7 +254,7 @@ void nuskaitytiIsFailo(Container& studentai) {
             tempStudentas.namuDarbai = move(namuDarbai);
 
             studentai.push_back(move(tempStudentas));
-        }
+      }
 
    }
    failas.close();
@@ -288,8 +287,6 @@ void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string
    failas.close();
    cout << "Rezultatai sėkmingai išsaugoti faile: " << failoPavadinimas << endl;
 }
-//template void isvedimasIFaila<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
-//template void isvedimasIFaila<list<Studentas>>(const list<Studentas>&, char pasirinkimas, const string& failoPavadinimas);
 
 //Funckija generuoti failus
 void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
@@ -325,7 +322,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
    cout << "Failas " << failoPavadinimas << " sėkmingai sukurtas" << endl;
 }
 
-//funkcija suskirstyti studentus i dvi grupes
+//funkcija suskirstyti studentus i dvi grupe (pirma strategija)
 template <typename Container>
 void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& vargsiukai, Container& kietiakai) {
    for (const auto& studentas : studentai) {
@@ -336,9 +333,8 @@ void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& va
       }
    }
 }
-//template void skirstytiStudentusPirmaStrategija<vector<Studentas>>(const vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
-//template void skirstytiStudentusPirmaStrategija<list<Studentas>>(const list<Studentas>&, list<Studentas>&, list<Studentas>&);
 
+//funkcija suskirstyti studentus i dvi grupe (antra strategija)
 template <typename Container>
 void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai) {
    auto it = studentai.begin();
@@ -351,9 +347,8 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
       }
    }
 }
-//template void skirstytiStudentusAntraStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&);
-//template void skirstytiStudentusAntraStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&);
 
+//funkcija suskirstyti studentus i dvi grupe (trecia strategija)
 template <typename Container>
 void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai){
    if constexpr(is_same_v<Container, vector<Studentas>>) {
@@ -374,8 +369,6 @@ void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiu
       }
    }
 }
-//template void skirstytiStudentusTreciaStrategija<vector<Studentas>>(vector<Studentas>&, vector<Studentas>&, vector<Studentas>&);
-//template void skirstytiStudentusTreciaStrategija<list<Studentas>>(list<Studentas>&, list<Studentas>&, list<Studentas>&);
 
 //funkcija rusiuoti studentus
 template <typename Container>
@@ -452,19 +445,17 @@ void rusiuotiStudentus(Container& studentai, char parametras) {
       }
    }
 }
-//template void rusiuotiStudentus<vector<Studentas>>(vector<Studentas>&, char parametras);
-//template void rusiuotiStudentus<list<Studentas>>(list<Studentas>&, char parametras);
 
 //funckija vartotojui pasirinkti galutinio balo matavimo buda
 char pasirinktiGalutinioskaiciavimoMetoda() {
-    char pasirinkimas;
-    do {
-        cout << "Pasirinkite galutinio balo skaičiavimo metodą (V- vidurkiu, M- mediana): ";
-        cin >> pasirinkimas;
-        pasirinkimas = toupper(pasirinkimas);
-    } while (pasirinkimas != 'V' && pasirinkimas != 'M');
+   char pasirinkimas;
+   do {
+      cout << "Pasirinkite galutinio balo skaičiavimo metodą (V- vidurkiu, M- mediana): ";
+      cin >> pasirinkimas;
+      pasirinkimas = toupper(pasirinkimas);
+   } while (pasirinkimas != 'V' && pasirinkimas != 'M');
 
-    return pasirinkimas;
+   return pasirinkimas;
 }
 
 //funkcija pasirinkti rusiavimo parametra
@@ -490,27 +481,27 @@ template void pasirinktiRusiavimoParametra<list<Studentas>>(list<Studentas>&);
 //funckija pasirinkti rezultato isvedimo buda
 template <typename Container>
 void pasirinktiRezultatuIsvedimoBuda(const Container& studentai, char pasirinkimas) {
-    char isvedimoBudas;
-    while (true) {
-        cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
-        cin >> isvedimoBudas;
-        isvedimoBudas = toupper(isvedimoBudas);
+   char isvedimoBudas;
+   while (true) {
+      cout << "Ar norite išvesti rezultatus į ekraną (E) ar į failą (F)? ";
+      cin >> isvedimoBudas;
+      isvedimoBudas = toupper(isvedimoBudas);
 
-        if (isvedimoBudas == 'E' || isvedimoBudas == 'F') {
-            break;
-        } else {
-            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
-        }
-    }
+      if (isvedimoBudas == 'E' || isvedimoBudas == 'F') {
+         break;
+      } else {
+         cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+      }
+   }
 
-    if (isvedimoBudas == 'E') {
-        isvedimas(studentai, pasirinkimas);
-    } else if (isvedimoBudas == 'F') {
-        string failoPavadinimas;
-        cout << "Įveskite failo pavadinimą rezultatams išsaugoti: ";
-        cin >> failoPavadinimas;
-        isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-    }
+   if (isvedimoBudas == 'E') {
+      isvedimas(studentai, pasirinkimas);
+   } else if (isvedimoBudas == 'F') {
+      string failoPavadinimas;
+      cout << "Įveskite failo pavadinimą rezultatams išsaugoti: ";
+      cin >> failoPavadinimas;
+      isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+   }
 }
 template void pasirinktiRezultatuIsvedimoBuda<vector<Studentas>>(const vector<Studentas>&, char pasirinkimas);
 template void pasirinktiRezultatuIsvedimoBuda<list<Studentas>>(const list<Studentas>&, char pasirinkimas);
@@ -564,6 +555,7 @@ void ivedimasRanka(Container& studentai) {
 template void ivedimasRanka<vector<Studentas>>(vector<Studentas>&);
 template void ivedimasRanka<list<Studentas>>(list<Studentas>&);
 
+//funckija pasirinkti studentu dalijimo strategija
 template <typename Container>
 void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
    //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
@@ -586,10 +578,6 @@ void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
          cout << "Neteisinga įvestis, bandykite dar kartą. " << endl;
       }
    }
-   // do {
-   //    cout << "Pasirinkite studentų dalijimo į dvi kategorijas strategiją: (1 - pirma, 2 - antra, 3 - trečia strategijos): ";
-   //    cin >> strategija;
-   // } while (strategija != 1 && strategija != 2 && strategija != 3);
 
    int kiekis = studentai.size();
    if (strategija == 1){

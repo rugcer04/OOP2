@@ -49,9 +49,17 @@ void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string
 //Funckija generuoti failus
 void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas);
 
-//funkcija suskirstyti studentus i dvi grupes
+//funkcija suskirstyti studentus i dvi grupes (pirma strategija)
 template <typename Container>
 void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& vargsiukai, Container& kietiakai);
+
+//funkcija suskirstyti studentus i dvi grupes (antra strategija)
+template <typename Container>
+void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai);
+
+//funkcija suskirstyti studentus i dvi grupes (trecia strategija)
+template <typename Container>
+void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai);
 
 //funkcija rusiuoti studentus
 template <typename Container>
@@ -75,15 +83,9 @@ char pasirinktiDuomenuIvedima();
 template <typename Container>
 void ivedimasRanka(Container& studentas);
 
-
-
-template <typename Container>
-void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai);
-
+//funckija pasirinkti studentu dalijimo strategija
 template <typename Container>
 void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas);
 
-template <typename Container>
-void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai);
 
 #endif

@@ -31,7 +31,7 @@ int main() {
             skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
-            //Pasirenkame studentu rusiavimo parametra
+            //Pasirenkame studentu rusiavimo parametra ir surusiuojame
             pasirinktiRusiavimoParametra(studentai);
 
             //pasirenkame kaip pateikti rezultatus (faile ar terminale)
@@ -46,7 +46,7 @@ int main() {
         //Nuskaitymas is failo
         else if (duomenuIvedimoBudas == 'F') {
             //system("dir *.txt");
-            //nuskaitome faila
+            //Nuskaitome faila
             nuskaitytiIsFailo(studentai);
 
             //Pasirenkame galutinio pazymio skaiciavimo metoda
@@ -58,7 +58,7 @@ int main() {
             //Pasirenkame studentu rusiavimo parametra
             pasirinktiRusiavimoParametra(studentai);
 
-            //isvedame rezultatus i faila
+            //Isvedame rezultatus i faila
             string failoPavadinimas;
             failoPavadinimas = "studrez.txt";
             isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
@@ -104,7 +104,7 @@ int main() {
             //Pasirenkame studentu rusiavimo parametra
             pasirinktiRusiavimoParametra(studentai);
 
-            //pasirenkame kaip pateikti rezultatus (faile ar terminale)
+            //Pasirenkame kaip pateikti rezultatus (faile ar terminale)
             if (duomenuIvedimoBudas == 'I') {
                 pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
             } else {
@@ -116,7 +116,7 @@ int main() {
         //Nuskaitymas is failo
         else if (duomenuIvedimoBudas == 'F') {
             //system("dir *.txt");
-            //nuskaitome faila
+            //Nuskaitome faila
             nuskaitytiIsFailo(studentai);
 
             //Pasirenkame galutinio pazymio skaiciavimo metoda
@@ -125,10 +125,10 @@ int main() {
                 skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
-            //Pasirenkame studentu rusiavimo parametra
+            //Pasirenkame studentu rusiavimo parametra ir surusiuojame
             pasirinktiRusiavimoParametra(studentai);
 
-            //isvedame rezultatus i faila
+            //Isvedame rezultatus i faila
             string failoPavadinimas;
             failoPavadinimas = "studrez.txt";
             isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
@@ -156,6 +156,5 @@ int main() {
         }
     }
     
-
     return 0;
 }
