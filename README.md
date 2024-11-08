@@ -1,8 +1,16 @@
 # OOP
-## Programos naudojimosi instrukcija
-Paleidus programą turite pasirinkti kokį konteinerį norite naudoti darbui su studentų duomenimis (spauskite 'V' dirbti su vektoriumu, 'L' - su sąrašu).
+## Programos diegimo ir paleidimo instrukcija
+Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
+- Atsisiųskite v1.0 versiją eidami į "Releases", pasirinkite v1.0 versiją ir paspauskite ant **Source code (zip)**;
+- Išskleiskite atsisiųstą failą "OOP-v1.0.zip";
+- Dukart spustelėkite ant failo "run.bat" ir šiek tiek palaukite;
+- Sekite ekrane pateiktas instrukcijas arba vadovaukitės žemiau pateikta programos naudojimosi instrukcija (rekomeduojama pradžioje susigeneruoti studentų failus);
+- Jeigu visus žingsnius atlikote teisingai, tai tame pačiame aplankale turite rasti naują aplankalą pavadinimu "Release", užėje į aplankalą, matysite aplikaciją pavadinimu "Studentai.exe", kuria paspaudus du kartus galėsite pratęsti darbą su programa.
 
-Po to turėsite pasirinkti ką toliau norite daryti: 'I' - įvesti studentų duomenis ranka, 'F' - nuskaityti duomenis iš failo ar 'G' - generuoti failus su studentų duomenimis:
+## Programos naudojimosi instrukcija
+- Paleidus programą turite pasirinkti kokį konteinerį norite naudoti darbui su studentų duomenimis (spauskite 'V' dirbti su vektoriumu, 'L' - su sąrašu).
+
+- Po to turėsite pasirinkti ką toliau norite daryti: 'I' - įvesti studentų duomenis ranka, 'F' - nuskaityti duomenis iš failo ar 'G' - generuoti failus su studentų duomenimis:
 
 - Pasirinkus įvesti duomenis ranka ('I'), turėsite įvesti kiek norite įtraukti studentų. Kiekvienam studentui turite pasirinkti ar norite įvesti jo namų darbų ir egzamino pažymius ranka ('R') ar generuoti atsitiktinai ('A').
 
@@ -24,7 +32,7 @@ Po to turėsite pasirinkti ką toliau norite daryti: 'I' - įvesti studentų duo
 
     - Rezultatai bus automatiškai išsaugoti "studrez.txt" faile. Tada turėsite pasirinkti pagal kokią strategija norite suskirstyti studentus į dvi grupes: '1', '2' ar '3' (strategijos aprašytos žemiau). Suskirstyti studentai bus automatiškai įrašyti į "vargsiukai.txt" ir "kietiakai.txt" failus. Po kiekvienos operacijos (failo nuskaitymo, surūšiavimo į grupes ir išvedimo į failus) bus išspausdinami operacijų vykdymo laikai. Programa baigia darbą.
 
-- Pasirinkus generuoti duomenis ('G') bus automatiškai sugeneruoti įfailai su studentų duomenimis (po 1000, 10000, 100000, 1000000, 10000000 įrašų). Kiekvienas studentas turės po 15 namų darbų pažymių ir egzamino pažymį. Po kiekvieno sugeneruoto failo bus išspausdinta generavimo laikas. Programa baigia darbą.
+- Pasirinkus generuoti duomenis ('G') bus automatiškai sugeneruoti 5 failai su studentų duomenimis (po 1000, 10000, 100000, 1000000, 10000000 įrašų). Kiekvienas studentas turės po 15 namų darbų pažymių ir egzamino pažymį. Po kiekvieno sugeneruoto failo bus išspausdinta generavimo laikas. Programa baigia darbą.
 
 
 ## Versijų aprašymas
@@ -57,12 +65,19 @@ Programos testavimas su studentų sąrašų failais, sudarytais iš `1000`, `100
 | `1 000 000` | 3,943s |
 | `10 000 000` | 34,656s |
 
-### Testavimas
-![Vektorius](vektorius.png)
-![Sąrašas](sarasas.png)
+### Duomenų nuskaitymo ir išvedimo į failus testavimas
+![Testavimas](testavimas.png)
 
-### Analizė
+#### Analizė
 Kai duomenų kiekis mažesnis, programos greitis naudojant vektorius ir sąrašus mažai skiriasi. Tačiau dirbant su 10 000 000 įrašų skirtumas tampa akivaizdesnis – su vektoriais programa veikia žymiai greičiau.
+
+### Studentų rūšiavimo į dvi grupes strategijų testavimas
+![Strategijos](strategijos.png)
+
+#### Analizė
+- `1 strategija`: su mažesniu kiekiu duomenų su sąrašu programa veikia sparčiau, tačiau su 10 mln. - priešingai;
+- `2 strategija`: visais atvejais sąrašas veikia sparčiausiai, darbas su vektoriumi stipriai suletėja;
+- `3 strategija`: lyginant su 1 ir 2 strategijomis, darbas su abejais konteineriais vyksta sparčiau. Su mažesniu kiekiu duomenų su vektoriumi programa veikia lečiau nei su sąrašu, tačiau su 10 mln. - priešingai;
 
 ## Testavimo sistemos parametrai
 - CPU: Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz, 1800 Mhz, 4 Core(s), 8 Logical Processor(s)
