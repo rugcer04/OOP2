@@ -59,7 +59,8 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
 
 //funkcija suskirstyti studentus i dvi grupes (trecia strategija)
 template <typename Container>
-void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai);
+//void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai);
+void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai);
 
 //funkcija rusiuoti studentus
 template <typename Container>
@@ -69,8 +70,7 @@ void rusiuotiStudentus(Container& studentai, char parametras);
 char pasirinktiGalutinioskaiciavimoMetoda();
 
 //funkcija pasirinkti rusiavimo parametra
-template <typename Container>
-void pasirinktiRusiavimoParametra(Container& studentai);
+char pasirinktiRusiavimoParametra();
 
 //funckija pasirinkti rezultato isvedimo buda
 template <typename Container>

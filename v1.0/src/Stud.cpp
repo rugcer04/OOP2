@@ -337,37 +337,100 @@ void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& va
 //funkcija suskirstyti studentus i dvi grupe (antra strategija)
 template <typename Container>
 void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai) {
-   auto it = studentai.begin();
-   while (it != studentai.end()) {
-      if (it->galutinis < 5.0) {
-         vargsiukai.push_back(*it);
-         it = studentai.erase(it);
+   if constexpr(is_same_v<Container, vector<Studentas>>) {
+      sort(studentai.begin(), studentai.end(),
+      [](const Studentas& a, const Studentas& b) {
+         return a.galutinis > b.galutinis;
+      });
+
+   } else if constexpr (is_same_v<Container, list<Studentas>>){
+      studentai.sort([](const Studentas& a, const Studentas& b){
+         return a.galutinis > b.galutinis;
+      });
+   }
+
+   while (!studentai.empty()){
+      if(studentai.back().galutinis < 5.0){
+         vargsiukai.push_back(studentai.back());
+         studentai.pop_back();
       } else {
-         ++it;
+         break;
       }
    }
+   // auto it = studentai.begin();
+   // while (it != studentai.end()) {
+   //    if (it->galutinis < 5.0) {
+   //       vargsiukai.push_back(*it);
+   //       it = studentai.erase(it);
+   //    } else {
+   //       ++it;
+   //    }
+   // }
 }
 
 //funkcija suskirstyti studentus i dvi grupe (trecia strategija)
+// template <typename Container>
+// void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai){
+//    if constexpr(is_same_v<Container, vector<Studentas>>) {
+//       auto it = stable_partition(studentai.begin(), studentai.end(), [](const Studentas& Lok){
+//          return Lok.galutinis < 5.0;
+//       });
+//       vargsiukai.assign(studentai.begin(), it);
+//       kietiakai.assign(it, studentai.end());   
+//    } else if constexpr (is_same_v<Container, list<Studentas>>){
+//       auto it = studentai.begin();
+//       while (it != studentai.end()) {
+//          if (it->galutinis < 5.0) {
+//             vargsiukai.push_back(*it);
+//             it = studentai.erase(it);
+//          } else {
+//             ++it;
+//          }
+//       }
+//    }
+// }
+
+//TRECIA STRATEGIJA PAGAL 1
+// template <typename Container>
+// void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai) {
+//     auto it = stable_partition(studentai.begin(), studentai.end(), [](const auto& studentas) {
+//         return studentas.galutinis < 5.0;
+//     });
+//     vargsiukai.assign(studentai.begin(), it);
+//     kietiakai.assign(it, studentai.end());
+// }
+
+//TRECIA STRATEGIJA PAGAL 2
 template <typename Container>
-void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai){
-   if constexpr(is_same_v<Container, vector<Studentas>>) {
-      auto it = stable_partition(studentai.begin(), studentai.end(), [](const Studentas& Lok){
-         return Lok.galutinis < 5.0;
-      });
-      vargsiukai.assign(studentai.begin(), it);
-      kietiakai.assign(it, studentai.end());   
-   } else if constexpr (is_same_v<Container, list<Studentas>>){
-      auto it = studentai.begin();
-      while (it != studentai.end()) {
-         if (it->galutinis < 5.0) {
-            vargsiukai.push_back(*it);
-            it = studentai.erase(it);
-         } else {
-            ++it;
-         }
+void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai){
+   auto it = stable_partition(studentai.begin(), studentai.end(), [](const Studentas& s) {
+      return s.galutinis >= 5.0; 
+   });
+
+   while(!studentai.empty()){
+      if(studentai.back().galutinis < 5.0){
+         vargsiukai.push_back(studentai.back());
+         studentai.pop_back();
+      } else {
+         break;
       }
    }
+
+   // while(it != studentai.end()){
+   //    if(it -> galutinis < 5.0){
+   //       vargsiukai.push_back(*it);
+   //       studentai.pop_back();
+   //    } else {
+   //       break;
+   //    }
+   // }
+
+   //vargsiukai.insert(vargsiukai.end(), it, studentai.end());
+   // while (it != studentai.end() && it->galutinis < 5.0) {
+   //    vargsiukai.push_back(*it);
+   //    studentai.pop_back(); 
+   // }
+
 }
 
 //funkcija rusiuoti studentus
@@ -458,9 +521,7 @@ char pasirinktiGalutinioskaiciavimoMetoda() {
    return pasirinkimas;
 }
 
-//funkcija pasirinkti rusiavimo parametra
-template <typename Container>
-void pasirinktiRusiavimoParametra(Container& studentai) {
+char pasirinktiRusiavimoParametra() {
    char parametras;
    while (true) {
       cout << "Pasirinkite kokia tvarka norėtumėte pateikti studentus: surūšiuotus pagal vardą (V), pagal pavardę (P), pagal galutinį rezultatą mažėjimo tvarka (M) ar didėjimo tvarka (D): ";
@@ -473,10 +534,8 @@ void pasirinktiRusiavimoParametra(Container& studentai) {
          cout << "Neteisinga įvestis, bandykite dar kartą.\n";
       }
    }
-   rusiuotiStudentus(studentai, parametras);
+   return parametras;
 }
-template void pasirinktiRusiavimoParametra<vector<Studentas>>(vector<Studentas>&);
-template void pasirinktiRusiavimoParametra<list<Studentas>>(list<Studentas>&);
 
 //funckija pasirinkti rezultato isvedimo buda
 template <typename Container>
@@ -586,6 +645,10 @@ void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
       skirstytiStudentusPirmaStrategija(studentai, vargsiukai, kietiakai);
       cout << "Failo su " << kiekis << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
 
+      char parametras = pasirinktiRusiavimoParametra();
+      rusiuotiStudentus(vargsiukai, parametras);
+      rusiuotiStudentus(kietiakai, parametras);
+
       Timer t4;
       //Isvesti vargsiukus i faila
       isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
@@ -599,6 +662,10 @@ void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
       skirstytiStudentusAntraStrategija(studentai, vargsiukai);
       cout << "Failo su " << kiekis << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
 
+      char parametras = pasirinktiRusiavimoParametra();
+      rusiuotiStudentus(vargsiukai, parametras);
+      rusiuotiStudentus(studentai, parametras);
+
       Timer t4;
       //Isvesti vargsiukus i faila
       isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
@@ -609,18 +676,18 @@ void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
    } else if (strategija == 3){
       Timer t3;
       Container vargsiukai, kietiakai;
-      skirstytiStudentusTreciaStrategija(studentai, vargsiukai, kietiakai);
+      skirstytiStudentusTreciaStrategija(studentai, vargsiukai);
       cout << "Failo su " << kiekis << " įrašų surūšiavimo į dvi grupes laikas: " << t3.elapsed() << " s\n" << endl;
+
+      char parametras = pasirinktiRusiavimoParametra();
+      rusiuotiStudentus(vargsiukai, parametras);
+      rusiuotiStudentus(studentai, parametras);
 
       Timer t4;
       //Isvesti vargsiukus i faila
       isvedimasIFaila(vargsiukai, pasirinkimas, "vargsiukai.txt");
       //Isvesti kietiakus i faila
-      if constexpr (is_same_v<Container, vector<Studentas>>){
-         isvedimasIFaila(kietiakai, pasirinkimas, "kietiakai.txt");
-      } else if constexpr (is_same_v<Container, list<Studentas>>){
-         isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
-      }
+      isvedimasIFaila(studentai, pasirinkimas, "kietiakai.txt");
       cout << "Failo su " << kiekis << " įrašų išvedimo į failus laikas: " << t4.elapsed() << " s\n" << endl;
    }
 }

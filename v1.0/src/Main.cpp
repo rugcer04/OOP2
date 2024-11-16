@@ -32,7 +32,8 @@ int main() {
             }
 
             //Pasirenkame studentu rusiavimo parametra ir surusiuojame
-            pasirinktiRusiavimoParametra(studentai);
+            char parametras = pasirinktiRusiavimoParametra();
+            rusiuotiStudentus(studentai, parametras);
 
             //pasirenkame kaip pateikti rezultatus (faile ar terminale)
             if (duomenuIvedimoBudas == 'I') {
@@ -55,16 +56,17 @@ int main() {
                 skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
-            //Pasirenkame studentu rusiavimo parametra
-            pasirinktiRusiavimoParametra(studentai);
+            // //Pasirenkame studentu rusiavimo parametra
+            // pasirinktiRusiavimoParametra(studentai);
 
-            //Isvedame rezultatus i faila
-            string failoPavadinimas;
-            failoPavadinimas = "studrez.txt";
-            isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+            // //Isvedame rezultatus i faila
+            // string failoPavadinimas;
+            // failoPavadinimas = "studrez.txt";
+            // isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
 
-            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
-            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
+            //Skirstyti studentus i vargsiukus ir kietiakus, surusiavimas pagal pasirinkta parametra ir isvesti i failus pagal pasirinkta strategija
+            duomenuIsvedimasPagalStrategija(studentai, pasirinkimas); 
+
         }
 
         //Failu generavimas
@@ -101,8 +103,9 @@ int main() {
             skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
-            //Pasirenkame studentu rusiavimo parametra
-            pasirinktiRusiavimoParametra(studentai);
+            //Pasirenkame studentu rusiavimo parametra ir surusiuojame
+            char parametras = pasirinktiRusiavimoParametra();
+            rusiuotiStudentus(studentai, parametras);
 
             //Pasirenkame kaip pateikti rezultatus (faile ar terminale)
             if (duomenuIvedimoBudas == 'I') {
@@ -125,15 +128,12 @@ int main() {
                 skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
-            //Pasirenkame studentu rusiavimo parametra ir surusiuojame
-            pasirinktiRusiavimoParametra(studentai);
+            // //Isvedame rezultatus i faila
+            // string failoPavadinimas;
+            // failoPavadinimas = "studrez.txt";
+            // isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
 
-            //Isvedame rezultatus i faila
-            string failoPavadinimas;
-            failoPavadinimas = "studrez.txt";
-            isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-
-            //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija
+            //Skirstyti studentus i vargsiukus ir kietiakus, surusiavimas pagal pasirinkta parametra ir isvesti i failus pagal pasirinkta strategija
             duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);
         }
 
