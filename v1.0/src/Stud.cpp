@@ -2,19 +2,36 @@
 #include "../include/Timer.h"
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
-double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
-   if (namuDarbai.empty()) {
-      return egzaminas * 0.6;
+// double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
+//    if (namuDarbai.empty()) {
+//       return egzaminas * 0.6;
+//    }
+
+//    double vidurkis = 0.0;
+//    for (int nd: namuDarbai) {
+//       vidurkis += nd;
+//    }
+
+//    vidurkis /= namuDarbai.size();
+
+//    return vidurkis * 0.4 + egzaminas * 0.6;
+// }
+
+double skaiciuotiGalutiniVidurkiu(){
+   if (namudarbai_.empty()){
+      galutinis_ = egzaminas_ * 6;
+   } else {
+      double vidurkis = 0.0;
+
+      for (int nd : namudarbai_){
+         vidurkis += nd;
+      }
+
+      vidurkis /= namudarbai_.size();
+      galutinis_ = vidurkis * 0.4 + egzaminas_ * 0.6;
    }
 
-   double vidurkis = 0.0;
-   for (int nd: namuDarbai) {
-      vidurkis += nd;
-   }
-
-   vidurkis /= namuDarbai.size();
-
-   return vidurkis * 0.4 + egzaminas * 0.6;
+   return galutinis_;
 }
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
