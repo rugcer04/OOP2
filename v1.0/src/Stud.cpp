@@ -17,40 +17,48 @@
 //    return vidurkis * 0.4 + egzaminas * 0.6;
 // }
 
-double skaiciuotiGalutiniVidurkiu(){
-   if (namudarbai_.empty()){
-      galutinis_ = egzaminas_ * 6;
+double skaiciuotiGalutiniVidurkiu(Studentas &s){
+   const vector<int>& namudarbai = s.getNamudarbai();
+   int egzaminas = s.getEgzaminas();
+
+   if (namudarbai.empty()){
+      s.setGalutinis(egzaminas * 0.6);
    } else {
       double vidurkis = 0.0;
 
-      for (int nd : namudarbai_){
+      for (int nd : namudarbai){
          vidurkis += nd;
       }
 
-      vidurkis /= namudarbai_.size();
-      galutinis_ = vidurkis * 0.4 + egzaminas_ * 0.6;
+      vidurkis /= namudarbai.size();
+      s.setGalutinis(vidurkis * 0.4 + egzaminas * 0.6);
    }
 
-   return galutinis_;
+   return s.getGalutinis();
 }
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
-double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas) {
-   if (namuDarbai.empty()) {
-      return egzaminas * 0.6;
+double skaiciuotiGalutiniMediana(Studentas &s) {
+   const vector<int>& namudarbai = s.getNamudarbai();
+   int egzaminas = s.getEgzaminas();
+
+   if (namudarbai.empty()) {
+      s.setGalutinis(egzaminas * 0.6);
    }
 
-   sort(namuDarbai.begin(), namuDarbai.end()) ;
+   sort(namudarbai.begin(), namudarbai.end()) ;
    double mediana;
-   int size = namuDarbai.size();
+   int size = namudarbai.size();
 
    if (size % 2 == 0) {
-      mediana = (namuDarbai[size / 2 - 1] + namuDarbai[size / 2]) / 2.0; 
+      mediana = (namudarbai[size / 2 - 1] + namudarbai[size / 2]) / 2.0; 
    } else {
-      mediana = namuDarbai[size / 2];
+      mediana = namudarbai[size / 2];
    }
 
-   return mediana * 0.4 + egzaminas * 0.6;
+   s.setGalutinis(mediana * 0.4 + egzaminas * 0.6);
+
+   return s.getGalutinis();
 
 }
 
@@ -58,18 +66,34 @@ random_device rd_generator;
 uniform_int_distribution<int> Results_interval(1, 10);
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
-void generuotiDuomenis(Studentas& Lok, int ndSkaicius) {
-   Lok.namuDarbai.clear();
-   Lok.namuDarbai.reserve(ndSkaicius);
+// void generuotiDuomenis(Studentas& Lok, int ndSkaicius) {
+//    Lok.namuDarbai.clear();
+//    Lok.namuDarbai.reserve(ndSkaicius);
+
+//    cout << "Sugeneruoti namų darbų pažymiai: ";
+//    for (int i = 0; i < ndSkaicius; i++) {
+//       int pazymys = Results_interval(rd_generator);
+//       Lok.namuDarbai.push_back(pazymys);
+//       cout << pazymys << " ";
+//    }
+//    Lok.egzaminas = Results_interval(rd_generator);
+//    cout << "\nSugeneruotas egzamino rezultatas: " << Lok.egzaminas << endl;
+// }
+void generuotiDuomenis(Studentas& s, int ndSkaicius) {
+   vector<int> namudarbai;
+   namudarbai.reserve(ndSkaicius);
 
    cout << "Sugeneruoti namų darbų pažymiai: ";
    for (int i = 0; i < ndSkaicius; i++) {
       int pazymys = Results_interval(rd_generator);
-      Lok.namuDarbai.push_back(pazymys);
+      namudarbai.push_back(pazymys);
       cout << pazymys << " ";
    }
-   Lok.egzaminas = Results_interval(rd_generator);
-   cout << "\nSugeneruotas egzamino rezultatas: " << Lok.egzaminas << endl;
+   s.setNamuDarbai(namudarbai);
+
+   int egzaminas = Results_interval(rd_generator);
+   s.setEgzaminas(egzaminas);
+   cout << "\nSugeneruotas egzamino rezultatas: " << egzaminas << endl;
 }
 
 //funkcija ivesti studento varda ir pavarde

@@ -26,18 +26,20 @@ class Studentas{
       void setPavarde(const string& pavarde) { pavarde_ = pavarde; }
       void setNamuDarbai(const vector<int>& namudarbai) { namudarbai_ = namudarbai;}
       void setEgzaminas(const int& egzaminas) { egzaminas_ = egzaminas; }
+      void setGalutinis(const double& galutinis){ galutinis_ = galutinis;}
 
       // geteriai
       inline string getVardas() const { return vardas_; }
       inline string getPavarde() const { return pavarde_; }
       inline vector<int> getNamudarbai() const { return namudarbai_; }
       inline int getEgzaminas() const { return egzaminas_; }
+      inline double getGalutinis() const { return galutinis_; }
 
       // funckijos
-      double skaiciuotiGalutiniVidurkiu();
+      //double skaiciuotiGalutiniVidurkiu();
 };
 
-//struktura studento duomenims saugoti
+// //struktura studento duomenims saugoti
 // struct Studentas {
 //    string vardas;
 //    string pavarde;
@@ -48,12 +50,14 @@ class Studentas{
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 //double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas);
+double skaiciuotiGalutiniVidurkiu(Studentas& s);
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
-double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas);
+//double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas);
+double skaiciuotiGalutiniMediana(Studentas &s);
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
-void generuotiDuomenis(Studentas& Lok, int ndSkaicius);
+void generuotiDuomenis(Studentas& s, int ndSkaicius);
 
 //funkcija ivesti studento varda ir pavarde
 void ivestiVardaPavarde(Studentas& Lok);
