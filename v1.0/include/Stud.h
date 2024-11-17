@@ -60,16 +60,16 @@ double skaiciuotiGalutiniMediana(Studentas &s);
 void generuotiDuomenis(Studentas& s, int ndSkaicius);
 
 //funkcija ivesti studento varda ir pavarde
-void ivestiVardaPavarde(Studentas& Lok);
+void ivestiVardaPavarde(Studentas& s);
 
 //funkcija ivesti pazymius ranka
-void ivedimas(Studentas &Lok);
+void ivedimas(Studentas& s);
 
 //funkcija pasirinkti duomenu ivedimo buda
-void pasirinktiDuomenuIvedimoBuda(Studentas& Lok);
+void pasirinktiDuomenuIvedimoBuda(Studentas& s);
  
 //funkcija apskaiciuoti galutini bala
-void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas);
+void skaiciuotiGalutini(Studentas& s, char pasirinkimas);
 
 //funkcija isvesti duomenis
 template <typename Container>

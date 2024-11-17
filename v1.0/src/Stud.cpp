@@ -2,21 +2,6 @@
 #include "../include/Timer.h"
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
-// double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas) {
-//    if (namuDarbai.empty()) {
-//       return egzaminas * 0.6;
-//    }
-
-//    double vidurkis = 0.0;
-//    for (int nd: namuDarbai) {
-//       vidurkis += nd;
-//    }
-
-//    vidurkis /= namuDarbai.size();
-
-//    return vidurkis * 0.4 + egzaminas * 0.6;
-// }
-
 double skaiciuotiGalutiniVidurkiu(Studentas &s){
    const vector<int>& namudarbai = s.getNamudarbai();
    int egzaminas = s.getEgzaminas();
@@ -66,19 +51,6 @@ random_device rd_generator;
 uniform_int_distribution<int> Results_interval(1, 10);
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
-// void generuotiDuomenis(Studentas& Lok, int ndSkaicius) {
-//    Lok.namuDarbai.clear();
-//    Lok.namuDarbai.reserve(ndSkaicius);
-
-//    cout << "Sugeneruoti namų darbų pažymiai: ";
-//    for (int i = 0; i < ndSkaicius; i++) {
-//       int pazymys = Results_interval(rd_generator);
-//       Lok.namuDarbai.push_back(pazymys);
-//       cout << pazymys << " ";
-//    }
-//    Lok.egzaminas = Results_interval(rd_generator);
-//    cout << "\nSugeneruotas egzamino rezultatas: " << Lok.egzaminas << endl;
-// }
 void generuotiDuomenis(Studentas& s, int ndSkaicius) {
    vector<int> namudarbai;
    namudarbai.reserve(ndSkaicius);
@@ -97,21 +69,26 @@ void generuotiDuomenis(Studentas& s, int ndSkaicius) {
 }
 
 //funkcija ivesti studento varda ir pavarde
-void ivestiVardaPavarde(Studentas& Lok) {
+void ivestiVardaPavarde(Studentas& s) {
+   string vardas, pavarde;
    cout << "Įveskite studento vardą: " << endl;
-   cin >> Lok.vardas;
+   cin >> vardas;
    cout << "Įveskite studento pavardę: " << endl;
-   cin >> Lok.pavarde;
+   cin >> pavarde;
    cin.ignore();
+
+   s.setVardas(vardas);
+   s.setPavarde(pavarde);
 }
 
 //funkcija ivesti pazymius ranka
-void ivedimas(Studentas &Lok) {
-   ivestiVardaPavarde(Lok);
+void ivedimas(Studentas& s) {
+   ivestiVardaPavarde(s);
 
    cout << "Įveskite namų darbų pažymius (Kai baigsite įvedimą, spauskite dukart Enter klavišą):" << endl;
 
-   Lok.namuDarbai.clear();
+   vector<int> namudarbai;
+   //s.namuDarbai.clear();
    string input;
    int pazymys;
 
@@ -131,7 +108,8 @@ void ivedimas(Studentas &Lok) {
             throw out_of_range("Pažymys turi būti tarp 1 ir 10");
          }
 
-         Lok.namuDarbai.push_back(pazymys);
+         //Lok.namuDarbai.push_back(pazymys);
+         namudarbai.push_back(pazymys);
 
       } catch (const invalid_argument& e) {
          cout << "Klaida: įvesta ne skaičius. Bandykite dar kartą." << endl;
@@ -140,6 +118,8 @@ void ivedimas(Studentas &Lok) {
       }
 
    }
+
+   s.setNamuDarbai(namudarbai);
 
    cout << "Įveskite egzamino rezultatą: " << endl;
    while (true) {
@@ -155,7 +135,8 @@ void ivedimas(Studentas &Lok) {
             throw out_of_range("Egzamino pažymys turi būti tarp 1 ir 10");
          }
 
-         Lok.egzaminas = pazymys;
+         //Lok.egzaminas = pazymys;
+         s.setEgzaminas(pazymys);
          break;
 
       } catch (const invalid_argument& e) {
@@ -165,10 +146,10 @@ void ivedimas(Studentas &Lok) {
       }
    }
 
-};
+}
 
 //funkcija pasirinkti duomenu ivedimo buda
-void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
+void pasirinktiDuomenuIvedimoBuda(Studentas& s) {
    char pasirinkimas;
    while (true) {
       cout << "Ar norite įvesti pažymius rankiniu būdu (R) ar generuoti automatiškai (A)? ";
@@ -182,9 +163,9 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
    }
 
    if (pasirinkimas == 'R') {
-      ivedimas(Lok);
+      ivedimas(s);
    } else if (pasirinkimas == 'A') {
-      ivestiVardaPavarde(Lok);
+      ivestiVardaPavarde(s);
       cout << "Įveskite, kiek namų darbų pažymių sugeneruoti: ";
       //cin.ignore();
       
@@ -205,18 +186,17 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& Lok) {
          }
       }
 
-      generuotiDuomenis(Lok, ndSkaicius);
+      generuotiDuomenis(s, ndSkaicius);
    }
 
 }
 
-
 //funkcija apskaiciuoti galutini bala
-void skaiciuotiGalutini(Studentas& Lok, char pasirinkimas) {
+void skaiciuotiGalutini(Studentas& s, char pasirinkimas) {
      if (pasirinkimas == 'V') {
-      Lok.galutinis = skaiciuotiGalutiniVidurkiu(Lok.namuDarbai, Lok.egzaminas);
+      s.setGalutinis(skaiciuotiGalutiniVidurkiu(s));
    } else if (pasirinkimas == 'M') {
-      Lok.galutinis = skaiciuotiGalutiniMediana(Lok.namuDarbai, Lok.egzaminas);
+      s.getGalutinis(skaiciuotiGalutiniMediana(s));
    }
 }
 
