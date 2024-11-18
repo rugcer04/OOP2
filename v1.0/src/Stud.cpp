@@ -196,7 +196,7 @@ void skaiciuotiGalutini(Studentas& s, char pasirinkimas) {
      if (pasirinkimas == 'V') {
       s.setGalutinis(skaiciuotiGalutiniVidurkiu(s));
    } else if (pasirinkimas == 'M') {
-      s.getGalutinis(skaiciuotiGalutiniMediana(s));
+      s.setGalutinis(skaiciuotiGalutiniMediana(s));
    }
 }
 
@@ -210,8 +210,8 @@ void isvedimas(const Container& studentai, char pasirinkimas) {
    }
 
    cout << "-------------------------------------------------------------------" << endl;
-   for (const auto& Lok: studentai) {
-      cout << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << setw(20) << Lok.galutinis << setw(50) << left << &Lok << endl;
+   for (const auto& s: studentai) {
+      cout << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << setw(20) << s.getGalutinis() << setw(50) << left << &s << endl;
    }
 }
 
@@ -246,8 +246,9 @@ void nuskaitytiIsFailo(Container& studentai) {
 
    while (getline(failas, eilute)) {
       stringstream ss(eilute);
-      Studentas tempStudentas;
-      ss >> tempStudentas.pavarde >> tempStudentas.vardas; //pirmi du elementai eiluteje yra pavarde ir vardas, todel jie yra priskiriami pavardei ir vardui
+      string vardas, pavarde;
+      //Studentas tempStudentas;
+      ss >> pavarde >> vardas; //pirmi du elementai eiluteje yra pavarde ir vardas, todel jie yra priskiriami pavardei ir vardui
 
       string reiksme;
       vector<int> namuDarbai;
@@ -270,11 +271,15 @@ void nuskaitytiIsFailo(Container& studentai) {
 
       if (!namuDarbai.empty()) {
             //Paskutinis skaičius yra egzamino pažymys
-            tempStudentas.egzaminas = namuDarbai.back();
-            namuDarbai.pop_back();
-            tempStudentas.namuDarbai = move(namuDarbai);
+            Studentas tempS;
+            tempS.setVardas(vardas);
+            tempS.setPavarde(pavarde);
 
-            studentai.push_back(move(tempStudentas));
+            tempS.setEgzaminas(namuDarbai.back());
+            namuDarbai.pop_back();
+            tempS.setNamuDarbai(move(namuDarbai));
+
+            studentai.push_back(move(tempS));
       }
 
    }
@@ -301,8 +306,8 @@ void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string
    }
 
    failas << "----------------------------------------------" << endl;
-   for (const auto& Lok : studentai)  {
-      failas << left << setw(15) << Lok.pavarde << setw(15) << Lok.vardas << fixed << setprecision(2) << Lok.galutinis << endl;
+   for (const auto& s : studentai)  {
+      failas << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << s.getGalutinis() << endl;
    }
 
    failas.close();
