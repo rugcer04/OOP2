@@ -352,7 +352,7 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas) {
 template <typename Container>
 void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& vargsiukai, Container& kietiakai) {
    for (const auto& studentas : studentai) {
-      if (studentas.galutinis < 5.0) {
+      if (studentas.getGalutinis() < 5.0) {
          vargsiukai.push_back(studentas);
       } else {
          kietiakai.push_back(studentas);
@@ -366,17 +366,17 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
    if constexpr(is_same_v<Container, vector<Studentas>>) {
       sort(studentai.begin(), studentai.end(),
       [](const Studentas& a, const Studentas& b) {
-         return a.galutinis > b.galutinis;
+         return a.getGalutinis() > b.getGalutinis();
       });
 
    } else if constexpr (is_same_v<Container, list<Studentas>>){
       studentai.sort([](const Studentas& a, const Studentas& b){
-         return a.galutinis > b.galutinis;
+         return a.getGalutinis() > b.getGalutinis();
       });
    }
 
    while (!studentai.empty()){
-      if(studentai.back().galutinis < 5.0){
+      if(studentai.back().getGalutinis() < 5.0){
          vargsiukai.push_back(studentai.back());
          studentai.pop_back();
       } else {
@@ -420,11 +420,11 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
 template <typename Container>
 void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai){
    auto it = stable_partition(studentai.begin(), studentai.end(), [](const Studentas& s) {
-      return s.galutinis >= 5.0; 
+      return s.getGalutinis() >= 5.0; 
    });
 
    while(!studentai.empty()){
-      if(studentai.back().galutinis < 5.0){
+      if(studentai.back().getGalutinis() < 5.0){
          vargsiukai.push_back(studentai.back());
          studentai.pop_back();
       } else {
