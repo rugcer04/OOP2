@@ -458,34 +458,34 @@ void rusiuotiStudentus(Container& studentai, char parametras) {
          //Rusiavimas pagal varda
          sort(studentai.begin(), studentai.end(),
          [](const Studentas& a, const Studentas& b) {
-               if (a.vardas == b.vardas) {
-                  return a.pavarde < b.pavarde;
+               if (a.getVardas() == b.getVardas()) {
+                  return a.getPavarde() < b.getPavarde();
                }
-               return a.vardas < b.vardas;
+               return a.getVardas() < b.getVardas();
          }
       );
       } else if (parametras == 'P') {
          //Rusiavimas pagal pavarde
          sort(studentai.begin(), studentai.end(),
          [](const Studentas& a, const Studentas& b) {
-               if (a.pavarde == b.pavarde) {
-                  return a.vardas < b.vardas;
+               if (a.getPavarde() == b.getPavarde()) {
+                  return a.getVardas() < b.getVardas();
                }
-               return a.pavarde < b.pavarde;
+               return a.getPavarde() < b.getPavarde();
          }
       );
       } else if (parametras == 'M') {
          //Rusiavimas pagal galutini pazymi mazejimo tvarka
          sort(studentai.begin(), studentai.end(),
          [](const Studentas& a, const Studentas& b) {
-               return a.galutinis > b.galutinis;
+               return a.getGalutinis() > b.getGalutinis();
          }
       );
       } else if (parametras == 'D') {
          //Rusiavimas pagal galutini pazymi didejimo tvarka
          sort(studentai.begin(), studentai.end(),
          [](const Studentas& a, const Studentas& b) {
-               return a.galutinis < b.galutinis;
+               return a.getGalutinis() < b.getGalutinis();
          }
       );
       }
@@ -494,31 +494,31 @@ void rusiuotiStudentus(Container& studentai, char parametras) {
       if(parametras == 'V') {
          //Rusiavimas pagal varda
          studentai.sort([](const Studentas& a, const Studentas& b) {
-            if (a.vardas == b.vardas) {
-               return a.pavarde < b.pavarde;
+            if (a.getVardas() == b.getVardas()) {
+               return a.getPavarde() < b.getPavarde();
             }
-            return a.vardas < b.vardas;
+            return a.getVardas() < b.getVardas();
          }
       );
       } else if (parametras == 'P') {
          //Rusiavimas pagal pavarde
          studentai.sort([](const Studentas& a, const Studentas& b) {
-            if (a.pavarde == b.pavarde) {
-               return a.vardas < b.vardas;
+            if (a.getPavarde() == b.getPavarde()) {
+               return a.getVardas() < b.getVardas();
             }
-            return a.pavarde < b.pavarde;
+            return a.getPavarde() < b.getPavarde();
          }
       );
       } else if (parametras == 'M') {
          //Rusiavimas pagal galutini pazymi mazejimo tvarka
          studentai.sort([](const Studentas& a, const Studentas& b) {
-            return a.galutinis > b.galutinis;
+            return a.getGalutinis() > b.getGalutinis();
          }
       );
       } else if (parametras == 'D') {
          //Rusiavimas pagal galutini pazymi didejimo tvarka
          studentai.sort([](const Studentas& a, const Studentas& b) {
-            return a.galutinis < b.galutinis;
+            return a.getGalutinis() < b.getGalutinis();
          }
       );
       }
