@@ -35,8 +35,9 @@ class Studentas{
       inline int getEgzaminas() const { return egzaminas_; }
       inline double getGalutinis() const { return galutinis_; }
 
-      // funckijos
-      //double skaiciuotiGalutiniVidurkiu();
+      // metodai
+      void skaiciuotiGalutiniVidurkiu();
+      void skaiciuotiGalutiniMediana();
 };
 
 // //struktura studento duomenims saugoti
@@ -50,11 +51,11 @@ class Studentas{
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
 //double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas);
-double skaiciuotiGalutiniVidurkiu(Studentas& s);
+//double skaiciuotiGalutiniVidurkiu(Studentas& s);
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
 //double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas);
-double skaiciuotiGalutiniMediana(Studentas &s);
+//double skaiciuotiGalutiniMediana(Studentas &s);
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
 void generuotiDuomenis(Studentas& s, int ndSkaicius);

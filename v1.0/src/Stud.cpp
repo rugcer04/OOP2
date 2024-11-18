@@ -2,48 +2,67 @@
 #include "../include/Timer.h"
 
 //funkcija galutiniam balui apskaiciuoti naudojant vidurki
-double skaiciuotiGalutiniVidurkiu(Studentas &s){
-   const vector<int>& namudarbai = s.getNamudarbai();
-   int egzaminas = s.getEgzaminas();
+// double skaiciuotiGalutiniVidurkiu(Studentas &s){
+//    const vector<int>& namudarbai = s.getNamudarbai();
+//    int egzaminas = s.getEgzaminas();
 
-   if (namudarbai.empty()){
-      s.setGalutinis(egzaminas * 0.6);
+//    if (namudarbai.empty()){
+//       s.setGalutinis(egzaminas * 0.6);
+//    } else {
+//       double vidurkis = 0.0;
+
+//       for (int nd : namudarbai){
+//          vidurkis += nd;
+//       }
+
+//       vidurkis /= namudarbai.size();
+//       s.setGalutinis(vidurkis * 0.4 + egzaminas * 0.6);
+//    }
+
+//    return s.getGalutinis();
+// }
+void Studentas::skaiciuotiGalutiniVidurkiu(){
+   //const vector<int>& namudarbai = s.getNamudarbai();
+   //int egzaminas = s.getEgzaminas();
+
+   if (namudarbai_.empty()){
+      galutinis_ = egzaminas_ * 0.6;
    } else {
       double vidurkis = 0.0;
 
-      for (int nd : namudarbai){
+      for (int nd : namudarbai_){
          vidurkis += nd;
       }
 
-      vidurkis /= namudarbai.size();
-      s.setGalutinis(vidurkis * 0.4 + egzaminas * 0.6);
+      vidurkis /= namudarbai_.size();
+      galutinis_ = vidurkis * 0.4 + egzaminas_ * 0.6;
    }
 
-   return s.getGalutinis();
+   //return s.getGalutinis();
 }
 
 //funkcija galutiniam balui apskaiciuoti naudojant mediana
-double skaiciuotiGalutiniMediana(Studentas &s) {
-   const vector<int>& namudarbai = s.getNamudarbai();
-   int egzaminas = s.getEgzaminas();
+void Studentas::skaiciuotiGalutiniMediana() {
+   //const vector<int>& namudarbai = s.getNamudarbai();
+   //int egzaminas = s.getEgzaminas();
 
-   if (namudarbai.empty()) {
-      s.setGalutinis(egzaminas * 0.6);
+   if (namudarbai_.empty()) {
+      galutinis_ = egzaminas_ * 0.6;
    }
 
-   sort(namudarbai.begin(), namudarbai.end()) ;
+   sort(namudarbai_.begin(), namudarbai_.end()) ;
    double mediana;
-   int size = namudarbai.size();
+   int size = namudarbai_.size();
 
    if (size % 2 == 0) {
-      mediana = (namudarbai[size / 2 - 1] + namudarbai[size / 2]) / 2.0; 
+      mediana = (namudarbai_[size / 2 - 1] + namudarbai_[size / 2]) / 2.0; 
    } else {
-      mediana = namudarbai[size / 2];
+      mediana = namudarbai_[size / 2];
    }
 
-   s.setGalutinis(mediana * 0.4 + egzaminas * 0.6);
-
-   return s.getGalutinis();
+   galutinis_ = mediana * 0.4 + egzaminas_ * 0.6;
+   //s.setGalutinis(mediana * 0.4 + egzaminas * 0.6);
+   //return s.getGalutinis();
 
 }
 
@@ -194,9 +213,9 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& s) {
 //funkcija apskaiciuoti galutini bala
 void skaiciuotiGalutini(Studentas& s, char pasirinkimas) {
      if (pasirinkimas == 'V') {
-      s.setGalutinis(skaiciuotiGalutiniVidurkiu(s));
+      s.skaiciuotiGalutiniVidurkiu();
    } else if (pasirinkimas == 'M') {
-      s.setGalutinis(skaiciuotiGalutiniMediana(s));
+      s.skaiciuotiGalutiniMediana();
    }
 }
 
