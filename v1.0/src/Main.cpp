@@ -1,6 +1,7 @@
 #include "../include/Lib.h"
 #include "../include/Stud.h"
 #include "../include/Timer.h"
+#include "../include/Studentas.h"
 
 int main() {
     char konteinerioPasirinkimas;

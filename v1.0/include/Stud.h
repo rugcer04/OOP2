@@ -3,42 +3,8 @@
 #define STUD_H_INCLUDED
 
 #include "Lib.h"
-using std::istream;
+#include "Studentas.h"
 
-// studento klase
-class Studentas{
-   private:
-      string vardas_;
-      string pavarde_;
-      vector<int> namudarbai_;
-      int egzaminas_;
-      double galutinis_;
-
-   public:
-      // konstruktoriai
-      Studentas() : egzaminas_(0), galutinis_(0.0) { }
-      Studentas(const string& vardas, const string& pavarde, const vector<int> namudarbai, double egzaminas):
-      vardas_(vardas), pavarde_(pavarde), namudarbai_(namudarbai), egzaminas_(egzaminas), galutinis_(0.0) { }
-      // Studentas(istream& is); //constructor that takes an input stream, allowing the student data to be read from a stream
-
-      // seteriai
-      void setVardas(const string& vardas) { vardas_ = vardas; }
-      void setPavarde(const string& pavarde) { pavarde_ = pavarde; }
-      void setNamuDarbai(const vector<int>& namudarbai) { namudarbai_ = namudarbai;}
-      void setEgzaminas(const int& egzaminas) { egzaminas_ = egzaminas; }
-      void setGalutinis(const double& galutinis){ galutinis_ = galutinis;}
-
-      // geteriai
-      inline string getVardas() const { return vardas_; }
-      inline string getPavarde() const { return pavarde_; }
-      inline vector<int> getNamudarbai() const { return namudarbai_; }
-      inline int getEgzaminas() const { return egzaminas_; }
-      inline double getGalutinis() const { return galutinis_; }
-
-      // metodai
-      void skaiciuotiGalutiniVidurkiu();
-      void skaiciuotiGalutiniMediana();
-};
 
 // //struktura studento duomenims saugoti
 // struct Studentas {
@@ -48,14 +14,6 @@ class Studentas{
 //    int egzaminas;
 //    double galutinis;
 // };
-
-//funkcija galutiniam balui apskaiciuoti naudojant vidurki
-//double skaiciuotiGalutiniVidurkiu(const vector<int>& namuDarbai, int egzaminas);
-//double skaiciuotiGalutiniVidurkiu(Studentas& s);
-
-//funkcija galutiniam balui apskaiciuoti naudojant mediana
-//double skaiciuotiGalutiniMediana(vector<int>& namuDarbai, int egzaminas);
-//double skaiciuotiGalutiniMediana(Studentas &s);
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
 void generuotiDuomenis(Studentas& s, int ndSkaicius);

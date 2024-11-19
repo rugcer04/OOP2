@@ -1,70 +1,6 @@
 #include "../include/Stud.h"
 #include "../include/Timer.h"
-
-//funkcija galutiniam balui apskaiciuoti naudojant vidurki
-// double skaiciuotiGalutiniVidurkiu(Studentas &s){
-//    const vector<int>& namudarbai = s.getNamudarbai();
-//    int egzaminas = s.getEgzaminas();
-
-//    if (namudarbai.empty()){
-//       s.setGalutinis(egzaminas * 0.6);
-//    } else {
-//       double vidurkis = 0.0;
-
-//       for (int nd : namudarbai){
-//          vidurkis += nd;
-//       }
-
-//       vidurkis /= namudarbai.size();
-//       s.setGalutinis(vidurkis * 0.4 + egzaminas * 0.6);
-//    }
-
-//    return s.getGalutinis();
-// }
-void Studentas::skaiciuotiGalutiniVidurkiu(){
-   //const vector<int>& namudarbai = s.getNamudarbai();
-   //int egzaminas = s.getEgzaminas();
-
-   if (namudarbai_.empty()){
-      galutinis_ = egzaminas_ * 0.6;
-   } else {
-      double vidurkis = 0.0;
-
-      for (int nd : namudarbai_){
-         vidurkis += nd;
-      }
-
-      vidurkis /= namudarbai_.size();
-      galutinis_ = vidurkis * 0.4 + egzaminas_ * 0.6;
-   }
-
-   //return s.getGalutinis();
-}
-
-//funkcija galutiniam balui apskaiciuoti naudojant mediana
-void Studentas::skaiciuotiGalutiniMediana() {
-   //const vector<int>& namudarbai = s.getNamudarbai();
-   //int egzaminas = s.getEgzaminas();
-
-   if (namudarbai_.empty()) {
-      galutinis_ = egzaminas_ * 0.6;
-   }
-
-   sort(namudarbai_.begin(), namudarbai_.end()) ;
-   double mediana;
-   int size = namudarbai_.size();
-
-   if (size % 2 == 0) {
-      mediana = (namudarbai_[size / 2 - 1] + namudarbai_[size / 2]) / 2.0; 
-   } else {
-      mediana = namudarbai_[size / 2];
-   }
-
-   galutinis_ = mediana * 0.4 + egzaminas_ * 0.6;
-   //s.setGalutinis(mediana * 0.4 + egzaminas * 0.6);
-   //return s.getGalutinis();
-
-}
+#include "../include/Studentas.h"
 
 random_device rd_generator;
 uniform_int_distribution<int> Results_interval(1, 10);
@@ -80,7 +16,8 @@ void generuotiDuomenis(Studentas& s, int ndSkaicius) {
       namudarbai.push_back(pazymys);
       cout << pazymys << " ";
    }
-   s.setNamuDarbai(namudarbai);
+   //s.setNamuDarbai(namudarbai);
+   s.setNamuDarbai(move(namudarbai));
 
    int egzaminas = Results_interval(rd_generator);
    s.setEgzaminas(egzaminas);
@@ -263,10 +200,16 @@ void nuskaitytiIsFailo(Container& studentai) {
    string eilute;
    getline(failas, eilute);
 
+   Container tempStudentai;
+
+   if constexpr (is_same_v<Container, vector<Studentas>>) {
+      //studentai.reserve(10000000);
+      tempStudentai.reserve(10000000);
+   }
+
    while (getline(failas, eilute)) {
       stringstream ss(eilute);
       string vardas, pavarde;
-      //Studentas tempStudentas;
       ss >> pavarde >> vardas; //pirmi du elementai eiluteje yra pavarde ir vardas, todel jie yra priskiriami pavardei ir vardui
 
       string reiksme;
@@ -277,7 +220,8 @@ void nuskaitytiIsFailo(Container& studentai) {
             int pazymys = stoi(reiksme);
 
             if (pazymys >= 1 && pazymys <= 10) {
-               namuDarbai.push_back(pazymys);
+               namuDarbai.push_back(move(pazymys));
+               //namuDarbai.push_back(pazymys);
             } else {
                cerr << "Netinkamas pažymys (" << pazymys << "), praleidžiama reikšmė" << endl;
             }
@@ -289,25 +233,85 @@ void nuskaitytiIsFailo(Container& studentai) {
       }
 
       if (!namuDarbai.empty()) {
-            //Paskutinis skaičius yra egzamino pažymys
-            Studentas tempS;
-            tempS.setVardas(vardas);
-            tempS.setPavarde(pavarde);
+         //Paskutinis skaičius yra egzamino pažymys
+         Studentas tempS;
+         tempS.setVardas(vardas);
+         tempS.setPavarde(pavarde);
 
-            tempS.setEgzaminas(namuDarbai.back());
-            namuDarbai.pop_back();
-            tempS.setNamuDarbai(move(namuDarbai));
+         tempS.setEgzaminas(namuDarbai.back());
+         namuDarbai.pop_back();
+         tempS.setNamuDarbai(move(namuDarbai));
 
-            studentai.push_back(move(tempS));
+         tempStudentai.push_back(move(tempS));
+         //studentai.push_back(move(tempS));
       }
 
    }
    failas.close();
+
+   studentai = move(tempStudentai);
+
+   // if constexpr (is_same_v<Container, vector<Studentas>>) {
+   //    //studentai.shrink_to_fit();
+   //    studentai.shrink_to_fit(); // Release unused capacity
+   // }
+
    cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
 
 }
 template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&);
 template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&);
+
+
+// template <typename Container>
+// void nuskaitytiIsFailo(Container& studentai) {
+//    string failoPavadinimas;
+//    ifstream failas;
+
+//    while (true) {
+//       try {
+//          cout << "Įveskite failo pavadinimą: ";
+//          cin >> failoPavadinimas;
+//          failas.open(failoPavadinimas);
+
+//          if (!failas) {
+//             throw runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
+//          }
+
+//          break;
+
+//       } catch (const std::runtime_error& e) {
+//          cerr << e.what() << " Bandykite dar kartą." << endl;
+//       }
+//    }
+
+//    Timer t1;
+
+//    string eilute;
+//    getline(failas, eilute);
+
+//    Container tempStudentai;
+
+//    if constexpr (is_same_v<Container, vector<Studentas>>) {
+//       tempStudentai.reserve(10000000);
+//    }
+
+//    while (getline(failas, eilute)) {
+//       std::istringstream ss(eilute);
+//       //When you call tempStudentai.emplace_back(ss);, the std::vector (or other container) constructs a Studentas object directly in its memory.
+//       tempStudentai.emplace_back(ss); // Use stream constructor
+//    }
+
+//    failas.close();
+
+//    studentai = move(tempStudentai);
+
+//    std::cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
+// }
+// template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&);
+// template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&);
+
+
 
 //funckija irasyti rezultatus i faila
 template <typename Container>
@@ -386,13 +390,19 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
       sort(studentai.begin(), studentai.end(),
       [](const Studentas& a, const Studentas& b) {
          return a.getGalutinis() > b.getGalutinis();
+         //return a.didesnis(b);
       });
 
    } else if constexpr (is_same_v<Container, list<Studentas>>){
       studentai.sort([](const Studentas& a, const Studentas& b){
          return a.getGalutinis() > b.getGalutinis();
+         //return a.didesnis(b);
       });
    }
+
+   // if constexpr (is_same_v<Container, std::vector<Studentas>>) {
+   //    vargsiukai.reserve(studentai.size() / 2);
+   // }
 
    while (!studentai.empty()){
       if(studentai.back().getGalutinis() < 5.0){
@@ -402,40 +412,9 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
          break;
       }
    }
-   // auto it = studentai.begin();
-   // while (it != studentai.end()) {
-   //    if (it->galutinis < 5.0) {
-   //       vargsiukai.push_back(*it);
-   //       it = studentai.erase(it);
-   //    } else {
-   //       ++it;
-   //    }
-   // }
 }
 
 //funkcija suskirstyti studentus i dvi grupe (trecia strategija)
-// template <typename Container>
-// void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai){
-//    if constexpr(is_same_v<Container, vector<Studentas>>) {
-//       auto it = stable_partition(studentai.begin(), studentai.end(), [](const Studentas& Lok){
-//          return Lok.galutinis < 5.0;
-//       });
-//       vargsiukai.assign(studentai.begin(), it);
-//       kietiakai.assign(it, studentai.end());   
-//    } else if constexpr (is_same_v<Container, list<Studentas>>){
-//       auto it = studentai.begin();
-//       while (it != studentai.end()) {
-//          if (it->galutinis < 5.0) {
-//             vargsiukai.push_back(*it);
-//             it = studentai.erase(it);
-//          } else {
-//             ++it;
-//          }
-//       }
-//    }
-// }
-
-//TRECIA STRATEGIJA PAGAL 2
 template <typename Container>
 void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai){
    auto it = stable_partition(studentai.begin(), studentai.end(), [](const Studentas& s) {
@@ -451,28 +430,13 @@ void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiu
       }
    }
 
-   // while(it != studentai.end()){
-   //    if(it -> galutinis < 5.0){
-   //       vargsiukai.push_back(*it);
-   //       studentai.pop_back();
-   //    } else {
-   //       break;
-   //    }
-   // }
-
-   //vargsiukai.insert(vargsiukai.end(), it, studentai.end());
-   // while (it != studentai.end() && it->galutinis < 5.0) {
-   //    vargsiukai.push_back(*it);
-   //    studentai.pop_back(); 
-   // }
-
 }
 
 //funkcija rusiuoti studentus
 template <typename Container>
 void rusiuotiStudentus(Container& studentai, char parametras) {
    //vektoriaus rusiavimas
-   if constexpr (is_same_v<Container, vector<Studentas>>) { //patikrinama ar konteineris yra vektorius
+   if constexpr (is_same_v<Container, vector<Studentas>>) {
       if(parametras == 'V') {
          //Rusiavimas pagal varda
          sort(studentai.begin(), studentai.end(),
