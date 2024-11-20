@@ -147,6 +147,7 @@ void pasirinktiDuomenuIvedimoBuda(Studentas& s) {
 
 }
 
+
 //funkcija apskaiciuoti galutini bala
 void skaiciuotiGalutini(Studentas& s, char pasirinkimas) {
      if (pasirinkimas == 'V') {
@@ -200,13 +201,6 @@ void nuskaitytiIsFailo(Container& studentai) {
    string eilute;
    getline(failas, eilute);
 
-   Container tempStudentai;
-
-   if constexpr (is_same_v<Container, vector<Studentas>>) {
-      //studentai.reserve(10000000);
-      tempStudentai.reserve(10000000);
-   }
-
    while (getline(failas, eilute)) {
       stringstream ss(eilute);
       string vardas, pavarde;
@@ -220,8 +214,7 @@ void nuskaitytiIsFailo(Container& studentai) {
             int pazymys = stoi(reiksme);
 
             if (pazymys >= 1 && pazymys <= 10) {
-               namuDarbai.push_back(move(pazymys));
-               //namuDarbai.push_back(pazymys);
+               namuDarbai.push_back(pazymys);
             } else {
                cerr << "Netinkamas pažymys (" << pazymys << "), praleidžiama reikšmė" << endl;
             }
@@ -232,29 +225,17 @@ void nuskaitytiIsFailo(Container& studentai) {
          }
       }
 
+      int egzaminas;
+
       if (!namuDarbai.empty()) {
-         //Paskutinis skaičius yra egzamino pažymys
-         Studentas tempS;
-         tempS.setVardas(vardas);
-         tempS.setPavarde(pavarde);
-
-         tempS.setEgzaminas(namuDarbai.back());
+         egzaminas = namuDarbai.back();
          namuDarbai.pop_back();
-         tempS.setNamuDarbai(move(namuDarbai));
-
-         tempStudentai.push_back(move(tempS));
-         //studentai.push_back(move(tempS));
       }
+
+      studentai.emplace_back(Studentas(vardas, pavarde, namuDarbai, egzaminas));
 
    }
    failas.close();
-
-   studentai = move(tempStudentai);
-
-   // if constexpr (is_same_v<Container, vector<Studentas>>) {
-   //    //studentai.shrink_to_fit();
-   //    studentai.shrink_to_fit(); // Release unused capacity
-   // }
 
    cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
 
@@ -508,6 +489,8 @@ void rusiuotiStudentus(Container& studentai, char parametras) {
    }
 }
 
+
+
 //funckija vartotojui pasirinkti galutinio balo matavimo buda
 char pasirinktiGalutinioskaiciavimoMetoda() {
    char pasirinkimas;
@@ -582,6 +565,7 @@ char pasirinktiDuomenuIvedima() {
    return duomenuIvedimoBudas;
 }
 
+#include <memory>
 //funckija iskviesti rankini ivedimo buda 
 template <typename Container>
 void ivedimasRanka(Container& studentai) {
@@ -605,9 +589,9 @@ void ivedimasRanka(Container& studentai) {
    }
 
    for (int i = 0; i < studentuSk; i++) {
-      typename Container::value_type studentas;
-      pasirinktiDuomenuIvedimoBuda(studentas);
-      studentai.push_back(studentas);
+      auto studentas = std::make_shared<Studentas>( "", "", vector<int>(), 0.0);
+      pasirinktiDuomenuIvedimoBuda(*studentas);
+      studentai.push_back(*studentas);
    }
 }
 template void ivedimasRanka<vector<Studentas>>(vector<Studentas>&);

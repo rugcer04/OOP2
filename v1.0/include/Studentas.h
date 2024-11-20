@@ -13,10 +13,11 @@ class Studentas{
 
    public:
       // konstruktoriai
-      Studentas() : egzaminas_(0), galutinis_(0.0) { }
-      Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas):
-      vardas_(vardas), pavarde_(pavarde), namudarbai_(move(namudarbai)), egzaminas_(egzaminas), galutinis_(0.0) { }
+      // Studentas() : egzaminas_(0), galutinis_(0.0) { }
+      // Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas):
+      // vardas_(vardas), pavarde_(pavarde), namudarbai_(move(namudarbai)), egzaminas_(egzaminas), galutinis_(0.0) { }
       //Studentas(istream& is); //constructor that takes an input stream, allowing the student data to be read from a stream
+      Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas);
       ~Studentas();
 
       // seteriai
@@ -37,9 +38,6 @@ class Studentas{
       void skaiciuotiGalutiniVidurkiu();
       void skaiciuotiGalutiniMediana();
 
-      // bool didesnis(const Studentas& kitas) const {
-      //    return galutinis_ > kitas.galutinis_;
-      // }
 };
 
 #endif

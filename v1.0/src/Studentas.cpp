@@ -1,6 +1,14 @@
 #include "../include/Stud.h"
 #include "../include/Studentas.h"
 
+Studentas::Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas){
+   vardas_ = vardas;
+   pavarde_ = pavarde;
+   namudarbai_ = namudarbai;
+   egzaminas_ = egzaminas;
+   galutinis_ = 0;
+}
+
 //destruktorius
 Studentas::~Studentas(){
    vardas_.clear();
