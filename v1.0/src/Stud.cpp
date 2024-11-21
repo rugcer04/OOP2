@@ -2,48 +2,12 @@
 #include "../include/Timer.h"
 #include "../include/Studentas.h"
 
-//random_device rd_generator;
-//uniform_int_distribution<int> Results_interval(1, 10);
-
-//funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
-// void generuotiDuomenis(Studentas& s, int ndSkaicius) {
-//    vector<int> namudarbai;
-//    namudarbai.reserve(ndSkaicius);
-
-//    cout << "Sugeneruoti namų darbų pažymiai: ";
-//    for (int i = 0; i < ndSkaicius; i++) {
-//       int pazymys = Results_interval(rd_generator);
-//       namudarbai.push_back(pazymys);
-//       cout << pazymys << " ";
-//    }
-//    //s.setNamuDarbai(namudarbai);
-//    s.setNamuDarbai(move(namudarbai));
-
-//    int egzaminas = Results_interval(rd_generator);
-//    s.setEgzaminas(egzaminas);
-//    cout << "\nSugeneruotas egzamino rezultatas: " << egzaminas << endl;
-// }
-
-//funkcija ivesti studento varda ir pavarde
-// void ivestiVardaPavarde(Studentas& s) {
-//    string vardas, pavarde;
-//    cout << "Įveskite studento vardą: " << endl;
-//    cin >> vardas;
-//    cout << "Įveskite studento pavardę: " << endl;
-//    cin >> pavarde;
-//    cin.ignore();
-
-//    s.setVardas(vardas);
-//    s.setPavarde(pavarde);
-// }
-
 //funkcija ivesti pazymius ranka
 template <typename Container>
 void ivedimas(Container& studentai, string vardas, string pavarde) {
    cout << "Įveskite namų darbų pažymius (Kai baigsite įvedimą, spauskite dukart Enter klavišą):" << endl;
 
    vector<int> namudarbai;
-   //s.namuDarbai.clear();
    string input;
    int pazymys;
 
@@ -73,8 +37,6 @@ void ivedimas(Container& studentai, string vardas, string pavarde) {
 
    }
 
-   //s.setNamuDarbai(namudarbai);
-
    cout << "Įveskite egzamino rezultatą: " << endl;
    while (true) {
       cin >> input;
@@ -90,8 +52,6 @@ void ivedimas(Container& studentai, string vardas, string pavarde) {
          }
 
          studentai.push_back(Studentas(vardas, pavarde, namudarbai, pazymys));
-         //Lok.egzaminas = pazymys;
-         //s.setEgzaminas(pazymys);
          break;
 
       } catch (const invalid_argument& e) {
@@ -104,95 +64,6 @@ void ivedimas(Container& studentai, string vardas, string pavarde) {
 }
 template void ivedimas<vector<Studentas>>(vector<Studentas>&, string, string);
 template void ivedimas<list<Studentas>>(list<Studentas>&, string, string);
-
-//funkcija pasirinkti duomenu ivedimo buda
-//void pasirinktiDuomenuIvedimoBuda(Studentas& s) {
-   // char pasirinkimas;
-   // while (true) {
-   //    cout << "Ar norite įvesti pažymius rankiniu būdu (R) ar generuoti automatiškai (A)? ";
-   //    cin >> pasirinkimas;
-   //    pasirinkimas = toupper(pasirinkimas);
-   //    if (pasirinkimas == 'R' || pasirinkimas == 'A') {
-   //       break;
-   //    } else {
-   //       cout << "Neteisinga įvestis, bandykite dar kartą.\n";
-   //    }
-   // }
-
-   // if (pasirinkimas == 'R') {
-   //    ivedimas(s);
-   // } else if (pasirinkimas == 'A') {
-   //    ivestiVardaPavarde(s);
-   //    cout << "Įveskite, kiek namų darbų pažymių sugeneruoti: ";
-   //    //cin.ignore();
-      
-   //    int ndSkaicius;
-   //    string input;
-
-   //    while(true) {
-   //       getline(cin, input);
-
-   //       try{
-   //          stringstream ss(input);
-   //          if (!(ss >> ndSkaicius)) {
-   //             throw invalid_argument("įvestis nėra skaičius. ");
-   //          }
-   //          break;
-   //       } catch (const invalid_argument &e){
-   //          cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
-   //       }
-   //    }
-
-   //    Studentas(s.getVardas(), s.getPavarde(), ndSkaicius);
-   //    //generuotiDuomenis(s, ndSkaicius);
-//   }
-
-//}
-
-// template <typename Container>
-// void pasirinktiDuomenuIvedimoBuda(const Container& studentai, Studentas& s) {
-//    char pasirinkimas;
-//    while (true) {
-//       cout << "Ar norite įvesti pažymius rankiniu būdu (R) ar generuoti automatiškai (A)? ";
-//       cin >> pasirinkimas;
-//       pasirinkimas = toupper(pasirinkimas);
-//       if (pasirinkimas == 'R' || pasirinkimas == 'A') {
-//          break;
-//       } else {
-//          cout << "Neteisinga įvestis, bandykite dar kartą.\n";
-//       }
-//    }
-
-//    if (pasirinkimas == 'R') {
-//       ivedimas(s);
-//    } else if (pasirinkimas == 'A') {
-//       ivestiVardaPavarde(s);
-//       cout << "Įveskite, kiek namų darbų pažymių sugeneruoti: ";
-//       //cin.ignore();
-      
-//       int ndSkaicius;
-//       string input;
-
-//       while(true) {
-//          getline(cin, input);
-
-//          try{
-//             stringstream ss(input);
-//             if (!(ss >> ndSkaicius)) {
-//                throw invalid_argument("įvestis nėra skaičius. ");
-//             }
-//             break;
-//          } catch (const invalid_argument &e){
-//             cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
-//          }
-//       }
-
-//       Studentas(s.getVardas(), s.getPavarde(), ndSkaicius);
-//       //generuotiDuomenis(s, ndSkaicius);
-//    }
-
-// }
-
 
 //funkcija apskaiciuoti galutini bala
 void skaiciuotiGalutini(Studentas& s, char pasirinkimas) {
@@ -420,19 +291,13 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
       sort(studentai.begin(), studentai.end(),
       [](const Studentas& a, const Studentas& b) {
          return a.getGalutinis() > b.getGalutinis();
-         //return a.didesnis(b);
       });
 
    } else if constexpr (is_same_v<Container, list<Studentas>>){
       studentai.sort([](const Studentas& a, const Studentas& b){
          return a.getGalutinis() > b.getGalutinis();
-         //return a.didesnis(b);
       });
    }
-
-   // if constexpr (is_same_v<Container, std::vector<Studentas>>) {
-   //    vargsiukai.reserve(studentai.size() / 2);
-   // }
 
    while (!studentai.empty()){
       if(studentai.back().getGalutinis() < 5.0){
@@ -538,8 +403,6 @@ void rusiuotiStudentus(Container& studentai, char parametras) {
    }
 }
 
-
-
 //funckija vartotojui pasirinkti galutinio balo matavimo buda
 char pasirinktiGalutinioskaiciavimoMetoda() {
    char pasirinkimas;
@@ -552,6 +415,7 @@ char pasirinktiGalutinioskaiciavimoMetoda() {
    return pasirinkimas;
 }
 
+//funkcija pasirinkti rusiavimo parametra
 char pasirinktiRusiavimoParametra() {
    char parametras;
    while (true) {
@@ -614,41 +478,7 @@ char pasirinktiDuomenuIvedima() {
    return duomenuIvedimoBudas;
 }
 
-//#include <memory>
-// //funckija iskviesti rankini ivedimo buda 
-// template <typename Container>
-// void ivedimasRanka(Container& studentai) {
-//    cout << "Įveskite studentų skaičių: ";
-//    cin.ignore();
-//    string input;
-//    int studentuSk;
-
-//    while(true) {
-//       getline(cin, input);
-
-//       try{
-//          stringstream ss(input);
-//          if (!(ss >> studentuSk)) {
-//             throw invalid_argument("įvestis nėra skaičius. ");
-//          }
-//          break;
-//       } catch (const invalid_argument &e){
-//          cout << "Klaida: " << e.what() << "Bandykite dar kartą\n";
-//       }
-//    }
-
-//    for (int i = 0; i < studentuSk; i++) {
-//       typename Container::value_type studentas;
-//       pasirinktiDuomenuIvedimoBuda(studentas);
-//       // auto studentas = std::make_shared<Studentas>( "", "", vector<int>(), 0.0);
-//       // pasirinktiDuomenuIvedimoBuda(*studentas);
-//       // studentai.push_back(*studentas);
-//    }
-// }
-// template void ivedimasRanka<vector<Studentas>>(vector<Studentas>&);
-// template void ivedimasRanka<list<Studentas>>(list<Studentas>&);
-
-//funckija iskviesti rankini ivedimo buda 
+// funkcija ivesti studentu duomenis ranka
 template <typename Container>
 void ivedimasRanka(Container& studentai) {
    cout << "Įveskite studentų skaičių: ";
@@ -675,12 +505,9 @@ void ivedimasRanka(Container& studentai) {
 
       cout << "Įveskite studento vardą: " << endl;
       cin >> vardas;
-      //s.setVardas(vardas);
 
       cout << "Įveskite studento pavardę: " << endl;
       cin >> pavarde;
-      //s.setPavarde(pavarde);
-
       //cin.ignore();
 
       char pasirinkimas;
@@ -726,7 +553,7 @@ void ivedimasRanka(Container& studentai) {
 template void ivedimasRanka<vector<Studentas>>(vector<Studentas>&);
 template void ivedimasRanka<list<Studentas>>(list<Studentas>&);
 
-//funckija pasirinkti studentu dalijimo strategija
+//funckija skirstyti studentus i vargsiukus ir kietiakus, surusiuoti pagal pasirinkta parametra ir isvesti i failus pagal pasirinkta strategija
 template <typename Container>
 void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas){
    //Skirstyti studentus i vargsiukus ir kietiakus ir isvesti i failus pagal pasirinkta strategija

@@ -57,14 +57,6 @@ int main() {
                 skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
-            // //Pasirenkame studentu rusiavimo parametra
-            // pasirinktiRusiavimoParametra(studentai);
-
-            // //Isvedame rezultatus i faila
-            // string failoPavadinimas;
-            // failoPavadinimas = "studrez.txt";
-            // isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-
             //Skirstyti studentus i vargsiukus ir kietiakus, surusiavimas pagal pasirinkta parametra ir isvesti i failus pagal pasirinkta strategija
             duomenuIsvedimasPagalStrategija(studentai, pasirinkimas); 
 
@@ -128,11 +120,6 @@ int main() {
             for (Studentas& studentas : studentai) {
                 skaiciuotiGalutini(studentas, pasirinkimas);
             }
-
-            // //Isvedame rezultatus i faila
-            // string failoPavadinimas;
-            // failoPavadinimas = "studrez.txt";
-            // isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
 
             //Skirstyti studentus i vargsiukus ir kietiakus, surusiavimas pagal pasirinkta parametra ir isvesti i failus pagal pasirinkta strategija
             duomenuIsvedimasPagalStrategija(studentai, pasirinkimas);

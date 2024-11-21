@@ -9,6 +9,7 @@ Studentas::Studentas(const string& vardas, const string& pavarde, const vector<i
    galutinis_ = 0.0;
 }
 
+//konstruktorius generuojantis ivertinimus
 Studentas::Studentas(const string& vardas, const string& pavarde, int ndSkaicius){
    random_device rd_generator;
    uniform_int_distribution<int> Results_interval(1, 10);

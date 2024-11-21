@@ -15,20 +15,9 @@
 //    double galutinis;
 // };
 
-//funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
-//void generuotiDuomenis(Studentas& s, int ndSkaicius);
-
-//funkcija ivesti studento varda ir pavarde
-//void ivestiVardaPavarde(Studentas& s);
-
 //funkcija ivesti pazymius ranka
-//void ivedimas(Studentas& s);
 template <typename Container>
 void ivedimas(Container& studentai, string vardas, string pavarde);
-
-//funkcija pasirinkti duomenu ivedimo buda
-//void pasirinktiDuomenuIvedimoBuda(const Container& studentai, Studentas& s);
-//void pasirinktiDuomenuIvedimoBuda(Studentas& s);
  
 //funkcija apskaiciuoti galutini bala
 void skaiciuotiGalutini(Studentas& s, char pasirinkimas);
@@ -58,7 +47,6 @@ void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiuk
 
 //funkcija suskirstyti studentus i dvi grupes (trecia strategija)
 template <typename Container>
-//void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai, Container& kietiakai);
 void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai);
 
 //funkcija rusiuoti studentus
@@ -78,11 +66,11 @@ void pasirinktiRezultatuIsvedimoBuda(const Container& studentai, char pasirinkim
 //funkcija pasirinkti ivesti duomenis, nuskaityti duomenis is failo ar generuoti faila
 char pasirinktiDuomenuIvedima();
 
-//funckija iskviesti rankini ivedimo buda 
+// funkcija ivesti studentu duomenis ranka
 template <typename Container>
 void ivedimasRanka(Container& studentas);
 
-//funckija pasirinkti studentu dalijimo strategija
+//funckija skirstyti studentus i vargsiukus ir kietiakus, surusiuoti pagal pasirinkta parametra ir isvesti i failus pagal pasirinkta strategija
 template <typename Container>
 void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas);
 
