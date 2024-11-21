@@ -84,6 +84,11 @@ Palyginama programos sparta naudojant struct ir class tipo studentus. Testavimui
 ![structirclass](struktura_klase.png)
 Matome, jog programos veikimo laikas naudojant struct ir class tipo studentus yra panašus.
 
+## Kompiliatoriaus optimizavimas
+Atlikita eksperimentinė analizė priklausomai nuo kompiliatoriaus optimizavimo lygio, nurodyto per flag'us: O1, O2, O3.
+![flags](flags.png)
+
+
 ## Testavimo sistemos parametrai
 - CPU: Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz, 1800 Mhz, 4 Core(s), 8 Logical Processor(s)
 - RAM: 8.00 GB
