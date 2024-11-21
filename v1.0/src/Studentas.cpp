@@ -6,7 +6,26 @@ Studentas::Studentas(const string& vardas, const string& pavarde, const vector<i
    pavarde_ = pavarde;
    namudarbai_ = namudarbai;
    egzaminas_ = egzaminas;
-   galutinis_ = 0;
+   galutinis_ = 0.0;
+}
+
+Studentas::Studentas(const string& vardas, const string& pavarde, int ndSkaicius){
+   random_device rd_generator;
+   uniform_int_distribution<int> Results_interval(1, 10);
+
+   vardas_ = vardas;
+   pavarde_ = pavarde;
+
+   cout << "Sugeneruoti namų darbų pažymiai: ";
+   for (int i = 0; i < ndSkaicius; i++) {
+      int pazymys = Results_interval(rd_generator);
+      namudarbai_.push_back(pazymys);
+      cout << pazymys << " ";
+   }
+
+   int egzaminas = Results_interval(rd_generator);
+   cout << "\nSugeneruotas egzamino rezultatas: " << egzaminas << endl;
+   egzaminas_ = egzaminas;
 }
 
 //destruktorius

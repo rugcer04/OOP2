@@ -13,11 +13,13 @@ class Studentas{
 
    public:
       // konstruktoriai
-      // Studentas() : egzaminas_(0), galutinis_(0.0) { }
+      //Studentas() : egzaminas_(0), galutinis_(0.0) { }
       // Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas):
       // vardas_(vardas), pavarde_(pavarde), namudarbai_(move(namudarbai)), egzaminas_(egzaminas), galutinis_(0.0) { }
       //Studentas(istream& is); //constructor that takes an input stream, allowing the student data to be read from a stream
       Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas);
+      // konstruktorius generuojantis studentu duomenis
+      Studentas(const string& vardas, const string& pavarde, int ndSkaicius);
       ~Studentas();
 
       // seteriai

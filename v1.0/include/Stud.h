@@ -16,16 +16,19 @@
 // };
 
 //funckija sugeneruoti atsitiktinius namu darbu ir egzamino pazymius
-void generuotiDuomenis(Studentas& s, int ndSkaicius);
+//void generuotiDuomenis(Studentas& s, int ndSkaicius);
 
 //funkcija ivesti studento varda ir pavarde
-void ivestiVardaPavarde(Studentas& s);
+//void ivestiVardaPavarde(Studentas& s);
 
 //funkcija ivesti pazymius ranka
-void ivedimas(Studentas& s);
+//void ivedimas(Studentas& s);
+template <typename Container>
+void ivedimas(Container& studentai, string vardas, string pavarde);
 
 //funkcija pasirinkti duomenu ivedimo buda
-void pasirinktiDuomenuIvedimoBuda(Studentas& s);
+//void pasirinktiDuomenuIvedimoBuda(const Container& studentai, Studentas& s);
+//void pasirinktiDuomenuIvedimoBuda(Studentas& s);
  
 //funkcija apskaiciuoti galutini bala
 void skaiciuotiGalutini(Studentas& s, char pasirinkimas);
