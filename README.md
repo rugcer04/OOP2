@@ -79,6 +79,11 @@ Kai duomenų kiekis mažesnis, programos greitis naudojant vektorius ir sąrašu
 - `2 strategija`: visais atvejais sąrašas veikia sparčiausiai, darbas su vektoriumi stipriai suletėja;
 - `3 strategija`: lyginant su 1 ir 2 strategijomis, darbas su abejais konteineriais vyksta sparčiau. Su mažesniu kiekiu duomenų su vektoriumi programa veikia lečiau nei su sąrašu, tačiau su 10 mln. - priešingai;
 
+## Struct ir class spartos testavimas
+Palyginama programos sparta naudojant struct ir class tipo studentus. Testavimui parinktas vienas konteineris- sąrašas (list) bei 2 studentų rūšiavimo į dvi grupes strategija. Testavimas atliktas su 100 000 ir 1 000 000 įrašų failais.
+![structirclass](struktura_klase.png)
+Matome, jog programos veikimo laikas naudojant struct ir class tipo studentus yra panašus.
+
 ## Testavimo sistemos parametrai
 - CPU: Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz, 1800 Mhz, 4 Core(s), 8 Logical Processor(s)
 - RAM: 8.00 GB
