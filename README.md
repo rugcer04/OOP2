@@ -71,22 +71,30 @@ Programos testavimas su studentų sąrašų failais, sudarytais iš `1000`, `100
 #### Analizė
 Kai duomenų kiekis mažesnis, programos greitis naudojant vektorius ir sąrašus mažai skiriasi. Tačiau dirbant su 10 000 000 įrašų skirtumas tampa akivaizdesnis – su vektoriais programa veikia žymiai greičiau.
 
+
 ### Studentų rūšiavimo į dvi grupes strategijų testavimas
 ![Strategijos](new_strategijos.png)
 
 #### Analizė
 - `1 strategija`: su mažesniu kiekiu duomenų su sąrašu programa veikia sparčiau, tačiau su 10 mln. - priešingai;
-- `2 strategija`: visais atvejais sąrašas veikia sparčiausiai, darbas su vektoriumi stipriai suletėja;
-- `3 strategija`: lyginant su 1 ir 2 strategijomis, darbas su abejais konteineriais vyksta sparčiau. Su mažesniu kiekiu duomenų su vektoriumi programa veikia lečiau nei su sąrašu, tačiau su 10 mln. - priešingai;
+- `2 strategija`: taip pat kaip ir pirmoje startegijoje, su mažesniais failais programa veikia sparčiau su sąrašu, su didžiausiu failu - su vektoriumi;
+- `3 strategija`: lyginant su 1 ir 2 strategijomis, darbas su abejais konteineriais vyksta sparčiausiai. Visais atevejais programa veikia greičiau su vektoriumi;
+
 
 ## Struct ir class spartos testavimas
 Palyginama programos sparta naudojant struct ir class tipo studentus. Testavimui parinktas vienas konteineris- sąrašas (list) bei 2 studentų rūšiavimo į dvi grupes strategija. Testavimas atliktas su 100 000 ir 1 000 000 įrašų failais.
 ![structirclass](struktura_klase.png)
-Matome, jog programos veikimo laikas naudojant struct ir class tipo studentus yra panašus.
+
+#### Analizė
+Matome, jog programos veikimo laikas naudojant struct ir class tipo studentus yra labai panašus. Duomenų nuskaitymas ir rūšiavimas į dvi grupes su didesniu failu vyksta truputį greičiau su struktūra, tačiau išvedimas į failus- su klase.
+
 
 ## Kompiliatoriaus optimizavimas
 Atlikita eksperimentinė analizė priklausomai nuo kompiliatoriaus optimizavimo lygio, nurodyto per flag'us: O1, O2, O3.
 ![flags](flags.png)
+
+#### Analizė
+Programos sparta pritaikius skirtingus flag'us stipriai nesiskiria, tačiau išvedimas į failus vyksta sparčiausiai su O3 flag'u, kitų procesų sparta priklauso nuo failų dydžių ir ar programoje naudojama struct, ar class. Mažiausi .exe failai yra panaudojant O3 flag'ą
 
 
 ## Testavimo sistemos parametrai
