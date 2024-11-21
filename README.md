@@ -3,6 +3,7 @@
 Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
 - Atsisiųskite v1.0 versiją eidami į "Releases", pasirinkite v1.0 versiją ir paspauskite ant **Source code (zip)**;
 - Išskleiskite atsisiųstą failą "OOP-v1.0.zip";
+- Įsidiekite "cmake-3.31.0-rc-windows-x86_64" bei "msys2-x86_64-20240113"
 - Dukart spustelėkite ant failo "run.bat" ir šiek tiek palaukite;
 - Sekite ekrane pateiktas instrukcijas arba vadovaukitės žemiau pateikta programos naudojimosi instrukcija (rekomeduojama pradžioje susigeneruoti studentų failus);
 - Jeigu visus žingsnius atlikote teisingai, tai tame pačiame aplankale turite rasti naują aplankalą pavadinimu "Release", užėje į aplankalą, matysite aplikaciją pavadinimu "Studentai.exe", kuria paspaudus du kartus galėsite pratęsti darbą su programa.
@@ -12,9 +13,8 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
 
 - Po to turėsite pasirinkti ką toliau norite daryti: 'I' - įvesti studentų duomenis ranka, 'F' - nuskaityti duomenis iš failo ar 'G' - generuoti failus su studentų duomenimis:
 
-- Pasirinkus įvesti duomenis ranka ('I'), turėsite įvesti kiek norite įtraukti studentų. Kiekvienam studentui turite pasirinkti ar norite įvesti jo namų darbų ir egzamino pažymius ranka ('R') ar generuoti atsitiktinai ('A').
-
-    - Kiekvienam studentui reikia įvesti jo vardą, pavardę. Jeigu pasirinkote įvesti pažymius ranka, turėsite suvesti pažymius po vieną, kaskart paspaudžiaunt 'enter' klavišą. Kai baigsite namų darbų įvedimą, spauskite dukart 'enter' klavišą. Tada įveskite egzamino rezultatą.
+- Pasirinkus įvesti duomenis ranka ('I'), turėsite įvesti kiek norite įtraukti studentų.
+    - Kiekvienam studentui reikia įvesti jo vardą, pavardę ir pasirinkti ar norite įvesti jo namų darbų ir egzamino pažymius ranka ('R') ar generuoti atsitiktinai ('A'). Jeigu pasirinkote įvesti pažymius ranka, turėsite suvesti pažymius po vieną, kaskart paspaudžiaunt 'enter' klavišą. Kai baigsite namų darbų įvedimą, spauskite dukart 'enter' klavišą. Tada įveskite egzamino rezultatą.
 
     - Jeigu pasirinkote sugeneruoti automatiškai, turite įrašyti kiek namų darbų pažymių sugeneruoti, sugeneruoti pažymiai bus išspausdinami.
 
@@ -30,7 +30,7 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
 
     - Po to turėsite pasirinkti kokia tvarka noretumėte pateikti studentus: surūšiuotus pagal vardą ('V'), pagal pavardę ('P'), pagal galutinį rezultatą mažėjimo tvarka ('M') ar didėjimo tvarka ('D').
 
-    - Rezultatai bus automatiškai išsaugoti "studrez.txt" faile. Tada turėsite pasirinkti pagal kokią strategija norite suskirstyti studentus į dvi grupes: '1', '2' ar '3' (strategijos aprašytos žemiau). Suskirstyti studentai bus automatiškai įrašyti į "vargsiukai.txt" ir "kietiakai.txt" failus. Po kiekvienos operacijos (failo nuskaitymo, surūšiavimo į grupes ir išvedimo į failus) bus išspausdinami operacijų vykdymo laikai. Programa baigia darbą.
+    - Tada turėsite pasirinkti pagal kokią strategija norite suskirstyti studentus į dvi grupes: '1', '2' ar '3' (strategijos aprašytos žemiau). Suskirstyti studentai bus automatiškai įrašyti į "vargsiukai.txt" ir "kietiakai.txt" failus. Po kiekvienos operacijos (failo nuskaitymo, surūšiavimo į grupes ir išvedimo į failus) bus išspausdinami operacijų vykdymo laikai. Programa baigia darbą.
 
 - Pasirinkus generuoti duomenis ('G') bus automatiškai sugeneruoti 5 failai su studentų duomenimis (po 1000, 10000, 100000, 1000000, 10000000 įrašų). Kiekvienas studentas turės po 15 namų darbų pažymių ir egzamino pažymį. Po kiekvieno sugeneruoto failo bus išspausdinta generavimo laikas. Programa baigia darbą.
 
@@ -72,7 +72,7 @@ Programos testavimas su studentų sąrašų failais, sudarytais iš `1000`, `100
 Kai duomenų kiekis mažesnis, programos greitis naudojant vektorius ir sąrašus mažai skiriasi. Tačiau dirbant su 10 000 000 įrašų skirtumas tampa akivaizdesnis – su vektoriais programa veikia žymiai greičiau.
 
 ### Studentų rūšiavimo į dvi grupes strategijų testavimas
-![Strategijos](strategijos.png)
+![Strategijos](new_strategijos.png)
 
 #### Analizė
 - `1 strategija`: su mažesniu kiekiu duomenų su sąrašu programa veikia sparčiau, tačiau su 10 mln. - priešingai;
