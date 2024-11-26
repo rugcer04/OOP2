@@ -29,6 +29,15 @@ Studentas::Studentas(const string& vardas, const string& pavarde, int ndSkaicius
    egzaminas_ = egzaminas;
 }
 
+//kopijavimo kontstruktorius
+Studentas::Studentas(const Studentas& kitas){
+   vardas_ = kitas.vardas_;
+   pavarde_ = kitas.pavarde_;
+   namudarbai_= kitas.namudarbai_;
+   egzaminas_ = kitas.egzaminas_;
+   galutinis_ = kitas.galutinis_;
+}
+
 //destruktorius
 Studentas::~Studentas(){
    vardas_.clear();
@@ -53,7 +62,6 @@ void Studentas::skaiciuotiGalutiniVidurkiu(){
       galutinis_ = vidurkis * 0.4 + egzaminas_ * 0.6;
    }
 
-   //return s.getGalutinis();
 }
 
 //metodas skaiciuoti galutini pagal mediana

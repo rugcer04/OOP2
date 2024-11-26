@@ -15,6 +15,7 @@ class Studentas{
       // konstruktoriai
       Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas);
       Studentas(const string& vardas, const string& pavarde, int ndSkaicius);
+      Studentas(const Studentas& kitas); //kopijavimo konstruktorius
       // destruktorius
       ~Studentas();
 
