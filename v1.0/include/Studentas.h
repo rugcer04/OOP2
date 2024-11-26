@@ -2,8 +2,14 @@
 #define STUDENTAS_H_INCLUDED
 
 #include "Lib.h"
+using std::ostream;
+using std::istream;
+
 // studento klase
 class Studentas{
+   friend ostream& operator << (ostream& ou, Studentas& s);
+   friend istream& operator >> (istream& is, Studentas& s);
+
    private:
       string vardas_;
       string pavarde_;

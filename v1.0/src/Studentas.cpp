@@ -29,13 +29,26 @@ Studentas::Studentas(const string& vardas, const string& pavarde, int ndSkaicius
    egzaminas_ = egzaminas;
 }
 
-//kopijavimo kontstruktorius
+//kopijavimo konstruktorius
 Studentas::Studentas(const Studentas& kitas){
    vardas_ = kitas.vardas_;
    pavarde_ = kitas.pavarde_;
    namudarbai_= kitas.namudarbai_;
    egzaminas_ = kitas.egzaminas_;
    galutinis_ = kitas.galutinis_;
+}
+
+//kopijavimo priskyrimo operatorius
+Studentas& Studentas::operator=(const Studentas& kitas){
+   if (this == &kitas) return *this;
+
+   vardas_ = kitas.vardas_;
+   pavarde_ = kitas.pavarde_;
+   namudarbai_= kitas.namudarbai_;
+   egzaminas_ = kitas.egzaminas_;
+   galutinis_ = kitas.galutinis_;
+
+   return *this;
 }
 
 //destruktorius
