@@ -85,7 +85,8 @@ void isvedimas(const Container& studentai, char pasirinkimas) {
 
    cout << "-------------------------------------------------------------------" << endl;
    for (const auto& s: studentai) {
-      cout << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << setw(20) << s.getGalutinis() << setw(50) << left << &s << endl;
+      cout << s << setw(50) << left << &s << endl;
+      //cout << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << setw(20) << s.getGalutinis() << setw(50) << left << &s << endl;
    }
 }
 
@@ -228,7 +229,8 @@ void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string
 
    failas << "----------------------------------------------" << endl;
    for (const auto& s : studentai)  {
-      failas << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << s.getGalutinis() << endl;
+      failas << s << endl;
+      //failas << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << s.getGalutinis() << endl;
    }
 
    failas.close();

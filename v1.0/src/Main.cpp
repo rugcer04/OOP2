@@ -37,12 +37,13 @@ int main() {
             rusiuotiStudentus(studentai, parametras);
 
             //pasirenkame kaip pateikti rezultatus (faile ar terminale)
-            if (duomenuIvedimoBudas == 'I') {
-                pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-            } else {
-                string failoPavadinimas = "studrez.txt";
-                isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-            }    
+            pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+            // if (duomenuIvedimoBudas == 'I') {
+            //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+            // } else {
+            //     string failoPavadinimas = "studrez.txt";
+            //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+            // }    
         }
 
         //Nuskaitymas is failo
@@ -101,12 +102,13 @@ int main() {
             rusiuotiStudentus(studentai, parametras);
 
             //Pasirenkame kaip pateikti rezultatus (faile ar terminale)
-            if (duomenuIvedimoBudas == 'I') {
-                pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-            } else {
-                string failoPavadinimas = "studrez.txt";
-                isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-            }
+            pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+            // if (duomenuIvedimoBudas == 'I') {
+            //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
+            // } else {
+            //     string failoPavadinimas = "studrez.txt";
+            //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
+            // }
         }
 
         //Nuskaitymas is failo

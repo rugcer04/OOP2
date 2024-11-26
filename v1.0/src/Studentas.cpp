@@ -96,6 +96,12 @@ void Studentas::skaiciuotiGalutiniMediana() {
    galutinis_ = mediana * 0.4 + egzaminas_ * 0.6;
 }
 
+ostream& operator<< (ostream& os, const Studentas& s){
+   os << left << setw(15) << s.pavarde_ << setw(15) << s.vardas_ << fixed << setprecision(2) << setw(20) << s.galutinis_;
+   // os << left << setw(15) << s.pavarde_ << setw(15) << s.vardas_ << fixed << setprecision(2) << setw(20) << s.galutinis_ << setw(50) << left << &s << endl;
+   return os;
+}
+
 // Studentas::Studentas(istream& is) {
 //    string vardas, pavarde;
 //    is >> pavarde >> vardas;

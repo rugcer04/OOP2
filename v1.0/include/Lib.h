@@ -42,5 +42,7 @@ using std::numeric_limits;
 using std::max;
 using std::streamsize;
 using std::runtime_error;
+using std::ostream;
+using std::istream;
 
 #endif
