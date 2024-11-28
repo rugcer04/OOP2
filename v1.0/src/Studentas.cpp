@@ -96,10 +96,114 @@ void Studentas::skaiciuotiGalutiniMediana() {
    galutinis_ = mediana * 0.4 + egzaminas_ * 0.6;
 }
 
+//isvedimo operatorius
 ostream& operator<< (ostream& os, const Studentas& s){
    os << left << setw(15) << s.pavarde_ << setw(15) << s.vardas_ << fixed << setprecision(2) << setw(20) << s.galutinis_;
-   // os << left << setw(15) << s.pavarde_ << setw(15) << s.vardas_ << fixed << setprecision(2) << setw(20) << s.galutinis_ << setw(50) << left << &s << endl;
    return os;
+}
+
+//ivedimo operatorius
+istream& operator>> (istream& is, Studentas& s){
+   if (&is == &cin){
+      cout << "Iveskite studento varda ir pavarde: ";
+   }
+   is >> s.vardas_ >> s.pavarde_;
+
+   if (&is == &cin){
+      char pasirinkimas;
+      while (true) {
+         cout << "Ar norite įvesti pažymius rankiniu būdu (R) ar generuoti automatiškai (A)? ";
+         is >> pasirinkimas;
+         pasirinkimas = toupper(pasirinkimas);
+         if (pasirinkimas == 'R' || pasirinkimas == 'A') {
+            break;
+         } else {
+            cout << "Neteisinga įvestis, bandykite dar kartą.\n";
+         }
+      }
+
+      if (pasirinkimas == 'A'){
+         cout << "Įveskite, kiek namų darbų pažymių sugeneruoti: ";
+         int ndSkaicius;
+         is >> ndSkaicius;
+         s = Studentas(s.vardas_, s.pavarde_, ndSkaicius);
+
+      } else if (pasirinkimas == 'R'){
+         cout << "Įveskite namų darbų pažymius (Kai baigsite įvedimą, spauskite dukart Enter klavišą):" << endl;
+         cin.ignore();
+         string input;
+         int pazymys;
+
+         while (true) {
+            getline(cin, input);
+            if (input.empty()) {
+               break;
+            }
+
+            try {
+               stringstream ss(input);
+               if (!(ss >> pazymys)) {
+                  throw invalid_argument("Netinkama įvestis");
+               }
+
+               if (pazymys < 1 || pazymys > 10) {
+                  throw out_of_range("Pažymys turi būti tarp 1 ir 10");
+               }
+
+               s.namudarbai_.push_back(pazymys);
+
+            } catch (const invalid_argument& e) {
+               cout << "Klaida: įvesta ne skaičius. Bandykite dar kartą." << endl;
+            } catch (const out_of_range& e) {
+               cout << "Klaida: pažymys turi būti tarp 1 ir 10. Bandykite dar kartą." << endl;
+            }
+
+         }
+
+         cout << "Įveskite egzamino rezultatą: " << endl;
+         while (true) {
+            cin >> input;
+
+            try {
+               stringstream ss(input);
+               if (!(ss >> pazymys)) {
+                  throw invalid_argument("Netinkama įvestis");
+               }
+
+               if (pazymys < 1 || pazymys > 10) {
+                  throw out_of_range("Egzamino pažymys turi būti tarp 1 ir 10");
+               }
+
+               s.egzaminas_ = pazymys;
+               break;
+
+            } catch (const invalid_argument& e) {
+               cout << "Klaida: įvesta ne skaičius. Bandykite dar kartą." << endl;
+            } catch (const out_of_range& e) {
+               cout << "Klaida: pažymys turi būti tarp 1 ir 10. Bandykite dar kartą." << endl;
+            }
+         }
+      }   
+   } else {
+      vector<int> namudarbai;
+      int pazymys;
+
+      while(is >> pazymys){
+         namudarbai.push_back(pazymys);
+      }
+      
+      if (!namudarbai.empty()){
+         s.egzaminas_ = namudarbai.back();
+         namudarbai.pop_back();
+         s.namudarbai_ = namudarbai;
+      }
+
+      namudarbai.clear();
+
+   }
+
+   return is;
+   
 }
 
 // Studentas::Studentas(istream& is) {

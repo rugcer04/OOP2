@@ -1,8 +1,6 @@
 #ifndef  STUDENTAS_H_INCLUDED
 #define STUDENTAS_H_INCLUDED
 
-#include "Lib.h"
-
 // studento klase
 class Studentas{
    friend ostream& operator<< (ostream& os, const Studentas& s);
@@ -17,6 +15,7 @@ class Studentas{
 
    public:
       // konstruktoriai
+      Studentas(){ };
       Studentas(const string& vardas, const string& pavarde, const vector<int>& namudarbai, double egzaminas);
       Studentas(const string& vardas, const string& pavarde, int ndSkaicius);
       Studentas(const Studentas& kitas); //kopijavimo konstruktorius
