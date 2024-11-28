@@ -100,6 +100,13 @@ int main() {
             cout << "\nNaudojamas kopijavimo operatorius: " << endl;
             cout << s1 << endl;
             cout << s2 << endl;
+
+            // ifstream in("test.txt");
+            // Studentas a;
+            // in >> a;
+            // a.skaiciuotiGalutiniVidurkiu();
+            // ofstream failas("reztest.txt");
+            // failas << a;
         }
         
 

@@ -51,6 +51,17 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
         - jei pasirenkama dirbti su *vektoriumi* - naudojama `1 strategija`, patobulinta tinkamais algoritmais; 
         - jei pasirenkama dirbti su *sąrašu* - naudojama `2 strategija`.
 
+## Studento klasė
+#### Trijų metodų taisyklė
+- `Kopijavimo konstruktorius` - naudojamas sukuriant naują objekto kopiją iš esamo objekto;
+- `Kopijavimo priskyrimo operatorius` - naudojamas, kai jau egzistuojančiam objektui priskiriami kito objekto duomenys;
+- `Destruktorius` - atlaisvina atmintį kai objektas yra sunaikinamas, yra automatiškai kviečiamas, kai objektas išeina iš apimties (scope) arba sunaikinamas.
+
+#### Įvesties operatorius
+Perdengtas operatorius suteikia galimybę vartotojui įvesti studento duomenis iš terminalo: vartotojas turi įvesti studento vardą, pavardę, pagal pasirinkimą pažymius įvesti ranka arba generuoti atsitiktinai; arba iš teksto srauto.
+
+#### Išvesties operatorius
+Perdengtas operatorius išveda studento objekto duomenis (vardą, pavardę, galutinį pažymį) terminale arba į failą.
 
 
 ## Programos veikimo greičio analizė
