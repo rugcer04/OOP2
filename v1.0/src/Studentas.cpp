@@ -105,7 +105,7 @@ ostream& operator<< (ostream& os, const Studentas& s){
 //ivedimo operatorius
 istream& operator>> (istream& is, Studentas& s){
    if (&is == &cin){
-      cout << "Iveskite studento varda ir pavarde: ";
+      cout << "Įveskite studento vardą ir pavardę: ";
    }
    is >> s.vardas_ >> s.pavarde_;
 

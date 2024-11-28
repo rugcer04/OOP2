@@ -29,7 +29,7 @@ int main() {
             //Pasirenkame galutinio pazymio skaiciavimo metoda
             char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
             for (Studentas& studentas : studentai) {
-            skaiciuotiGalutini(studentas, pasirinkimas);
+                skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
             //Pasirenkame studentu rusiavimo parametra ir surusiuojame
@@ -37,13 +37,7 @@ int main() {
             rusiuotiStudentus(studentai, parametras);
 
             //pasirenkame kaip pateikti rezultatus (faile ar terminale)
-            pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-            // if (duomenuIvedimoBudas == 'I') {
-            //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-            // } else {
-            //     string failoPavadinimas = "studrez.txt";
-            //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-            // }    
+            pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);   
         }
 
         //Nuskaitymas is failo
@@ -77,8 +71,35 @@ int main() {
                 cout << "Failo su " << n << " įrašų generavimo laikas: " << t2.elapsed() << " s\n" << endl;        
             }
 
-        return 0;
+        } else if (duomenuIvedimoBudas == 'D') {
+            Studentas s1, s2;
+            cout << "\nNaudojamas įvesties operatorius (įvedimas ranka): " << endl;
+            cin >> s1;
+            s1.skaiciuotiGalutiniVidurkiu();
 
+            cout << "\nNaudojamas įvesties operatorius (įvedimas iš eilutės)" << endl;
+            stringstream eilute("Jonas Jonaitis 6 9 4 8 6");
+            eilute >> s2;
+            s2.skaiciuotiGalutiniVidurkiu();
+
+            cout << "\nNaudojamas išvesties operatorius:" << endl;
+            ofstream failas("test.txt");
+            cout << s1 << endl;
+            cout << s2 << endl;
+            failas << s2;
+            failas.close();
+
+            // kopijavimo konstruktorius
+            Studentas s3 = s1;
+            cout << "\nNaudojamas kopijavimo konstruktorius: " << endl;
+            cout << s1 << endl;
+            cout << s3 << endl;
+
+            // kopijavimo operatorius
+            s2 = s1;
+            cout << "\nNaudojamas kopijavimo operatorius: " << endl;
+            cout << s1 << endl;
+            cout << s2 << endl;
         }
         
 
@@ -94,7 +115,7 @@ int main() {
             //Pasirenkame galutinio pazymio skaiciavimo metoda
             char pasirinkimas = pasirinktiGalutinioskaiciavimoMetoda();
             for (Studentas& studentas : studentai) {
-            skaiciuotiGalutini(studentas, pasirinkimas);
+                skaiciuotiGalutini(studentas, pasirinkimas);
             }
 
             //Pasirenkame studentu rusiavimo parametra ir surusiuojame
@@ -103,12 +124,6 @@ int main() {
 
             //Pasirenkame kaip pateikti rezultatus (faile ar terminale)
             pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-            // if (duomenuIvedimoBudas == 'I') {
-            //     pasirinktiRezultatuIsvedimoBuda(studentai, pasirinkimas);
-            // } else {
-            //     string failoPavadinimas = "studrez.txt";
-            //     isvedimasIFaila(studentai, pasirinkimas, failoPavadinimas);
-            // }
         }
 
         //Nuskaitymas is failo
@@ -141,8 +156,35 @@ int main() {
                 cout << "Failo su " << n << " įrašų generavimo laikas: " << t2.elapsed() << " s\n" << endl;        
             }
 
-        return 0;
+        } else if (duomenuIvedimoBudas == 'D') {
+            Studentas s1, s2;
+            cout << "\nNaudojamas įvesties operatorius (įvedimas ranka): " << endl;
+            cin >> s1;
+            s1.skaiciuotiGalutiniVidurkiu();
 
+            cout << "\nNaudojamas įvesties operatorius (įvedimas iš eilutės)" << endl;
+            stringstream eilute("Jonas Jonaitis 6 9 4 8 6");
+            eilute >> s2;
+            s2.skaiciuotiGalutiniVidurkiu();
+
+            cout << "\nNaudojamas išvesties operatorius:" << endl;
+            ofstream failas("test.txt");
+            cout << s1 << endl;
+            cout << s2 << endl;
+            failas << s2;
+            failas.close();
+
+            // kopijavimo konstruktorius
+            Studentas s3 = s1;
+            cout << "\nNaudojamas kopijavimo konstruktorius: " << endl;
+            cout << s1 << endl;
+            cout << s3 << endl;
+
+            // kopijavimo operatorius
+            s2 = s1;
+            cout << "\nNaudojamas kopijavimo operatorius: " << endl;
+            cout << s1 << endl;
+            cout << s2 << endl;
         }
     }
     

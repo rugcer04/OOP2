@@ -467,11 +467,11 @@ template void pasirinktiRezultatuIsvedimoBuda<list<Studentas>>(const list<Studen
 char pasirinktiDuomenuIvedima() {
    char duomenuIvedimoBudas;
    while (true) {
-      cout << "Ar norite duomenis įvesti (I), nuskaityti iš failo (F), ar sugeneruoti failą (G)? ";
+      cout << "Ar norite duomenis įvesti (I), nuskaityti iš failo (F), ar sugeneruoti failą (G), ar demonstruoti metodus (D)? ";
       cin >> duomenuIvedimoBudas;
       duomenuIvedimoBudas = toupper(duomenuIvedimoBudas);
 
-      if (duomenuIvedimoBudas == 'I' || duomenuIvedimoBudas == 'F' || duomenuIvedimoBudas == 'G') {
+      if (duomenuIvedimoBudas == 'I' || duomenuIvedimoBudas == 'F' || duomenuIvedimoBudas == 'G' || duomenuIvedimoBudas == 'D') {
           break;
       } else {
          cout << "Neteisinga įvestis, bandykite dar kartą.\n";
