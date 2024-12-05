@@ -52,6 +52,12 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
         - jei pasirenkama dirbti su *vektoriumi* - naudojama `1 strategija`, patobulinta tinkamais algoritmais; 
         - jei pasirenkama dirbti su *sąrašu* - naudojama `2 strategija`.
 
+- **v1.1** versijoje sukurta ir realizuota studento klasė, programa pritaikyta dirbti su šia klase.
+
+- **v1.2** versijoje realizuota trijų metodų taisyklė bei įvesties i išvesties operatoriai.
+
+- **v1.5** versijoje sukuriama bazinė žmogaus klasė, užtikrinama, jog ji būtų abstrakti, studento klasė padaroma išvestine iš žmogaus klasės.
+
 ## Studento klasė
 Studentento klasė yra išvestinė klasė iš Žmogaus bazinės klasės. Žmogaus klasė yra abstrakti, negalima sukurti jos objektų.
 
