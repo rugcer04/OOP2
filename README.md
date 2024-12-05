@@ -48,9 +48,7 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
 - **v1.0** versijoje studentų rūšiavimo į dvi grupes strategija papildoma dar dvejomis strategijomis:
     - `1 strategija`: bendras studentų konteineris skaidomas į du naujus to paties tipo konteinerius: "vargšiukai" ir "kietiakai";
     - `2 strategija`: iš bendro studentų konteinerio "vargšiukus" perkeliame į "vargšiukų" konteinerį ir ištriname iš studentų konteinerio, jame lieka tik "kietiakai";
-    - `3 strategija`: atsižvelgiant į rušiavimo greičius, trečia strategija veikia priklausomai nuo vartotojo pasirinkto konteinerio:
-        - jei pasirenkama dirbti su *vektoriumi* - naudojama `1 strategija`, patobulinta tinkamais algoritmais; 
-        - jei pasirenkama dirbti su *sąrašu* - naudojama `2 strategija`.
+    - `3 strategija`: atsižvelgiant į rušiavimo greičius, trečia strategija veikia 2 strategijos principu, tačiau darbas paspartintas pirma studentus surūšiuojant su stable_partition funckija.
 
 - **v1.1** versijoje sukurta ir realizuota studento klasė, programa pritaikyta dirbti su šia klase.
 
