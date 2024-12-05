@@ -90,7 +90,7 @@ int main() {
             failas.close();
 
             // kopijavimo konstruktorius
-            Studentas s3 = s1;
+            Studentas s3(s1);
             cout << "\nNaudojamas kopijavimo konstruktorius: " << endl;
             cout << s1 << endl;
             cout << s3 << endl;
@@ -182,7 +182,7 @@ int main() {
             failas.close();
 
             // kopijavimo konstruktorius
-            Studentas s3 = s1;
+            Studentas s3(s1);
             cout << "\nNaudojamas kopijavimo konstruktorius: " << endl;
             cout << s1 << endl;
             cout << s3 << endl;
