@@ -72,6 +72,7 @@ int main() {
             }
 
         } else if (duomenuIvedimoBudas == 'D') {
+            //Zmogus z;
             Studentas s1, s2;
             cout << "\nNaudojamas įvesties operatorius (įvedimas ranka): " << endl;
             cin >> s1;

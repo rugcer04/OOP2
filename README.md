@@ -11,7 +11,7 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
 ## Programos naudojimosi instrukcija
 - Paleidus programą turite pasirinkti kokį konteinerį norite naudoti darbui su studentų duomenimis (spauskite 'V' dirbti su vektoriumu, 'L' - su sąrašu).
 
-- Po to turėsite pasirinkti ką toliau norite daryti: 'I' - įvesti studentų duomenis ranka, 'F' - nuskaityti duomenis iš failo ar 'G' - generuoti failus su studentų duomenimis:
+- Po to turėsite pasirinkti ką toliau norite daryti: 'I' - įvesti studentų duomenis ranka, 'F' - nuskaityti duomenis iš failo, 'G' - generuoti failus su studentų duomenimis ar 'D' - demonstruoti metodus:
 
 - Pasirinkus įvesti duomenis ranka ('I'), turėsite įvesti kiek norite įtraukti studentų.
     - Kiekvienam studentui reikia įvesti jo vardą, pavardę ir pasirinkti ar norite įvesti jo namų darbų ir egzamino pažymius ranka ('R') ar generuoti atsitiktinai ('A'). Jeigu pasirinkote įvesti pažymius ranka, turėsite suvesti pažymius po vieną, kaskart paspaudžiaunt 'enter' klavišą. Kai baigsite namų darbų įvedimą, spauskite dukart 'enter' klavišą. Tada įveskite egzamino rezultatą.
@@ -34,6 +34,7 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
 
 - Pasirinkus generuoti duomenis ('G') bus automatiškai sugeneruoti 5 failai su studentų duomenimis (po 1000, 10000, 100000, 1000000, 10000000 įrašų). Kiekvienas studentas turės po 15 namų darbų pažymių ir egzamino pažymį. Po kiekvieno sugeneruoto failo bus išspausdinta generavimo laikas. Programa baigia darbą.
 
+- Pasirinkus demonstruoti metodus ('D') bus paprašoma įvesti vieno studento duomenis, taip pat studento duomenys bus nuskaitomi iš eilutės, kad pademonstruoti įvesties ir išvesties operatorius. Taip pat bus pademonstruota implementuota trijų metodų taisyklė aprašyta žemiau.
 
 ## Versijų aprašymas
 - **v0.1 pradinėje** versijoje sukuriama `Studentas` struktūra studento duomenims saugoti. Vartotojui leidžiama pasirinkti galutinio balo skaičiavimo būdą. Aprašomos dvi funkcijos galutiniam balui apskaičiuoti- naudojant vidurkį arba medianą. Sukuriamos funkcijos įvesti studento vardą, pavardę ir namų darbų ir egzamino pažymius, leidžiama vartotojui pasirinkti įvesti pažymius patiems arba juos generuoti atsitiktinai. Pasirinkimai ir įvesti duomenys yra išvedami lentele.
@@ -52,6 +53,8 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
         - jei pasirenkama dirbti su *sąrašu* - naudojama `2 strategija`.
 
 ## Studento klasė
+Studentento klasė yra išvestinė klasė iš Žmogaus bazinės klasės. Žmogaus klasė yra abstrakti, negalima sukurti jos objektų.
+
 #### Trijų metodų taisyklė
 - `Kopijavimo konstruktorius` - naudojamas sukuriant naują objekto kopiją iš esamo objekto;
 - `Kopijavimo priskyrimo operatorius` - naudojamas, kai jau egzistuojančiam objektui priskiriami kito objekto duomenys;
