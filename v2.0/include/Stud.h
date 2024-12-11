@@ -149,22 +149,104 @@ void generuotiFaila(int studentuSkaicius, const string& failoPavadinimas);
 template <typename Container>
 void skirstytiStudentusPirmaStrategija(const Container& studentai, Container& vargsiukai, Container& kietiakai);
 
-//funkcija suskirstyti studentus i dvi grupes (antra strategija)
+
+/**
+ * @brief Funkcija studentų skirstymui į dvi grupes naudojant antrąją strategiją.
+ * 
+ * Ši funkcija studentus padalina į dvi grupes: "vargšiukai" (studentai, kurių galutinis balas mažesnis už 5) 
+ * ir likusieji studentai. Studentai rūšiuojami pagal galutinį balą mažėjančia tvarka, o "vargšiukai" 
+ * perkeliami iš pradinio konteinerio į atskirą konteinerį.
+ * 
+ * @tparam Container Konteinerio, kuriame saugomi studentų duomenys, tipas (pvz., `std::vector` arba `std::list`).
+ * @param studentai Pradinis konteineris su visais studentų duomenimis.
+ * @param vargsiukai Konteineris, į kurį bus perkelti studentai su galutiniu balu mažesniu nei 5.
+ * 
+ * @details
+ * Funkcijos veikimo eiga:
+ * - Studentai rūšiuojami pagal galutinį balą mažėjančia tvarka
+ * - Pereinama per konteinerį `studentai` nuo galo:
+ *   - Jei studento galutinis balas < 5.0, jis perkeliamas į konteinerį `vargsiukai`.
+ *   - Kai randamas pirmasis studentas su balu >= 5.0, iteracija nutraukiama, nes likę studentai taip pat turi balus >= 5.0.
+ * 
+ * @note Funkcija modifikuoja pradinį `studentai` konteinerį, pašalindama iš jo studentus, kurie perkeliami į `vargsiukai`.
+ */
 template <typename Container>
 void skirstytiStudentusAntraStrategija(Container& studentai, Container& vargsiukai);
 
-//funkcija suskirstyti studentus i dvi grupes (trecia strategija)
+
+/**
+ * @brief Funkcija studentų skirstymui į dvi grupes naudojant trečiąją strategiją.
+ * 
+ * Ši funkcija studentus padalina į dvi grupes: "vargšiukai" (studentai, kurių galutinis balas mažesnis už 5) 
+ * ir likusieji studentai. Naudojamas `std::stable_partition`, kad būtų paspartinas funkcijos veikimo laikas.
+ * 
+ * @tparam Container Konteinerio, kuriame saugomi studentų duomenys, tipas (pvz., `std::vector` arba `std::list`).
+ * @param studentai Pradinis konteineris su visais studentų duomenimis.
+ * @param vargsiukai Konteineris, į kurį bus perkelti studentai su galutiniu balu mažesniu nei 5.
+ * 
+ * @details
+ * Funkcijos veikimo eiga:
+ * - Naudojama `std::stable_partition`, kad išskirstytų studentus į dvi dalis:
+ *   - Studentai, kurių galutinis balas >= 5.0, lieka priekyje.
+ *   - Studentai, kurių galutinis balas < 5.0, perkelti į pabaigą.
+ * - Pereinama per konteinerį `studentai` nuo galo:
+ *   - Jei studento galutinis balas < 5.0, jis perkeliamas į konteinerį `vargsiukai` ir pašalinamas iš `studentai`.
+ *   - Kai randamas pirmasis studentas su balu >= 5.0, iteracija nutraukiama.
+ * 
+ * @note Funkcija modifikuoja pradinį `studentai` konteinerį, pašalindama iš jo studentus, kurie perkeliami į `vargsiukai`.
+ */
 template <typename Container>
 void skirstytiStudentusTreciaStrategija(Container& studentai, Container& vargsiukai);
 
-//funkcija rusiuoti studentus
+
+/**
+ * @brief Funkcija studentų rūšiavimui pagal pasirinktą parametrą.
+ * 
+ * Ši funkcija rūšiuoja studentus pagal nurodytą kriterijų (`vardas`, `pavardė` arba `galutinis pažymys`
+ * (didėjančia arba mažėjančia tvarka)). Funkcija automatiškai pritaiko tinkamą rūšiavimo algoritmą, 
+ * atsižvelgdama į naudojamo konteinerio tipą (`std::vector` arba `std::list`).
+ * 
+ * @tparam Container Konteinerio, kuriame saugomi studentų duomenys, tipas (pvz., `std::vector` arba `std::list`).
+ * @param studentai Konteineris su studentų duomenimis, kuris bus surūšiuotas.
+ * @param parametras Rūšiavimo kriterijus:
+ * - `'V'` - rūšiavimas pagal vardą (abėcėlės tvarka). Jei vardai sutampa, rūšiuojama pagal pavardę.
+ * - `'P'` - rūšiavimas pagal pavardę (abėcėlės tvarka). Jei pavardės sutampa, rūšiuojama pagal vardą.
+ * - `'M'` - rūšiavimas pagal galutinį pažymį mažėjimo tvarka.
+ * - `'D'` - rūšiavimas pagal galutinį pažymį didėjimo tvarka.
+ */
 template <typename Container>
 void rusiuotiStudentus(Container& studentai, char parametras);
 
-//funckija vartotojui pasirinkti galutinio balo matavimo buda
+
+/**
+ * @brief Funkcija leidžia vartotojui pasirinkti galutinio balo skaičiavimo metodą.
+ * 
+ * Ši funkcija prašo vartotojo pasirinkti, kuris metodas bus naudojamas galutiniam balui apskaičiuoti: 
+ * vidurkiu arba mediana. Pasirinktas metodas grąžinamas kaip simbolis.
+ * 
+ * @return char Grąžinamas vartotojo pasirinktas metodas:
+ * - `'V'` - galutinio balo skaičiavimas naudojant vidurkį.
+ * - `'M'` - galutinio balo skaičiavimas naudojant medianą.
+ * 
+ * @note Funkcija užtikrina, kad grąžinama reikšmė visada bus validi (`V` arba `M`).
+ */
 char pasirinktiGalutinioskaiciavimoMetoda();
 
-//funkcija pasirinkti rusiavimo parametra
+
+/**
+ * @brief Funkcija leidžia vartotojui pasirinkti studentų rūšiavimo parametrą.
+ * 
+ * Ši funkcija prašo vartotojo pasirinkti, pagal kokį parametrą studentai bus surūšiuoti: 
+ * pagal vardą, pavardę arba galutinį rezultatą mažėjimo ar didėjimo tvarka.
+ * 
+ * @return char Grąžinamas vartotojo pasirinktas rūšiavimo parametras:
+ * - `'V'` - rūšiavimas pagal vardą.
+ * - `'P'` - rūšiavimas pagal pavardę.
+ * - `'M'` - rūšiavimas pagal galutinį rezultatą mažėjimo tvarka.
+ * - `'D'` - rūšiavimas pagal galutinį rezultatą didėjimo tvarka.
+ * 
+ * @note Funkcija užtikrina, kad grąžinama reikšmė visada bus validi (`V`, `P`, `M`, arba `D`).
+ */
 char pasirinktiRusiavimoParametra();
 
 //funckija pasirinkti rezultato isvedimo buda
