@@ -86,7 +86,6 @@ void isvedimas(const Container& studentai, char pasirinkimas) {
    cout << "-------------------------------------------------------------------" << endl;
    for (const auto& s: studentai) {
       cout << s << setw(50) << left << &s << endl;
-      //cout << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << setw(20) << s.getGalutinis() << setw(50) << left << &s << endl;
    }
 }
 
@@ -162,56 +161,6 @@ template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&);
 template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&);
 
 
-// template <typename Container>
-// void nuskaitytiIsFailo(Container& studentai) {
-//    string failoPavadinimas;
-//    ifstream failas;
-
-//    while (true) {
-//       try {
-//          cout << "Įveskite failo pavadinimą: ";
-//          cin >> failoPavadinimas;
-//          failas.open(failoPavadinimas);
-
-//          if (!failas) {
-//             throw runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
-//          }
-
-//          break;
-
-//       } catch (const std::runtime_error& e) {
-//          cerr << e.what() << " Bandykite dar kartą." << endl;
-//       }
-//    }
-
-//    Timer t1;
-
-//    string eilute;
-//    getline(failas, eilute);
-
-//    Container tempStudentai;
-
-//    if constexpr (is_same_v<Container, vector<Studentas>>) {
-//       tempStudentai.reserve(10000000);
-//    }
-
-//    while (getline(failas, eilute)) {
-//       std::istringstream ss(eilute);
-//       //When you call tempStudentai.emplace_back(ss);, the std::vector (or other container) constructs a Studentas object directly in its memory.
-//       tempStudentai.emplace_back(ss); // Use stream constructor
-//    }
-
-//    failas.close();
-
-//    studentai = move(tempStudentai);
-
-//    std::cout << "Failo su " << studentai.size() << " įrašų nuskaitymo laikas: " << t1.elapsed() << " s\n" << endl;
-// }
-// template void nuskaitytiIsFailo<vector<Studentas>>(vector<Studentas>&);
-// template void nuskaitytiIsFailo<list<Studentas>>(list<Studentas>&);
-
-
-
 //funckija irasyti rezultatus i faila
 template <typename Container>
 void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string& failoPavadinimas) {
@@ -230,7 +179,6 @@ void isvedimasIFaila(const Container& studentai, char pasirinkimas, const string
    failas << "----------------------------------------------" << endl;
    for (const auto& s : studentai)  {
       failas << s << endl;
-      //failas << left << setw(15) << s.getPavarde() << setw(15) << s.getVardas() << fixed << setprecision(2) << s.getGalutinis() << endl;
    }
 
    failas.close();
