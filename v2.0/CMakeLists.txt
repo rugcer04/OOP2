@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.31)
+project(Studentai)
+include_directories(include)
+set(CMAKE_CXX_FLAGS "-O3") 
+file(GLOB SOURCES "src/*.cpp")
+add_executable(Studentai ${SOURCES})
