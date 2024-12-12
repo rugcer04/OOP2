@@ -2,6 +2,17 @@
 #define STUDENTAS_H_INCLUDED
 
 #include "../include/Zmogus.h"
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+
+using std::endl;
+using std::cout;
+using std::cin;
+
+using std::string;
+using std::vector;
 
 /**
  * @class Studentas
@@ -73,7 +84,7 @@ class Studentas : public Zmogus{
       * @param s Studentas, kurio informacija bus išvedama.
       * @return Nuoroda į išvedimo srautą.
       */
-      friend ostream& operator<< (ostream& os, const Studentas& s);
+      friend std::ostream& operator<< (std::ostream& os, const Studentas& s);
 
       /**
       * @brief Įvedimo operatorius.
@@ -85,7 +96,7 @@ class Studentas : public Zmogus{
       * @param s Studentas, kurio duomenys bus įvedami.
       * @return Nuoroda į įvedimo srautą.
       */
-      friend istream& operator>> (istream& is, Studentas& s);
+      friend std::istream& operator>> (std::istream& is, Studentas& s);
 
       /**
       * @brief Priskyrimo operatorius.
