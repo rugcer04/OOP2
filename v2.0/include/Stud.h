@@ -249,18 +249,87 @@ char pasirinktiGalutinioskaiciavimoMetoda();
  */
 char pasirinktiRusiavimoParametra();
 
-//funckija pasirinkti rezultato isvedimo buda
+
+/**
+ * @brief Funkcijaa leidžia vartotojui pasirinkti rezultatų išvedimo būdą (į ekraną arba į failą).
+ *
+ * Ši funkcija vartotojui leidžia pasirinkti, ar išvesti studentų rezultatus į ekraną, 
+ * ar išsaugoti juos į failą. Jei pasirenkamas failas, vartotojas turi nurodyti failo pavadinimą.
+ * 
+ * @tparam Container Konteinerio tipas, kuriame saugomi studentų duomenys.
+ * @param studentai Konteineris su studentų duomenimis.
+ * @param pasirinkimas Vartotojo pasirinkimas, naudojamas rezultatų išvedimui.
+ */
 template <typename Container>
 void pasirinktiRezultatuIsvedimoBuda(const Container& studentai, char pasirinkimas);
 
-//funkcija pasirinkti ivesti duomenis, nuskaityti duomenis is failo ar generuoti faila
+
+/**
+ * @brief Funkcija leidžia vartotojui pasirinkti duomenų įvedimo būdą.
+ *
+ * Ši funkcija paklausia ir leidžia vartotojui pasirinkti, ar duomenis įvesti rankiniu būdu, 
+ * nuskaityti iš failo, sugeneruoti naują failą ar demonstruoti metodus. 
+ * 
+ * @return Pasirinktas duomenų įvedimo būdas:
+ *         - 'I' – Įvesti duomenis rankiniu būdu.
+ *         - 'F' – Nuskaityti duomenis iš failo.
+ *         - 'G' – Sugeneruoti naują failą.
+ *         - 'D' – Demonstruoti metodus.
+ * 
+ * @note Funkcija užtikrina, kad vartotojas įves tinkamą pasirinkimą, kitaip prašoma įvesti dar kartą.
+ */
 char pasirinktiDuomenuIvedima();
 
-// funkcija ivesti studentu duomenis ranka
+
+/**
+ * @brief Funkcija leidžia vartotojui rankiniu būdu įvesti studentų duomenis.
+ *
+ * Ši funkcija leidžia įvesti nurodyto skaičiaus studentų vardus, pavardes ir pažymius. 
+ * Vartotojas gali pasirinkti, ar įvesti pažymius rankiniu būdu, ar sugeneruoti juos automatiškai.
+ * 
+ * @tparam Container Konteinerio tipas, kuriame bus saugomi studentų duomenys.
+ * @param studentai Konteineris, kuriame bus išsaugoti įvesti studentų duomenys.
+ * 
+ * @throws invalid_argument jei įvestis nėra skaičius (pvz., studentų skaičius arba pažymių skaičius).
+ * 
+ * @details
+ * Funkcijos veiksmai:
+ * 1. Vartotojo prašoma nurodyti studentų skaičių.
+ * 2. Įvedami kiekvieno studento vardas ir pavardė.
+ * 3. Pasirenkamas pažymių įvedimo būdas:
+ *    - Rankiniu būdu įvedant kiekvieną pažymį.
+ *    - Automatiškai sugeneruojant nurodytą skaičių pažymių.
+ */
 template <typename Container>
 void ivedimasRanka(Container& studentas);
 
-//funckija skirstyti studentus i vargsiukus ir kietiakus, surusiuoti pagal pasirinkta parametra ir isvesti i failus pagal pasirinkta strategija
+
+/**
+ * @brief Funkcija leidžia vartotojui pasirinkti studentų rūšiavimo strategiją, skirsto studentus į „vargsiukus“ ir „kietiakus“ pagal pasirinktą strategiją, rūšiuoja pagal pasirinktą parametrą ir išveda į failus.
+ *
+ * Ši funkcija leidžia vartotojui pasirinkti vieną iš trijų strategijų studentų skirstymui į dvi grupes: 
+ * „vargsiukus“ ir „kietiakus“. Po skirstymo grupės surūšiuojamos pagal pasirinktą parametrą,
+ * o rezultatai išvedami į failus.
+ * 
+ * @tparam Container Konteinerio tipas, kuriame saugomi studentų duomenys (pvz., std::vector arba std::list).
+ * @param studentai Konteineris, kuriame saugomi studentų duomenys.
+ * @param pasirinkimas Pasirinkimas, nurodantis, kaip rezultatai turėtų būti išvedami. Galimos reikšmės:
+ *              - 'V' - galutinis balas bus apskaičiuojamas naudojant vidurkį;
+ *              - 'M' - galutinis balas bus apskaičiuojamas naudojant medianą;
+ * 
+ * @details
+ * Funkcijos eiga:
+ * 1. Leidžia vartotojui pasirinkti studentų rūčiavimo strategiją (1, 2 arba 3):
+ *    - Strategija 1: Studentų sąrašas skirstomas į dvi naujas grupes (vargsiukai ir kietiakai).
+ *    - Strategija 2: „Vargsiukai“ išskiriami į atskirą konteinerį, likusieji paliekami originaliame konteineryje.
+ *    - Strategija 3: Panaši į strategiją 2, bet su papildoma optimizacijoma.
+ * 2. Vykdomas pasirinktų grupių rūšiavimas pagal pasirinktą parametrą (pvz., vardą ar pažymį).
+ * 3. Rezultatai įrašomi į atskirus failus:
+ *    - „vargsiukai.txt“: Studentai, kurių galutinis mažesnis už 5;
+ *    - „kietiakai.txt“: Likusieji studentai.
+ * 
+ * @throws invalid_argument jei vartotojo įvestis yra netinkama arba klaidinga.
+ */
 template <typename Container>
 void duomenuIsvedimasPagalStrategija(Container& studentai, char pasirinkimas);
 
