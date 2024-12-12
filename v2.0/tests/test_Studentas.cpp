@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../include/Studentas.h"
+#include <sstream>
 
 // Testas galutinio įvertinimo apskaičiavimui pagal vidurkį
 TEST(StudentasTest, IvertinimasVidurkis) {
@@ -25,4 +26,38 @@ TEST(StudentasTest, KopijavimoKonstruktorius) {
     EXPECT_EQ(originalas.getNamudarbai(), kopija.getNamudarbai());
     EXPECT_EQ(originalas.getEgzaminas(), kopija.getEgzaminas());
     EXPECT_EQ(originalas.getGalutinis(), kopija.getGalutinis());
+}
+
+// Testas patikrinina ar sugeneruotas skaičius patenka į intervalą 1-10
+TEST(StudentasTest, PazymioGeneravimoKonstruktorius) {
+    std::string vardas = "Jonas";
+    std::string pavarde = "Jonaitis";
+    int ndSkaicius = 5;
+
+    Studentas studentas(vardas, pavarde, ndSkaicius);
+
+    EXPECT_EQ(studentas.getVardas(), vardas);
+    EXPECT_EQ(studentas.getPavarde(), pavarde);
+
+    EXPECT_EQ(studentas.getNamudarbai().size(), ndSkaicius);
+
+    for (int grade : studentas.getNamudarbai()) {
+        EXPECT_GE(grade, 1);
+        EXPECT_LE(grade, 10);
+    }
+    
+    EXPECT_GE(studentas.getEgzaminas(), 1);
+    EXPECT_LE(studentas.getEgzaminas(), 10);
+}
+
+TEST(StudentasTest, IsvestiesOperatorius) {
+    Studentas studentas("Jonas", "Jonaitis", {8, 7, 9}, 9);
+    studentas.skaiciuotiGalutiniVidurkiu();
+
+    std::ostringstream output;
+    output << studentas;
+
+    std::string expectedOutput = "Jonaitis       Jonas          8.60                ";
+
+    EXPECT_EQ(output.str(), expectedOutput);
 }
