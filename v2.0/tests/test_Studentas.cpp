@@ -50,6 +50,7 @@ TEST(StudentasTest, PazymioGeneravimoKonstruktorius) {
     EXPECT_LE(studentas.getEgzaminas(), 10);
 }
 
+// Testas išvesties operatoriui
 TEST(StudentasTest, IsvestiesOperatorius) {
     Studentas studentas("Jonas", "Jonaitis", {8, 7, 9}, 9);
     studentas.skaiciuotiGalutiniVidurkiu();

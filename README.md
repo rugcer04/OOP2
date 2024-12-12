@@ -56,6 +56,8 @@ Norint įdiegti ir paleisti programą sekite šiuos žingsnius:
 
 - **v1.5** versijoje sukuriama bazinė žmogaus klasė, užtikrinama, jog ji būtų abstrakti, studento klasė padaroma išvestine iš žmogaus klasės.
 
+- **v2.0** versijoje sukuriama Doxygen dokumentacija (html ir LaTeX), realizuojami unit testai naudojant google tests framework (https://github.com/google/googletest). Testuojamas galutinio įvertinimo apskaičiavimas pagal vidurkį, kopijavimo konstruktorius, konstruktorius su pažymio generavimu, išvesties operatorius.
+
 ## Studento klasė
 Studentento klasė yra išvestinė klasė iš Žmogaus bazinės klasės. Žmogaus klasė yra abstrakti, negalima sukurti jos objektų.
 
